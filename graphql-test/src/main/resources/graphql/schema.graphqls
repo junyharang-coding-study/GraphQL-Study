@@ -1,0 +1,45 @@
+type Equipment {
+    equipmentId: ID!,
+    usedBy: String,
+    count: Int!,
+    newOrUsed: String
+}
+
+input PostEquipment {
+    teamId: ID!,
+    firstName: String!,
+    lastName: String!,
+    sex: Sex!,
+    bloodType: BloodType!,
+    serveYears: Int!,
+    role: Role!,
+    from: String!
+}
+
+enum Sex {
+    male,
+    female
+}
+
+enum BloodType {
+    A,
+    B,
+    AB,
+    O
+}
+
+enum Role {
+    developer,
+    designer,
+    planner
+}
+
+type Query {
+    # 함수 이름은 Controller @QueryMapping이 사용된 Method 이름과 동일해야 함.
+    getEquipmentList: [Equipment],
+    getEquipment(equipmentId: String!): Equipment
+}
+
+type Mutation {
+    save(input: PostEquipment): Equipment!
+}

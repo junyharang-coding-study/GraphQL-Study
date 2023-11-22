@@ -1,0 +1,10 @@
+id,used_by,developed_by,description
+Eclipse,developer,Eclipse Foundation,integrated development environment
+Excel,planner,Microsoft,spreadsheet
+Illustrator,designer,Adobe,vector graphics editor
+Photoshop,designer,Adobe,raster graphics editor
+PowerPoint,planner,Microsoft,presentation program
+Sketch,designer,Sketch B.V.,vector graphics editor
+VS Code,developer,Microsoft,source code editor
+Word,planner,Microsoft,word processor
+Xcode,developer,Apple,integrated development environment

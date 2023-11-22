@@ -1,0 +1,16 @@
+{
+  "name": "apollostudy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "author": "junyss",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server": "^3.13.0",
+    "convert-csv-to-json": "^2.0.0"
+  }
+}

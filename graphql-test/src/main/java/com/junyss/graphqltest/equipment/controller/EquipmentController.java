@@ -1,13 +1,15 @@
 package com.junyss.graphqltest.equipment.controller;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import java.util.List;
+
+import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
-import com.junyss.graphqltest.equipment.model.dto.EquipmentRequestDto;
+import com.junyss.graphqltest.equipment.model.dto.request.EquipmentRequestDto;
+import com.junyss.graphqltest.equipment.model.dto.response.EquipmentResponseDto;
 import com.junyss.graphqltest.equipment.model.entity.Equipment;
 import com.junyss.graphqltest.equipment.service.EquipmentService;
 
@@ -33,12 +35,17 @@ public class EquipmentController {
 	 * @QueryMapping도 Rest API 구축 시 @GetMapping과 같은 어노테이션이며, @SubscriptionMapping도 존재
 	 */
 	@QueryMapping
-	public Page<Equipment> getEquipmentList (Pageable pageable) {
-		return equipmentService.getEquipmentList(pageable);
+	public List<EquipmentResponseDto> getEquipmentList (
+		@Argument String equipmentId,
+		@Argument String usedBy,
+		@Argument String newOrUsed,
+		@Argument Integer page,
+		@Argument Integer size) {
+		return equipmentService.getEquipmentList(equipmentId, usedBy, newOrUsed, page, size);
 	}
 
 	@QueryMapping
-	public Equipment getEquipment (@Argument String equipmentId) {
+	public EquipmentResponseDto getEquipment (@Argument String equipmentId) {
 		return equipmentService.getEquipment(equipmentId);
 	}
 }

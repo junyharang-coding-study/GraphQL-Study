@@ -3,11 +3,10 @@ package com.junyss.graphqltest.equipment.model.entity;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-import com.junyss.graphqltest.equipment.model.dto.EquipmentRequestDto;
+import com.junyss.graphqltest.equipment.model.dto.request.EquipmentRequestDto;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -25,7 +24,7 @@ public class Equipment {
 
 	public static Equipment toEntity (EquipmentRequestDto equipmentRequestDto) {
 		return new Equipment(
-			equipmentRequestDto.getId(),
+			equipmentRequestDto.getEquipmentId(),
 			equipmentRequestDto.getUsedBy(),
 			equipmentRequestDto.getCount(),
 		equipmentRequestDto.getNewOrUsed());

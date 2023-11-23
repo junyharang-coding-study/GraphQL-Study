@@ -1,16 +1,16 @@
 package com.junyss.graphqltest.equipment.service;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import java.util.List;
 
-import com.junyss.graphqltest.equipment.model.dto.EquipmentRequestDto;
+import com.junyss.graphqltest.equipment.model.dto.request.EquipmentRequestDto;
+import com.junyss.graphqltest.equipment.model.dto.response.EquipmentResponseDto;
 import com.junyss.graphqltest.equipment.model.entity.Equipment;
 
 public interface EquipmentService {
 
 	Equipment save(EquipmentRequestDto equipmentRequestDto);
 
-	Page<Equipment> getEquipmentList(Pageable pageable);
+	List<EquipmentResponseDto> getEquipmentList(String equipmentId, String usedBy, String newOrUsed, Integer page, Integer size);
 
-	Equipment getEquipment(String equipmentId);
+	EquipmentResponseDto getEquipment(String equipmentId);
 }

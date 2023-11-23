@@ -1,3 +1,10 @@
+//querydsl 추가
+buildscript {
+    dependencies {
+        classpath("gradle.plugin.com.ewerk.gradle.plugins:querydsl-plugin:1.0.10")
+    }
+}
+
 plugins {
     id 'java'
     id 'org.springframework.boot' version '2.7.17'
@@ -9,6 +16,15 @@ version = '0.0.1-SNAPSHOT'
 
 java {
     sourceCompatibility = '11'
+}
+
+//apply plugin: 'io.spring.dependency-management'
+apply plugin: "com.ewerk.gradle.plugins.querydsl"
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
 }
 
 repositories {
@@ -24,6 +40,9 @@ dependencies {
     // 유효성 검사를 위한 의존성 추가
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation
     implementation 'org.springframework.boot:spring-boot-starter-validation'
+    // Query dsl 의존성 추가
+    implementation 'com.querydsl:querydsl-jpa'
+    implementation 'com.querydsl:querydsl-apt'
     runtimeOnly 'com.h2database:h2'
     runtimeOnly 'com.mysql:mysql-connector-j'
     runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
@@ -40,4 +59,29 @@ tasks.named('bootBuildImage') {
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+// Query dsl task 추가
+def querydslDir = "$buildDir/generated/querydsl"
+
+querydsl {
+    library = "com.querydsl:querydsl-apt"
+    jpa = true
+    querydslSourcesDir = querydslDir
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java', querydslDir]
+        }
+    }
+}
+
+compileQuerydsl{
+    options.annotationProcessorPath = configurations.querydsl
+}
+
+configurations {
+    querydsl.extendsFrom compileClasspath
 }

@@ -1,19 +1,32 @@
-type Equipment {
+#type Equipment {
+#    equipmentId: ID!,
+#    usedBy: String!,
+#    count: Int!,
+#    newOrUsed: String!
+#}
+
+type EquipmentId {
+    equipmentId: ID!
+}
+
+type EquipmentResponseDto {
     equipmentId: ID!,
-    usedBy: String,
+    usedBy: String!,
     count: Int!,
+    newOrUsed: String!
+}
+
+input EquipmentSearchRequestDto {
+    equipmentId: ID,
+    usedBy: String,
     newOrUsed: String
 }
 
-input PostEquipment {
-    teamId: ID!,
-    firstName: String!,
-    lastName: String!,
-    sex: Sex!,
-    bloodType: BloodType!,
-    serveYears: Int!,
-    role: Role!,
-    from: String!
+input CreateEquipmentRequestDto {
+    equipmentId: ID!,
+    usedBy: String!,
+    count: Int!,
+    newOrUsed: String!
 }
 
 enum Sex {
@@ -36,10 +49,16 @@ enum Role {
 
 type Query {
     # 함수 이름은 Controller @QueryMapping이 사용된 Method 이름과 동일해야 함.
-    getEquipmentList: [Equipment],
-    getEquipment(equipmentId: String!): Equipment
+    getEquipmentList(
+        equipmentId: String,
+        usedBy: String,
+        newOrUsed: String,
+        page: Int,
+        size: Int): [EquipmentResponseDto!]!,
+
+    getEquipment(equipmentId: String!): EquipmentResponseDto!
 }
 
 type Mutation {
-    save(input: PostEquipment): Equipment!
+    save(input: CreateEquipmentRequestDto): EquipmentId!
 }

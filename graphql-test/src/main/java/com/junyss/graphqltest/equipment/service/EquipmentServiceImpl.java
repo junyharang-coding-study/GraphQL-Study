@@ -1,15 +1,17 @@
 package com.junyss.graphqltest.equipment.service;
 
+import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import com.junyss.graphqltest.common.constant.DefaultListResponse;
+import com.junyss.graphqltest.common.constant.Pagination;
 import com.junyss.graphqltest.common.util.PagingProcessUtil;
 import com.junyss.graphqltest.equipment.model.dto.request.EquipmentRequestDto;
 import com.junyss.graphqltest.equipment.model.dto.request.EquipmentSearchRequestDto;
@@ -33,22 +35,38 @@ public class EquipmentServiceImpl implements EquipmentService {
 	}
 
 	@Override
-	public List<EquipmentResponseDto> getEquipmentList(String equipmentId, String usedBy, String newOrUsed, Integer page, Integer size) {
-		return equipmentQueryDslRepository.findBySearchAndPaging(
-			new EquipmentSearchRequestDto(
+	public DefaultListResponse<Page<EquipmentResponseDto>> getEquipmentList(String equipmentId, String usedBy, String newOrUsed, Integer page, Integer size) {
+
+		Page<EquipmentResponseDto> result = equipmentQueryDslRepository.findBySearchAndPaging(
+				new EquipmentSearchRequestDto(
 					equipmentId,
 					usedBy,
 					newOrUsed),
-					PagingProcessUtil.processPaging(page, size))
-			.stream()
-			.filter(Objects::nonNull)
-			.map(equipment -> EquipmentResponseDto.builder()
-				.equipmentId(equipment.getEquipmentId())
-				.usedBy(equipment.getUsedBy())
-				.count(equipment.getCount())
-				.newOrUsed(equipment.getNewOrUsed())
-				.build())
-			.collect(Collectors.toList());
+				PagingProcessUtil.processPaging(page, size));
+
+		if (result.getTotalElements() == 0) {
+			return DefaultListResponse.response(HttpStatus.NOT_FOUND.value(), "NOT FOUND DATA");
+		}
+
+		return DefaultListResponse.response(HttpStatus.OK.value(), "OK", result, new Pagination(result));
+
+		// List<EquipmentResponseDto> result = equipmentQueryDslRepository.findBySearchAndPaging(
+		// 		new EquipmentSearchRequestDto(
+		// 			equipmentId,
+		// 			usedBy,
+		// 			newOrUsed),
+		// 		PagingProcessUtil.processPaging(page, size))
+		// 	.stream()
+		// 	.filter(Objects::nonNull)
+		// 	.map(equipment -> EquipmentResponseDto.builder()
+		// 		.equipmentId(equipment.getEquipmentId())
+		// 		.usedBy(equipment.getUsedBy())
+		// 		.count(equipment.getCount())
+		// 		.newOrUsed(equipment.getNewOrUsed())
+		// 		.build())
+		// 	.collect(Collectors.toList());
+
+
 	}
 
 	@Override

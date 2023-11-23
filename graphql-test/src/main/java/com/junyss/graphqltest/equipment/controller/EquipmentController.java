@@ -3,11 +3,13 @@ package com.junyss.graphqltest.equipment.controller;
 import java.util.List;
 
 import org.springframework.boot.context.properties.bind.DefaultValue;
+import org.springframework.data.domain.Page;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
+import com.junyss.graphqltest.common.constant.DefaultListResponse;
 import com.junyss.graphqltest.equipment.model.dto.request.EquipmentRequestDto;
 import com.junyss.graphqltest.equipment.model.dto.response.EquipmentResponseDto;
 import com.junyss.graphqltest.equipment.model.entity.Equipment;
@@ -35,7 +37,7 @@ public class EquipmentController {
 	 * @QueryMapping도 Rest API 구축 시 @GetMapping과 같은 어노테이션이며, @SubscriptionMapping도 존재
 	 */
 	@QueryMapping
-	public List<EquipmentResponseDto> getEquipmentList (
+	public DefaultListResponse<Page<EquipmentResponseDto>> getEquipmentList (
 		@Argument String equipmentId,
 		@Argument String usedBy,
 		@Argument String newOrUsed,

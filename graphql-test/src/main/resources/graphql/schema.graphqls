@@ -9,6 +9,20 @@ type EquipmentId {
     equipmentId: ID!
 }
 
+type DefaultListResponse {
+    statusCode: Int!,
+    message: String!,
+    data: String!,
+    pagination: String!
+}
+
+type Pagination {
+    totalPages: Int!,
+    totalElements: Int!,
+    page: Int!,
+    currentElements: Int!
+}
+
 type EquipmentResponseDto {
     equipmentId: ID!,
     usedBy: String!,
@@ -54,7 +68,7 @@ type Query {
         usedBy: String,
         newOrUsed: String,
         page: Int,
-        size: Int): [EquipmentResponseDto!]!,
+        size: Int): DefaultListResponse!,
 
     getEquipment(equipmentId: String!): EquipmentResponseDto!
 }

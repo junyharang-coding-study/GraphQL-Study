@@ -7,7 +7,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
-import com.junyss.graphqltest.equipment.model.dto.response.EquipmentResponseDto;
 import com.querydsl.jpa.impl.JPAQuery;
 
 import lombok.AccessLevel;

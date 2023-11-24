@@ -2,9 +2,6 @@ package com.junyss.graphqltest.equipment.repository.querydsl;
 
 import static com.junyss.graphqltest.equipment.model.entity.QEquipment.equipment;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -49,7 +46,7 @@ public class EquipmentQueryDslRepository {
 			query.stream().count());
 	}
 
-	private Predicate eqEquipmentId(String equipmentId) {
+	private BooleanExpression eqEquipmentId(String equipmentId) {
 		if (!StringUtils.hasText(equipmentId)) {
 			return null;
 		}

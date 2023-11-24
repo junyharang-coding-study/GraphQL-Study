@@ -101,7 +101,7 @@ public class EquipmentResolverImpl implements EquipmentResolver {
 		Equipment equipment = getEquipment(equipmentRequestDto, equipmentRepositoryById);
 
 		if (equipment == null) {
-			return DefaultResponse.response(HttpStatus.NOT_FOUND.value(), "NOT FOUND DATA");
+			return DefaultResponse.response(HttpStatus.NOT_FOUND.value(), "NOT FOUND UPDATE TARGET");
 		}
 
 		return DefaultResponse.response(
@@ -121,7 +121,7 @@ public class EquipmentResolverImpl implements EquipmentResolver {
 			return DefaultResponse.response(HttpStatus.OK.value(), "Deleted Success", equipmentId);
 		}
 
-		return DefaultResponse.response(HttpStatus.NOT_FOUND.value(), "NOT FOUND UPDATE TARGET", equipmentId);
+		return DefaultResponse.response(HttpStatus.NOT_FOUND.value(), "NOT FOUND DELETE TARGET", equipmentId);
 	}
 
 	private static Equipment getEquipment(EquipmentRequestDto equipmentRequestDto, Optional<Equipment> equipmentRepositoryById) {

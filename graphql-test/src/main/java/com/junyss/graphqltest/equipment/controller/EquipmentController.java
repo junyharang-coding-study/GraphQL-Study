@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import com.junyss.graphqltest.common.constant.DefaultResponse;
 import com.junyss.graphqltest.equipment.model.dto.request.EquipmentRequestDto;
 import com.junyss.graphqltest.equipment.model.dto.response.EquipmentResponseDto;
-import com.junyss.graphqltest.equipment.model.entity.Equipment;
 import com.junyss.graphqltest.equipment.resolver.EquipmentResolver;
 
 import lombok.RequiredArgsConstructor;

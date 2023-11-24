@@ -1,6 +1,8 @@
 package com.junyss.graphqltest.equipment.model.dto.request;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import lombok.Data;
 
@@ -8,6 +10,6 @@ import lombok.Data;
 public class EquipmentRequestDto {
 	@NotBlank private String equipmentId;
 	@NotBlank private String usedBy;
-	@NotBlank private Integer count;
+	@NotNull @Min(1) private Integer count;
 	@NotBlank private String newOrUsed;
 }

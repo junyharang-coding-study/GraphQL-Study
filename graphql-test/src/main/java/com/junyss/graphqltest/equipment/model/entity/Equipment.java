@@ -29,4 +29,20 @@ public class Equipment {
 			equipmentRequestDto.getCount(),
 		equipmentRequestDto.getNewOrUsed());
 	}
+
+	public void updateEquipmentId(String equipmentId) {
+		this.equipmentId = equipmentId;
+	}
+
+	public void updateUsedBy(String usedBy) {
+		this.usedBy = usedBy;
+	}
+
+	public void updateCount(Integer count) {
+		this.count = count;
+	}
+
+	public void updateNewOrUsed(String newOrUsed) {
+		this.newOrUsed = newOrUsed;
+	}
 }

@@ -1,19 +1,14 @@
-#type Equipment {
-#    equipmentId: ID!,
-#    usedBy: String!,
-#    count: Int!,
-#    newOrUsed: String!
-#}
-
-type EquipmentId {
-    equipmentId: ID!
-}
-
 type DefaultListResponse {
     statusCode: Int!,
     message: String!,
     data: [String!]!,
     pagination: String
+}
+
+type DefaultResponse {
+    statusCode: Int!,
+    message: String!,
+    data: String
 }
 
 type Pagination {
@@ -23,56 +18,9 @@ type Pagination {
     currentElements: Int!
 }
 
-type EquipmentResponseDto {
-    equipmentId: ID!,
-    usedBy: String!,
-    count: Int!,
-    newOrUsed: String!
-}
-
-input EquipmentSearchRequestDto {
-    equipmentId: ID,
+input EquipmentRequestDto {
+    equipmentId: String,
     usedBy: String,
+    count: Int,
     newOrUsed: String
-}
-
-input CreateEquipmentRequestDto {
-    equipmentId: ID!,
-    usedBy: String!,
-    count: Int!,
-    newOrUsed: String!
-}
-
-enum Sex {
-    male,
-    female
-}
-
-enum BloodType {
-    A,
-    B,
-    AB,
-    O
-}
-
-enum Role {
-    developer,
-    designer,
-    planner
-}
-
-type Query {
-    # 함수 이름은 Controller @QueryMapping이 사용된 Method 이름과 동일해야 함.
-    getEquipmentList(
-        equipmentId: String,
-        usedBy: String,
-        newOrUsed: String,
-        page: Int,
-        size: Int): DefaultListResponse!,
-
-    getEquipment(equipmentId: String!): EquipmentResponseDto!
-}
-
-type Mutation {
-    save(input: CreateEquipmentRequestDto): EquipmentId!
 }

@@ -2,13 +2,12 @@ package com.junyss.graphqltest.equipment.controller;
 
 import java.util.List;
 
-import org.springframework.data.domain.Page;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
-import com.junyss.graphqltest.common.constant.DefaultListResponse;
+import com.junyss.graphqltest.common.constant.DefaultResponse;
 import com.junyss.graphqltest.equipment.model.dto.request.EquipmentRequestDto;
 import com.junyss.graphqltest.equipment.model.dto.response.EquipmentResponseDto;
 import com.junyss.graphqltest.equipment.model.entity.Equipment;
@@ -28,15 +27,15 @@ public class EquipmentController {
 	 */
 	@MutationMapping
 	// @Argument는 @RequestBody, @RequestParam과 같은 매개 변수 값을 지정할 때 사용.
-	public Equipment save (@Argument EquipmentRequestDto equipmentRequestDto) {
-		return equipmentResolver.save(equipmentRequestDto);
+	public DefaultResponse<String> saveForEquipment (@Argument("input") EquipmentRequestDto equipmentRequestDto) {
+		return equipmentResolver.saveForEquipment(equipmentRequestDto);
 	}
 
 	/**
 	 * @QueryMapping도 Rest API 구축 시 @GetMapping과 같은 어노테이션이며, @SubscriptionMapping도 존재
 	 */
 	@QueryMapping
-	public DefaultListResponse<List<EquipmentResponseDto>> getEquipmentList (
+	public DefaultResponse<List<EquipmentResponseDto>> getEquipmentList (
 		@Argument String equipmentId,
 		@Argument String usedBy,
 		@Argument String newOrUsed,
@@ -46,7 +45,17 @@ public class EquipmentController {
 	}
 
 	@QueryMapping
-	public EquipmentResponseDto getEquipment (@Argument String equipmentId) {
+	public DefaultResponse<EquipmentResponseDto> getEquipment (@Argument String equipmentId) {
 		return equipmentResolver.getEquipment(equipmentId);
+	}
+
+	@MutationMapping
+	public DefaultResponse<String> updateEquipment (@Argument("input") EquipmentRequestDto equipmentRequestDto) {
+		return equipmentResolver.updateEquipment(equipmentRequestDto);
+	}
+
+	@MutationMapping
+	public DefaultResponse<String> deleteEquipment (@Argument String equipmentId) {
+		return equipmentResolver.deleteEquipment(equipmentId);
 	}
 }

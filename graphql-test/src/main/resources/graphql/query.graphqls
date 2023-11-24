@@ -1,0 +1,11 @@
+type Query {
+    # 함수 이름은 Controller @QueryMapping이 사용된 Method 이름과 동일해야 함.
+    getEquipmentList(
+        equipmentId: String,
+        usedBy: String,
+        newOrUsed: String,
+        page: Int,
+        size: Int): DefaultListResponse!,
+
+    getEquipment(equipmentId: String!): DefaultResponse!
+}

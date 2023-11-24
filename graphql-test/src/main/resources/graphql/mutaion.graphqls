@@ -1,0 +1,5 @@
+type Mutation {
+    saveForEquipment(input: EquipmentRequestDto): DefaultResponse!
+    updateEquipment(input: EquipmentRequestDto): DefaultResponse!
+    deleteEquipment(equipmentId: String!): DefaultResponse!
+}

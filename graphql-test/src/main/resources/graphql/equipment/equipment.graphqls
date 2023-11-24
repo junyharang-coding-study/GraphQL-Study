@@ -1,0 +1,10 @@
+type EquipmentId {
+    equipmentId: ID!
+}
+
+type EquipmentResponseDto {
+    equipmentId: ID!,
+    usedBy: String!,
+    count: Int!,
+    newOrUsed: String!
+}

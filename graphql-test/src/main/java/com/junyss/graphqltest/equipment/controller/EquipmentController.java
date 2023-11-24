@@ -2,7 +2,6 @@ package com.junyss.graphqltest.equipment.controller;
 
 import java.util.List;
 
-import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.data.domain.Page;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
@@ -13,7 +12,7 @@ import com.junyss.graphqltest.common.constant.DefaultListResponse;
 import com.junyss.graphqltest.equipment.model.dto.request.EquipmentRequestDto;
 import com.junyss.graphqltest.equipment.model.dto.response.EquipmentResponseDto;
 import com.junyss.graphqltest.equipment.model.entity.Equipment;
-import com.junyss.graphqltest.equipment.service.EquipmentService;
+import com.junyss.graphqltest.equipment.resolver.EquipmentResolver;
 
 import lombok.RequiredArgsConstructor;
 
@@ -21,7 +20,7 @@ import lombok.RequiredArgsConstructor;
 @Controller // REST API가 아니기 때문에 @Controller 사용
 public class EquipmentController {
 
-	private final EquipmentService equipmentService;
+	private final EquipmentResolver equipmentResolver;
 
 	/**
 	 * @MuationMapping은 REST API 구축 시 @PostMapping과 같은 어노테이션으로 graphql의 Mutaion에 사용.
@@ -30,24 +29,24 @@ public class EquipmentController {
 	@MutationMapping
 	// @Argument는 @RequestBody, @RequestParam과 같은 매개 변수 값을 지정할 때 사용.
 	public Equipment save (@Argument EquipmentRequestDto equipmentRequestDto) {
-		return equipmentService.save(equipmentRequestDto);
+		return equipmentResolver.save(equipmentRequestDto);
 	}
 
 	/**
 	 * @QueryMapping도 Rest API 구축 시 @GetMapping과 같은 어노테이션이며, @SubscriptionMapping도 존재
 	 */
 	@QueryMapping
-	public DefaultListResponse<Page<EquipmentResponseDto>> getEquipmentList (
+	public DefaultListResponse<List<EquipmentResponseDto>> getEquipmentList (
 		@Argument String equipmentId,
 		@Argument String usedBy,
 		@Argument String newOrUsed,
 		@Argument Integer page,
 		@Argument Integer size) {
-		return equipmentService.getEquipmentList(equipmentId, usedBy, newOrUsed, page, size);
+		return equipmentResolver.getEquipmentList(equipmentId, usedBy, newOrUsed, page, size);
 	}
 
 	@QueryMapping
 	public EquipmentResponseDto getEquipment (@Argument String equipmentId) {
-		return equipmentService.getEquipment(equipmentId);
+		return equipmentResolver.getEquipment(equipmentId);
 	}
 }

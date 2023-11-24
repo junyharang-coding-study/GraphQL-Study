@@ -1,10 +1,8 @@
-package com.junyss.graphqltest.equipment.service;
+package com.junyss.graphqltest.equipment.resolver;
 
-import java.net.http.HttpResponse;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -12,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.junyss.graphqltest.common.constant.DefaultListResponse;
 import com.junyss.graphqltest.common.constant.Pagination;
+import com.junyss.graphqltest.common.util.GraphQLSupportUtil;
 import com.junyss.graphqltest.common.util.PagingProcessUtil;
 import com.junyss.graphqltest.equipment.model.dto.request.EquipmentRequestDto;
 import com.junyss.graphqltest.equipment.model.dto.request.EquipmentSearchRequestDto;
@@ -24,7 +23,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Service
-public class EquipmentServiceImpl implements EquipmentService {
+public class EquipmentResolverImpl implements EquipmentResolver {
 
 	private final EquipmentRepository equipmentRepository;
 	private final EquipmentQueryDslRepository equipmentQueryDslRepository;
@@ -35,7 +34,7 @@ public class EquipmentServiceImpl implements EquipmentService {
 	}
 
 	@Override
-	public DefaultListResponse<Page<EquipmentResponseDto>> getEquipmentList(String equipmentId, String usedBy, String newOrUsed, Integer page, Integer size) {
+	public DefaultListResponse<List<EquipmentResponseDto>> getEquipmentList(String equipmentId, String usedBy, String newOrUsed, Integer page, Integer size) {
 
 		Page<EquipmentResponseDto> result = equipmentQueryDslRepository.findBySearchAndPaging(
 				new EquipmentSearchRequestDto(
@@ -44,11 +43,17 @@ public class EquipmentServiceImpl implements EquipmentService {
 					newOrUsed),
 				PagingProcessUtil.processPaging(page, size));
 
-		if (result.getTotalElements() == 0) {
+		if (result.getTotalElements() == 0 && !result.hasContent()) {
 			return DefaultListResponse.response(HttpStatus.NOT_FOUND.value(), "NOT FOUND DATA");
 		}
 
-		return DefaultListResponse.response(HttpStatus.OK.value(), "OK", result, new Pagination(result));
+		List<EquipmentResponseDto> equipmentResponseDtoList = GraphQLSupportUtil.pageToList(result);
+
+		if (!equipmentResponseDtoList.isEmpty()) {
+			return DefaultListResponse.response(HttpStatus.OK.value(), "OK", equipmentResponseDtoList, new Pagination(result));
+		} else {
+			return DefaultListResponse.response(HttpStatus.NOT_FOUND.value(), "NOT FOUND DATA");
+		}
 
 		// List<EquipmentResponseDto> result = equipmentQueryDslRepository.findBySearchAndPaging(
 		// 		new EquipmentSearchRequestDto(

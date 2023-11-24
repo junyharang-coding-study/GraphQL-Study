@@ -12,8 +12,8 @@ type EquipmentId {
 type DefaultListResponse {
     statusCode: Int!,
     message: String!,
-    data: String!,
-    pagination: String!
+    data: [String!]!,
+    pagination: String
 }
 
 type Pagination {

@@ -8,4 +8,19 @@ type Query {
         size: Int): DefaultListResponse!,
 
     getEquipment(equipmentId: String!): DefaultResponse!
+
+    getPeopleList(
+        peopleId: ID,
+        teamId: ID,
+        lastName: String,
+        firstName: String,
+        sex: Sex,
+        bloodType: BloodType,
+        serveYears: Int,
+        role: Role,
+        hometown: String
+        page: Int,
+        size: Int): DefaultListResponse!,
+
+    getPeople(peopleId: Int!): DefaultResponse!
 }

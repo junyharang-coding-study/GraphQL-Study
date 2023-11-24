@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class EquipmentSearchRequestDto {
-
 	private String equipmentId;
 	private String usedBy;
 	private String newOrUsed;

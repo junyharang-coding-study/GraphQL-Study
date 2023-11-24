@@ -1,6 +1,10 @@
 package com.junyss.graphqltest.people.model.entity;
 
+import java.util.Optional;
+
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,14 +35,13 @@ public class People {
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Team.class)
 	@JoinColumn(name = "team_id")
 	private Team team;
-
 	private String lastName;
 	private String firstName;
-	private Sex sex;
-	private BloodType bloodType;
+	@Enumerated(EnumType.STRING) private Sex sex;
+	@Enumerated(EnumType.STRING) private BloodType bloodType;
 	private Integer serveYears;
-	private Role role;
-	private String homeTown;
+	@Enumerated(EnumType.STRING) private Role role;
+	private String hometown;
 
 	@Builder
 	public static People toEntity (
@@ -49,7 +52,7 @@ public class People {
 		BloodType bloodType,
 		Integer serveYears,
 		Role role,
-		String homeTown
+		String hometown
 	) {
 		return new People (
 			null,
@@ -60,6 +63,42 @@ public class People {
 			bloodType,
 			serveYears,
 			role,
-			homeTown);
+			hometown);
+	}
+
+	public void updatePeopleId(Long peopleId) {
+		this.peopleId = peopleId;
+	}
+
+	public void updateTeam(Team team) {
+		this.team = team;
+	}
+
+	public void updateLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public void updateFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public void updateSex(Sex sex) {
+		this.sex = sex;
+	}
+
+	public void updateBloodType(BloodType bloodType) {
+		this.bloodType = bloodType;
+	}
+
+	public void updateServeYears(Integer serveYears) {
+		this.serveYears = serveYears;
+	}
+
+	public void updateRole(Role role) {
+		this.role = role;
+	}
+
+	public void updateHomeTown(String hometown) {
+		this.hometown = hometown;
 	}
 }

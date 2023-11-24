@@ -24,3 +24,44 @@ input EquipmentRequestDto {
     count: Int,
     newOrUsed: String
 }
+
+input PeopleRequestDto {
+    teamId: ID!,
+    lastName: String!,
+    firstName: String!,
+    sex: Sex!,
+    bloodType: BloodType!,
+    serveYears: Int!,
+    role: Role!,
+    hometown: String!
+}
+
+input PeopleUpdateRequestDto {
+    peopleId: ID!
+    teamId: ID,
+    lastName: String,
+    firstName: String,
+    sex: Sex,
+    bloodType: BloodType,
+    serveYears: Int,
+    role: Role,
+    hometown: String
+}
+
+enum Sex {
+    male,
+    female
+}
+
+enum  Role {
+    developer,
+    designer,
+    planner
+}
+
+enum BloodType {
+    A,
+    B,
+    O,
+    AB
+}

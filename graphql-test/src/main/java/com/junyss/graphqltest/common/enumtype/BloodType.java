@@ -8,10 +8,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public enum BloodType {
-	A_TYPE("A"),
-	B_TYPE("B"),
-	O_TYPE("O"),
-	AB_TYPE("AB");
+	A("A"),
+	B("B"),
+	O("O"),
+	AB("AB");
 
 	private String bloodType;
 }

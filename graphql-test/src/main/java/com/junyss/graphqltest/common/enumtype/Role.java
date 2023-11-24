@@ -8,9 +8,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public enum Role {
-	DEVELOPER("developer"),
-	DESIGNER("designer"),
-	PLANNER("planner");
+	developer("developer"),
+	designer("designer"),
+	planner("planner");
 
 	private String role;
 }

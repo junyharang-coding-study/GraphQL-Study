@@ -2,4 +2,8 @@ type Mutation {
     saveForEquipment(input: EquipmentRequestDto): DefaultResponse!
     updateEquipment(input: EquipmentRequestDto): DefaultResponse!
     deleteEquipment(equipmentId: String!): DefaultResponse!
+
+    saveForPeople(input: PeopleRequestDto): DefaultResponse!
+    updatePeople(input: PeopleUpdateRequestDto): DefaultResponse!
+    deletePeople(peopleId: Int!): DefaultResponse!
 }

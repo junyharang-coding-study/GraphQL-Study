@@ -30,7 +30,7 @@ create table role (
 
 create table people (
     people_id BIGINT not null AUTO_INCREMENT PRIMARY KEY comment 'ID',
-    team BIGINT not null comment 'TEAM 번호',
+    team_id BIGINT not null comment 'TEAM 번호',
     last_name varchar(255) not null comment '성',
     first_name varchar(255) not null comment '이름',
     sex varchar(6) not null comment '성별',
@@ -39,7 +39,7 @@ create table people (
     role varchar(100) not null comment '역할',
     hometown varchar(255) not null comment '출신지',
 
-    foreign key (team)
+    foreign key (team_id)
         references team (team_id)
 );
 
@@ -52,9 +52,9 @@ create table software (
 
 create table supply (
     supply_id varchar(255) not null PRIMARY KEY comment 'ID',
-    team BIGINT not null comment 'TEAM 번호',
+    team_id BIGINT not null comment 'TEAM 번호',
 
-    foreign key (team)
+    foreign key (team_id)
         references team (team_id)
 );
 

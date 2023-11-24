@@ -46,8 +46,12 @@ public class EquipmentResolverImpl implements EquipmentResolver {
 
 	@Transactional(readOnly = true)
 	@Override
-	public DefaultResponse<List<EquipmentResponseDto>> getEquipmentList(String equipmentId, String usedBy,
-		String newOrUsed, Integer page, Integer size) {
+	public DefaultResponse<List<EquipmentResponseDto>> getEquipmentList(
+		String equipmentId,
+		String usedBy,
+		String newOrUsed,
+		Integer page,
+		Integer size) {
 
 		Page<EquipmentResponseDto> result = equipmentQueryDslRepository.findBySearchAndPaging(
 			new EquipmentSearchRequestDto(
@@ -63,7 +67,10 @@ public class EquipmentResolverImpl implements EquipmentResolver {
 		List<EquipmentResponseDto> equipmentResponseDtoList = GraphQLSupportUtil.pageToList(result);
 
 		if (!equipmentResponseDtoList.isEmpty()) {
-			return DefaultResponse.response(HttpStatus.OK.value(), "OK", equipmentResponseDtoList,
+			return DefaultResponse.response(
+				HttpStatus.OK.value(),
+				"OK",
+				equipmentResponseDtoList,
 				new Pagination(result));
 		} else {
 			return DefaultResponse.response(HttpStatus.NOT_FOUND.value(), "NOT FOUND DATA");
@@ -98,7 +105,7 @@ public class EquipmentResolverImpl implements EquipmentResolver {
 
 		Optional<Equipment> equipmentRepositoryById = equipmentRepository.findById(equipmentRequestDto.getEquipmentId());
 
-		Equipment equipment = getEquipment(equipmentRequestDto, equipmentRepositoryById);
+		Equipment equipment = checkUpdateRequest(equipmentRequestDto, equipmentRepositoryById);
 
 		if (equipment == null) {
 			return DefaultResponse.response(HttpStatus.NOT_FOUND.value(), "NOT FOUND UPDATE TARGET");
@@ -124,7 +131,7 @@ public class EquipmentResolverImpl implements EquipmentResolver {
 		return DefaultResponse.response(HttpStatus.NOT_FOUND.value(), "NOT FOUND DELETE TARGET", equipmentId);
 	}
 
-	private static Equipment getEquipment(EquipmentRequestDto equipmentRequestDto, Optional<Equipment> equipmentRepositoryById) {
+	private Equipment checkUpdateRequest(EquipmentRequestDto equipmentRequestDto, Optional<Equipment> equipmentRepositoryById) {
 		if (equipmentRepositoryById.isEmpty()) {
 			return null;
 		} else {

@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class EquipmentResponseDto {
-
 	private String equipmentId;
 	private String usedBy;
 	private Integer count;

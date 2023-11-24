@@ -11,7 +11,6 @@ import org.springframework.util.StringUtils;
 import com.junyss.graphqltest.common.util.PagingProcessUtil;
 import com.junyss.graphqltest.equipment.model.dto.request.EquipmentSearchRequestDto;
 import com.junyss.graphqltest.equipment.model.dto.response.EquipmentResponseDto;
-import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQuery;

@@ -54,24 +54,6 @@ public class EquipmentResolverImpl implements EquipmentResolver {
 		} else {
 			return DefaultListResponse.response(HttpStatus.NOT_FOUND.value(), "NOT FOUND DATA");
 		}
-
-		// List<EquipmentResponseDto> result = equipmentQueryDslRepository.findBySearchAndPaging(
-		// 		new EquipmentSearchRequestDto(
-		// 			equipmentId,
-		// 			usedBy,
-		// 			newOrUsed),
-		// 		PagingProcessUtil.processPaging(page, size))
-		// 	.stream()
-		// 	.filter(Objects::nonNull)
-		// 	.map(equipment -> EquipmentResponseDto.builder()
-		// 		.equipmentId(equipment.getEquipmentId())
-		// 		.usedBy(equipment.getUsedBy())
-		// 		.count(equipment.getCount())
-		// 		.newOrUsed(equipment.getNewOrUsed())
-		// 		.build())
-		// 	.collect(Collectors.toList());
-
-
 	}
 
 	@Override

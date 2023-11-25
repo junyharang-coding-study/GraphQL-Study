@@ -10,8 +10,6 @@ type Query {
     getEquipment(equipmentId: String!): DefaultResponse!
 
     getPeopleList(
-        peopleId: ID,
-        teamId: ID,
         lastName: String,
         firstName: String,
         sex: Sex,
@@ -22,5 +20,9 @@ type Query {
         page: Int,
         size: Int): DefaultListResponse!,
 
-    getPeople(peopleId: Int!): DefaultResponse!
+    getPeopleByPeopleId(peopleId: Int!): DefaultResponse!
+    getPeopleByTeamId(
+        teamId: Int!,
+        page: Int,
+        size: Int): DefaultListResponse!
 }

@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +16,7 @@ import com.junyss.graphqltest.common.enumtype.BloodType;
 import com.junyss.graphqltest.common.enumtype.Role;
 import com.junyss.graphqltest.common.enumtype.Sex;
 import com.junyss.graphqltest.common.util.GraphQLSupportUtil;
+import com.junyss.graphqltest.common.util.ObjectUtil;
 import com.junyss.graphqltest.common.util.PagingProcessUtil;
 import com.junyss.graphqltest.people.model.dto.request.PeopleRequestDto;
 import com.junyss.graphqltest.people.model.dto.request.PeopleSearchRequestDto;
@@ -92,7 +95,7 @@ public class PeopleResolverImpl implements PeopleResolver {
 				hometown),
 			PagingProcessUtil.processPaging(page, size));
 
-		if (result.getTotalElements() == 0 && !result.hasContent()) {
+		if (ObjectUtil.checkObjectExistence(result)) {
 			return DefaultResponse.response(HttpStatus.NOT_FOUND.value(), "NOT FOUND DATA");
 		}
 
@@ -111,11 +114,11 @@ public class PeopleResolverImpl implements PeopleResolver {
 
 	@Transactional(readOnly = true)
 	@Override
-	public DefaultResponse<PeopleResponseDto> getPeople(Long peopleId) {
-		Optional<People> findByPeople = peopleRepository.findById(peopleId);
+	public DefaultResponse<PeopleResponseDto> getPeopleByPeopleId(Long peopleId) {
+		Optional<People> findByPeopleAsPeopleId = peopleRepository.findById(peopleId);
 
-		if (findByPeople.isPresent()) {
-			People people = findByPeople.get();
+		if (findByPeopleAsPeopleId.isPresent()) {
+			People people = findByPeopleAsPeopleId.get();
 
 			return DefaultResponse.response(
 				HttpStatus.OK.value(),
@@ -134,6 +137,28 @@ public class PeopleResolverImpl implements PeopleResolver {
 		}
 
 		return DefaultResponse.response(HttpStatus.NOT_FOUND.value(), "NOT FOUND DATA");
+	}
+
+	@Override
+	public DefaultResponse<List<PeopleResponseDto>> getPeopleByTeamId(Long teamId, Integer page, Integer size) {
+		Page<PeopleResponseDto> findByPeopleAsTeamId = peopleQueryDslRepository.findByPeopleAsTeamId(teamId, PageRequest.of(page, size));
+
+		if (ObjectUtil.checkObjectExistence(findByPeopleAsTeamId)) {
+			return DefaultResponse.response(HttpStatus.NOT_FOUND.value(), "NOT FOUND DATA");
+		}
+
+		List<PeopleResponseDto> peopleResponseDtoList = GraphQLSupportUtil.pageToList(findByPeopleAsTeamId);
+
+		if (!peopleResponseDtoList.isEmpty()) {
+
+			return DefaultResponse.response(
+				HttpStatus.OK.value(),
+				"OK",
+				peopleResponseDtoList,
+				new Pagination(findByPeopleAsTeamId));
+		} else {
+			return DefaultResponse.response(HttpStatus.NOT_FOUND.value(), "NOT FOUND DATA");
+		}
 	}
 
 	@Transactional

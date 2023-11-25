@@ -1,6 +1,7 @@
 package com.junyss.graphqltest.people.repository;
 
 import static com.junyss.graphqltest.people.model.entity.QPeople.people;
+import static com.junyss.graphqltest.team.model.entity.QTeam.team;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -14,6 +15,7 @@ import com.junyss.graphqltest.common.enumtype.Sex;
 import com.junyss.graphqltest.common.util.PagingProcessUtil;
 import com.junyss.graphqltest.people.model.dto.request.PeopleSearchRequestDto;
 import com.junyss.graphqltest.people.model.dto.response.PeopleResponseDto;
+import com.junyss.graphqltest.people.model.entity.People;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQuery;
@@ -29,7 +31,8 @@ public class PeopleQueryDslRepository {
 
 	private final JPAQueryFactory jpaQueryFactory;
 
-	public Page<PeopleResponseDto> findBySearchAndPaging(PeopleSearchRequestDto peopleSearchRequestDto, Pageable pageable) {
+	public Page<PeopleResponseDto> findBySearchAndPaging(PeopleSearchRequestDto peopleSearchRequestDto,
+		Pageable pageable) {
 		JPAQuery<PeopleResponseDto> query = jpaQueryFactory.select(Projections.constructor(
 				PeopleResponseDto.class,
 				people.peopleId,
@@ -52,6 +55,30 @@ public class PeopleQueryDslRepository {
 				eqServeYears(peopleSearchRequestDto.getServeYears()),
 				eqRole(peopleSearchRequestDto.getRole()),
 				eqHometown(peopleSearchRequestDto.getHometown()))
+			.orderBy(people.peopleId.desc());
+
+		return new PageImpl<>(
+			PagingProcessUtil.queryDslPagingProcessing(query, pageable),
+			pageable,
+			query.stream().count());
+	}
+
+	public Page<PeopleResponseDto> findByPeopleAsTeamId(Long teamId, Pageable pageable) {
+		JPAQuery<PeopleResponseDto> query = jpaQueryFactory.select(
+				Projections.constructor(
+					PeopleResponseDto.class,
+					people.peopleId,
+					people.team.teamId,
+					people.lastName,
+					people.firstName,
+					people.sex,
+					people.bloodType,
+					people.serveYears,
+					people.role,
+					people.hometown))
+			.from(people)
+			.innerJoin(team).on(team.teamId.eq(people.team.teamId))
+			.where(people.team.teamId.eq(teamId))
 			.orderBy(people.peopleId.desc());
 
 		return new PageImpl<>(

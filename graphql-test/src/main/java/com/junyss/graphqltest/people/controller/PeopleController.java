@@ -58,8 +58,17 @@ public class PeopleController {
 	}
 
 	@QueryMapping
-	public DefaultResponse<PeopleResponseDto> getPeople (@Argument Long peopleId) {
-		return peopleResolver.getPeople(peopleId);
+	public DefaultResponse<PeopleResponseDto> getPeopleByPeopleId (@Argument Long peopleId) {
+		return peopleResolver.getPeopleByPeopleId(peopleId);
+	}
+
+	@QueryMapping
+	public DefaultResponse<List<PeopleResponseDto>> getPeopleByTeamId (
+		@Argument Long teamId,
+		@Argument Integer page,
+		@Argument Integer size) {
+
+		return peopleResolver.getPeopleByTeamId(teamId, page, size);
 	}
 
 	@MutationMapping

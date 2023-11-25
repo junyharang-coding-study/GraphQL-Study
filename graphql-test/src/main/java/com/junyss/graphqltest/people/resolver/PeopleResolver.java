@@ -26,7 +26,9 @@ public interface PeopleResolver {
 		Integer page,
 		Integer size);
 
-	DefaultResponse<PeopleResponseDto> getPeople(Long peopleId);
+	DefaultResponse<PeopleResponseDto> getPeopleByPeopleId(Long peopleId);
+
+	DefaultResponse<List<PeopleResponseDto>> getPeopleByTeamId(Long teamId, Integer page, Integer size);
 
 	DefaultResponse<Long> updatePeople(PeopleUpdateRequestDto peopleUpdateRequestDto);
 

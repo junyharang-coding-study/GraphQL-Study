@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.junyss.graphqltest.common.constant.DefaultResponse;
 import com.junyss.graphqltest.common.constant.Pagination;
 import com.junyss.graphqltest.common.util.GraphQLSupportUtil;
+import com.junyss.graphqltest.common.util.ObjectUtil;
 import com.junyss.graphqltest.common.util.PagingProcessUtil;
 import com.junyss.graphqltest.equipment.model.dto.request.EquipmentRequestDto;
 import com.junyss.graphqltest.equipment.model.dto.request.EquipmentSearchRequestDto;
@@ -60,7 +61,7 @@ public class EquipmentResolverImpl implements EquipmentResolver {
 				newOrUsed),
 			PagingProcessUtil.processPaging(page, size));
 
-		if (result.getTotalElements() == 0 && !result.hasContent()) {
+		if (ObjectUtil.checkObjectExistence(result)) {
 			return DefaultResponse.response(HttpStatus.NOT_FOUND.value(), "NOT FOUND DATA");
 		}
 

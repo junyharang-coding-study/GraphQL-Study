@@ -75,7 +75,8 @@ public class PeopleQueryDslRepository {
 					people.role,
 					people.hometown))
 			.from(people)
-			.innerJoin(team).on(team.teamId.eq(people.team.teamId))
+			.innerJoin(team)
+			.on(team.teamId.eq(people.team.teamId))
 			.where(people.team.teamId.eq(teamId))
 			.orderBy(people.peopleId.desc());
 

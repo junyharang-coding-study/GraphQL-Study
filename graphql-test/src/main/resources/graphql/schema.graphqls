@@ -62,6 +62,11 @@ input SoftwareUpdateRequestDto {
     description: String
 }
 
+input SupplyRequestDto {
+    supplyId: String!,
+    teamId: ID!,
+}
+
 enum Sex {
     male,
     female

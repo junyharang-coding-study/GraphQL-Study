@@ -1,0 +1,8 @@
+type SupplyId {
+    peopleId: ID!
+}
+
+type SupplyResponseDto {
+    supplyId: ID!,
+    teamId: ID!
+}

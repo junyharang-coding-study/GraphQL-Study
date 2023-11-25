@@ -10,4 +10,7 @@ type Mutation {
     saveForSoftware(input: SoftwareRequestDto): DefaultResponse!
     updateSoftware(input: SoftwareUpdateRequestDto): DefaultResponse!
     deleteSoftware(softwareId: String!): DefaultResponse!
+
+    saveForSupply(input: SupplyRequestDto): DefaultResponse!
+    deleteSupply(supplyId: String!): DefaultResponse!
 }

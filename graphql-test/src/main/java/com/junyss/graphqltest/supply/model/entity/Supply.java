@@ -10,6 +10,7 @@ import com.junyss.graphqltest.team.model.entity.Team;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -25,7 +26,12 @@ public class Supply {
 	@JoinColumn(name = "team_id")
 	private Team team;
 
-	public Supply toEntity (String id, Team team) {
+	@Builder
+	public static Supply toEntity(String id, Team team) {
 		return new Supply (id, team);
+	}
+
+	public void updateSupplyId(String supplyId) {
+		SupplyId = supplyId;
 	}
 }

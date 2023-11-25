@@ -33,4 +33,14 @@ type Query {
         size: Int): DefaultListResponse!,
 
     getSoftwareBySoftwareId(softwareId: String!): DefaultResponse!
+
+    getSupplyList(
+        page: Int,
+        size: Int): DefaultListResponse!,
+
+    getSupplyBySupplyId(supplyId: String!): DefaultResponse!
+    getSupplyByTeamId(
+        teamId: Int!,
+        page: Int,
+        size: Int): DefaultListResponse!
 }

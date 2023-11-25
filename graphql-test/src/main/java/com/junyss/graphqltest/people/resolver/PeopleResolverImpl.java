@@ -40,14 +40,13 @@ public class PeopleResolverImpl implements PeopleResolver {
 	@Transactional
 	@Override
 	public DefaultResponse<Long> saveForPeople(PeopleRequestDto peopleRequestDtoDto) {
+		if (peopleRequestDtoDto == null) {
+			return DefaultResponse.response(HttpStatus.NO_CONTENT.value(), "Failed Create");
+		}
 
 		Optional<Team> team = teamRepository.findById(peopleRequestDtoDto.getTeamId());
 
 		if (team.isPresent()) {
-			if (peopleRequestDtoDto == null) {
-				return DefaultResponse.response(HttpStatus.NO_CONTENT.value(), "Failed Create");
-			}
-
 			return DefaultResponse.response(
 				HttpStatus.CREATED.value(),
 				"Success Create",
@@ -149,7 +148,6 @@ public class PeopleResolverImpl implements PeopleResolver {
 		List<PeopleResponseDto> peopleResponseDtoList = GraphQLSupportUtil.pageToList(findByPeopleAsTeamId);
 
 		if (!peopleResponseDtoList.isEmpty()) {
-
 			return DefaultResponse.response(
 				HttpStatus.OK.value(),
 				"OK",

@@ -1,0 +1,10 @@
+type SoftwareId {
+    softwareId: ID!
+}
+
+type SoftwareResponseDto {
+    softwareId: ID!,
+    usedBy: String!,
+    developedBy: String!,
+    description: String
+}

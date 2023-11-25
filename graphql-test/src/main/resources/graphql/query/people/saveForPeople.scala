@@ -9,10 +9,8 @@ mutation saveForPeople {
     role: developer,
     hometown: "Seoul"
   }) {
-    statusCode
-    ,
-    message
-    ,
+    statusCode,
+    message,
     data
   }
 }

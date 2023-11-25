@@ -3,6 +3,8 @@ package com.junyss.graphqltest.software.model.entity;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import com.junyss.graphqltest.software.model.dto.request.SoftwareRequestDto;
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,12 +16,28 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Software {
 
-	@Id private String SoftwareId;
+	@Id private String softwareId;
 	private String usedBy;
 	private String developedBy;
 	private String description;
 
-	public Software toEntity (String id, String usedBy, String developedBy, String description) {
-		return new Software(id, usedBy, developedBy, description);
+	public static Software toEntity (SoftwareRequestDto softwareRequestDto) {
+		return new Software(
+			softwareRequestDto.getSoftwareId(),
+			softwareRequestDto.getUsedBy(),
+			softwareRequestDto.getDevelopedBy(),
+			softwareRequestDto.getDescription());
+	}
+
+	public void updateUsedBy(String usedBy) {
+		this.usedBy = usedBy;
+	}
+
+	public void updateDevelopedBy(String developedBy) {
+		this.developedBy = developedBy;
+	}
+
+	public void updateDescription(String description) {
+		this.description = description;
 	}
 }

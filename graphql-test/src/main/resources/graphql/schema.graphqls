@@ -48,6 +48,20 @@ input PeopleUpdateRequestDto {
     hometown: String
 }
 
+input SoftwareRequestDto {
+    softwareId: String!,
+    usedBy: String!,
+    developedBy: String!,
+    description: String
+}
+
+input SoftwareUpdateRequestDto {
+    softwareId: String!,
+    usedBy: String,
+    developedBy: String,
+    description: String
+}
+
 enum Sex {
     male,
     female

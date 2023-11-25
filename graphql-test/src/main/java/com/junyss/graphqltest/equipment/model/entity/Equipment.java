@@ -30,10 +30,6 @@ public class Equipment {
 		equipmentRequestDto.getNewOrUsed());
 	}
 
-	public void updateEquipmentId(String equipmentId) {
-		this.equipmentId = equipmentId;
-	}
-
 	public void updateUsedBy(String usedBy) {
 		this.usedBy = usedBy;
 	}

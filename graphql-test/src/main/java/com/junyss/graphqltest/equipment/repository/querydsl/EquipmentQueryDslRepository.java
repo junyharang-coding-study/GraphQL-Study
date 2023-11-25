@@ -24,14 +24,17 @@ public class EquipmentQueryDslRepository {
 
 	private final JPAQueryFactory jpaQueryFactory;
 
-	public Page<EquipmentResponseDto> findBySearchAndPaging(EquipmentSearchRequestDto equipmentSearchRequestDto, Pageable pageable) {
-			JPAQuery<EquipmentResponseDto> query = jpaQueryFactory
-			.select(Projections.constructor(
-				EquipmentResponseDto.class,
-				equipment.equipmentId,
-				equipment.usedBy,
-				equipment.count,
-				equipment.newOrUsed))
+	public Page<EquipmentResponseDto> findBySearchAndPaging(
+		EquipmentSearchRequestDto equipmentSearchRequestDto,
+		Pageable pageable) {
+
+		JPAQuery<EquipmentResponseDto> query = jpaQueryFactory.select(
+				Projections.constructor(
+					EquipmentResponseDto.class,
+					equipment.equipmentId,
+					equipment.usedBy,
+					equipment.count,
+					equipment.newOrUsed))
 			.from(equipment)
 			.where(
 				eqEquipmentId(equipmentSearchRequestDto.getEquipmentId()),

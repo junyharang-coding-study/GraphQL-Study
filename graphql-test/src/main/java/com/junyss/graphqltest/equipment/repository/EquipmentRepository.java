@@ -10,5 +10,5 @@ import com.junyss.graphqltest.equipment.model.entity.Equipment;
 public interface EquipmentRepository extends JpaRepository<Equipment, String> {
 
 	@Query(value = "select equipment from Equipment equipment where equipment.equipmentId = :equipmentId")
-	Optional<Equipment> findAllByStringId(String equipmentId);
+	Optional<Equipment> findByEquipmentId(String equipmentId);
 }

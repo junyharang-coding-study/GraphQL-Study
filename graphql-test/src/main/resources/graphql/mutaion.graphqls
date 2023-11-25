@@ -6,4 +6,8 @@ type Mutation {
     saveForPeople(input: PeopleRequestDto): DefaultResponse!
     updatePeople(input: PeopleUpdateRequestDto): DefaultResponse!
     deletePeople(peopleId: Int!): DefaultResponse!
+
+    saveForSoftware(input: SoftwareRequestDto): DefaultResponse!
+    updateSoftware(input: SoftwareUpdateRequestDto): DefaultResponse!
+    deleteSoftware(softwareId: String!): DefaultResponse!
 }

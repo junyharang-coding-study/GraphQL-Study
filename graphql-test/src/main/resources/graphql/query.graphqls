@@ -25,4 +25,12 @@ type Query {
         teamId: Int!,
         page: Int,
         size: Int): DefaultListResponse!
+
+    getSoftwareList(
+        usedBy: String,
+        developedBy: String,
+        page: Int,
+        size: Int): DefaultListResponse!,
+
+    getSoftwareBySoftwareId(softwareId: String!): DefaultResponse!
 }

@@ -81,10 +81,10 @@ public class EquipmentResolverImpl implements EquipmentResolver {
 	@Transactional(readOnly = true)
 	@Override
 	public DefaultResponse<EquipmentResponseDto> getEquipment(String equipmentId) {
-		Optional<Equipment> findBySearchId = equipmentRepository.findAllByStringId(equipmentId);
+		Optional<Equipment> findByEquipmentId = equipmentRepository.findByEquipmentId(equipmentId);
 
-		if (findBySearchId.isPresent()) {
-			Equipment equipment = findBySearchId.get();
+		if (findByEquipmentId.isPresent()) {
+			Equipment equipment = findByEquipmentId.get();
 
 			return DefaultResponse.response(
 				HttpStatus.OK.value(),
@@ -137,10 +137,6 @@ public class EquipmentResolverImpl implements EquipmentResolver {
 			return null;
 		} else {
 			Equipment equipment = equipmentRepositoryById.get();
-
-			if (equipmentRequestDto.getEquipmentId() != null) {
-				equipment.updateEquipmentId(equipmentRequestDto.getEquipmentId());
-			}
 
 			if (equipmentRequestDto.getUsedBy() != null) {
 				equipment.updateUsedBy(equipmentRequestDto.getUsedBy());

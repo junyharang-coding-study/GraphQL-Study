@@ -15,16 +15,14 @@ import com.junyss.graphqltest.common.enumtype.Sex;
 import com.junyss.graphqltest.common.util.PagingProcessUtil;
 import com.junyss.graphqltest.people.model.dto.request.PeopleSearchRequestDto;
 import com.junyss.graphqltest.people.model.dto.response.PeopleResponseDto;
-import com.junyss.graphqltest.people.model.entity.People;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
+
 @RequiredArgsConstructor
 @Repository
 public class PeopleQueryDslRepository {

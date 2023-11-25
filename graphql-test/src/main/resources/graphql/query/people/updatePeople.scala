@@ -6,10 +6,8 @@ mutation updatePeople {
     firstName: "Junyss",
     serveYears: 20,
   }) {
-    statusCode
-    ,
-    message
-    ,
+    statusCode,
+    message,
     data
   }
 }

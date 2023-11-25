@@ -21,6 +21,7 @@ type Query {
         size: Int): DefaultListResponse!,
 
     getPeopleByPeopleId(peopleId: Int!): DefaultResponse!
+
     getPeopleByTeamId(
         teamId: Int!,
         page: Int,
@@ -39,8 +40,21 @@ type Query {
         size: Int): DefaultListResponse!,
 
     getSupplyBySupplyId(supplyId: String!): DefaultResponse!
+
     getSupplyByTeamId(
         teamId: Int!,
         page: Int,
         size: Int): DefaultListResponse!
+
+    getTeamList(
+        manager: String,
+        office: String,
+        extensionNumber: String,
+        mascot: String,
+        cleaningDuty: String,
+        project: String,
+        page: Int,
+        size: Int): DefaultListResponse!,
+
+    getTeamByTeamId(teamId: Int!): DefaultResponse!
 }

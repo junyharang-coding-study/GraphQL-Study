@@ -16,14 +16,14 @@ create table team (
     team_id BIGINT not null AUTO_INCREMENT PRIMARY KEY comment 'ID',
     manager varchar(255) not null comment '팀 관리자',
     office  varchar(5) not null comment '사무실 호수',
-    extension_number varchar(5) not null,
-    mascot varchar(10) not null,
+    extension_number varchar(5) not null comment '내선 번호',
+    mascot varchar(10) comment '마스코트',
     cleaning_duty varchar(10) not null comment '청소 당번 요일',
-    project varchar(10) not null comment '프로젝트 명'
+    project varchar(10) comment '프로젝트 명'
 );
 
 create table role (
-    id varchar(255) not null PRIMARY KEY comment 'ID',
+    role_id varchar(255) not null PRIMARY KEY comment 'ID',
     job varchar(255) not null comment '구분',
     requirement  varchar(255) not null
 );

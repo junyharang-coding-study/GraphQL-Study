@@ -187,13 +187,13 @@ INSERT INTO people (team_id, last_name, first_name, sex, blood_type, serve_years
 VALUES (1,'Ned','Butler','male','O',2,'planner','Messachusetts');
 
 
-INSERT INTO role (id, job, requirement)
+INSERT INTO role (role_id, job, requirement)
 VALUES ('developer', 'programming', 'computer science degree');
 
-INSERT INTO role (id, job, requirement)
+INSERT INTO role (role_id, job, requirement)
 VALUES ('designer', 'web design', 'graphic design certificate');
 
-INSERT INTO role (id, job, requirement)
+INSERT INTO role (role_id, job, requirement)
 VALUES ('planner', 'service planning', 'portfolio');
 
 

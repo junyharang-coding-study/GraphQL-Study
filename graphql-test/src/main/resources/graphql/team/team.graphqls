@@ -1,0 +1,13 @@
+type TeamId {
+    teamId: ID!
+}
+
+type TeamResponseDto {
+    teamId: ID!,
+    manager: String!,
+    office: String!,
+    extensionNumber: String!,
+    mascot: String,
+    cleaningDuty: String!,
+    project: String
+}

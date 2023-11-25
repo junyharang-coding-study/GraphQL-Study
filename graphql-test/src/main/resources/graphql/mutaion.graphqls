@@ -13,4 +13,8 @@ type Mutation {
 
     saveForSupply(input: SupplyRequestDto): DefaultResponse!
     deleteSupply(supplyId: String!): DefaultResponse!
+
+    saveForTeam(input: TeamRequestDto): DefaultResponse!
+    updateTeam(input: TeamUpdateRequestDto): DefaultResponse!
+    deleteTeam(peopleId: Int!): DefaultResponse!
 }

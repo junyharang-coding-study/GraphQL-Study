@@ -67,6 +67,26 @@ input SupplyRequestDto {
     teamId: ID!,
 }
 
+input TeamRequestDto {
+    teamId: ID,
+    manager: String!,
+    office: String!,
+    extensionNumber: String!,
+    mascot: String,
+    cleaningDuty: String!,
+    project: String
+}
+
+input TeamUpdateRequestDto {
+    teamId: ID!,
+    manager: String,
+    office: String,
+    extensionNumber: String,
+    mascot: String,
+    cleaningDuty: String,
+    project: String
+}
+
 enum Sex {
     male,
     female

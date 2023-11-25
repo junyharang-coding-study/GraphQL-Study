@@ -9,6 +9,8 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '2.7.17'
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+    //querydsl 추가
+    id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
 }
 
 group = 'com.junyss'
@@ -63,11 +65,12 @@ tasks.named('test') {
 
 // Query dsl task 추가
 def querydslDir = "$buildDir/generated/querydsl"
+//def querydslDir = 'src/main/generated'
 
 querydsl {
-    library = "com.querydsl:querydsl-apt"
     jpa = true
     querydslSourcesDir = querydslDir
+    library = "com.querydsl:querydsl-apt"
 }
 
 sourceSets {

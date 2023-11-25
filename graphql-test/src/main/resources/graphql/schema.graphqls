@@ -87,6 +87,18 @@ input TeamUpdateRequestDto {
     project: String
 }
 
+input RoleRequestDto {
+    roleId: String!,
+    job: String!,
+    requirement: String!
+}
+
+input RoleUpdateRequestDto {
+    roleId: String!,
+    job: String,
+    requirement: String
+}
+
 enum Sex {
     male,
     female

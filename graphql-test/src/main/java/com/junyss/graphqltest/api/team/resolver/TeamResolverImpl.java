@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.junyss.graphqltest.api.team.model.dto.request.TeamRequestDto;
 import com.junyss.graphqltest.api.team.model.dto.request.TeamSearchRequestDto;
@@ -29,6 +30,7 @@ public class TeamResolverImpl implements TeamResolver{
 	private final TeamRepository teamRepository;
 	private final TeamQueryDslRepository teamQueryDslRepository;
 
+	@Transactional
 	@Override
 	public DefaultResponse<Long> saveForTeam(TeamRequestDto teamRequestDto) {
 		if (teamRequestDto == null) {
@@ -49,6 +51,7 @@ public class TeamResolverImpl implements TeamResolver{
 				.getTeamId());
 	}
 
+	@Transactional(readOnly = true)
 	@Override
 	public DefaultResponse<List<TeamResponseDto>> getTeamList(
 		String manager,
@@ -87,6 +90,7 @@ public class TeamResolverImpl implements TeamResolver{
 		}
 	}
 
+	@Transactional(readOnly = true)
 	@Override
 	public DefaultResponse<TeamResponseDto> getTeamByTeamId(Long teamId) {
 		Optional<Team> findByTeamAsTeamId = teamRepository.findById(teamId);
@@ -111,6 +115,7 @@ public class TeamResolverImpl implements TeamResolver{
 		return DefaultResponse.response(HttpStatus.NOT_FOUND.value(), "NOT FOUND DATA");
 	}
 
+	@Transactional
 	@Override
 	public DefaultResponse<Long> updateTeam(TeamUpdateRequestDto teamUpdateRequestDto) {
 		Optional<Team> teamRepositoryById = teamRepository.findById(teamUpdateRequestDto.getTeamId());
@@ -127,6 +132,7 @@ public class TeamResolverImpl implements TeamResolver{
 			teamRepository.save(team).getTeamId());
 	}
 
+	@Transactional
 	@Override
 	public DefaultResponse<Long> deleteTeam(Long teamId) {
 		Optional<Team> teamRepositoryById = teamRepository.findById(teamId);

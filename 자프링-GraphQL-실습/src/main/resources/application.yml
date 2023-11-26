@@ -37,3 +37,11 @@ spring:
       mode: always
       schema-locations: classpath:init/database/schema.sql
       data-locations: classpath:init/database/data.sql
+
+springdoc:
+  swagger-ui:
+    version: 1.0.0
+
+logging:
+  level:
+    com.junyss.graphqltest.api: DEBUG

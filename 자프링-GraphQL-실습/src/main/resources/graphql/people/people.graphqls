@@ -2,15 +2,16 @@ type PeopleId {
     peopleId: ID!
 }
 
-type PeopleResponseDto {
-    peopleId: ID!,
-    teamId: ID!,
-    lastName: String!,
-    firstName: String!,
-    sex: Sex!,
-    bloodType: BloodType!,
-    serveYears: Int!,
-    role: Role!,
-    hometown: String!
+type DefaultListPeopleResponse {
+    statusCode: Int!,
+    message: String!,
+    data: [PeopleResponseDto!]!,
+    pagination: String
+}
+
+type DefaultPeopleResponse {
+    statusCode: Int!,
+    message: String!,
+    data: PeopleResponseDto!
 }
 

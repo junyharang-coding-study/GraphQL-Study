@@ -1,3 +1,28 @@
+### ⚠️ 소스 코드 관련 주의 사항(Precautions for Source Code)
+
+---
+주니의 블로그에 설명과 함께 실습하고, 사용해볼 수 있도록 만든 코드 입니다.
+본 코드를 내려 받고 바로 실행 시키면 따른 설정 없이 바로 실습해 볼 수 있습니다.
+
+다만, 아래 사항을 반드시 지켜주시기 바랍니다.
+
+첫째: 실습을 위해 소스 코드를 내려 받기 전 ⭐️ (Star)를 한번만 꾹 눌러주세요.
+둘째: 반드시 자신의 Git Hub Repository (레포지터리)에 Fork 한 뒤 그 곳에서 내려 받아 이용해 주세요. 
+셋째: 실습 하면서 발생되는 버그 등에 대해서 수정하시게 되면 많은 사람들과 공유를 위해 [📨 Mail](junyharang8592@gmail.com) 주시면 해당 수정 뒤 PR 보낼 수 있는 Branch를 열어 드리고 알려드리겠습니다.
+넷째: 자신의 Git Hub 등에 코드를 공개하시고자 할 경우 본 README.md를 수정, 삭제하지 말아주시기 부탁드립니다! 🙏
+
+공부하시는 데 도움이 되시기 바랍니다 😀
+
+If you download this code and run it right away, you can practice it right away without the settings that you follow.
+
+However, please make sure to follow the following.
+
+First: Press ⭐(Star) once before downloading the source code for practice.
+Second: Make sure to fork your Git Hub Repository and download it from there to use it.
+Third: If you fix bugs that occur during the practice, please [📨 send me an email](junyharang8592@gmail.com) for sharing with many people, and I will open a branch where you can send PR after the correction and let you know.
+
+I hope it helps you study 😀
+
 # 🚀 실습 소개
 
 각 종 언어와 Framwork를 사용하여 GraphQL 실습 및 공부
@@ -27,7 +52,9 @@
 <br>
 ●[GraphQL과 Apollo 여덟번째 이야기 - GraphQL Union과 Interface 그리고 인자와 인풋 타입에 대해 알아보아요 😀](https://junyharang.tistory.com/516)
 <br>
-●[GraphQL과 Apollo 아홉번째 이야기 - Java + Spring Boot에서 GraphQL 사용해 보기](https://junyharang.tistory.com/517)
+●[GraphQL과 Apollo 아홉번째 이야기 - Java + Spring Boot에서 GraphQL 사용해 보기 - 실습 환경 구성](https://junyharang.tistory.com/517)
+<br>
+●[GraphQL과 Apollo 열번째 이야기 - Java + Spring Boot에서 GraphQL 사용해 보기 - 실습 해보기](https://junyharang.tistory.com/518)
 <br><br>
 
 #### 🔊 알려드려요!

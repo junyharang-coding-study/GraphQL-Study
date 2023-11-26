@@ -9,19 +9,18 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
+import com.junyss.graphqltest.api.people.model.dto.request.PeopleSearchRequestDto;
+import com.junyss.graphqltest.api.people.model.dto.response.PeopleResponseDto;
 import com.junyss.graphqltest.common.enumtype.BloodType;
 import com.junyss.graphqltest.common.enumtype.Role;
 import com.junyss.graphqltest.common.enumtype.Sex;
 import com.junyss.graphqltest.common.util.PagingProcessUtil;
-import com.junyss.graphqltest.api.people.model.dto.request.PeopleSearchRequestDto;
-import com.junyss.graphqltest.api.people.model.dto.response.PeopleResponseDto;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import lombok.RequiredArgsConstructor;
-
 
 @RequiredArgsConstructor
 @Repository

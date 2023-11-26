@@ -5,12 +5,9 @@ query findBygetSoftwareListSeachAllFieldAndPaging {
     page: 1,
     size: 1
   ) {
-    statusCode
-    ,
-    message
-    ,
-    data
-    ,
+    statusCode,
+    message,
+    data,
     pagination
   }
 }

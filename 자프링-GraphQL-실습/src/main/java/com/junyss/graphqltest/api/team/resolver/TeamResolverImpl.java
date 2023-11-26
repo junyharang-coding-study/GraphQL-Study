@@ -1,16 +1,22 @@
 package com.junyss.graphqltest.api.team.resolver;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.junyss.graphqltest.api.people.model.dto.response.PeopleResponseDto;
+import com.junyss.graphqltest.api.people.repository.PeopleRepository;
 import com.junyss.graphqltest.api.team.model.dto.request.TeamRequestDto;
 import com.junyss.graphqltest.api.team.model.dto.request.TeamSearchRequestDto;
 import com.junyss.graphqltest.api.team.model.dto.request.TeamUpdateRequestDto;
+import com.junyss.graphqltest.api.team.model.dto.response.TeamAndMemberResponseDto;
 import com.junyss.graphqltest.api.team.model.dto.response.TeamResponseDto;
 import com.junyss.graphqltest.api.team.model.entity.Team;
 import com.junyss.graphqltest.api.team.repository.TeamQueryDslRepository;
@@ -25,10 +31,11 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Service
-public class TeamResolverImpl implements TeamResolver{
+public class TeamResolverImpl implements TeamResolver {
 
 	private final TeamRepository teamRepository;
 	private final TeamQueryDslRepository teamQueryDslRepository;
+	private final PeopleRepository peopleRepository;
 
 	@Transactional
 	@Override
@@ -92,16 +99,33 @@ public class TeamResolverImpl implements TeamResolver{
 
 	@Transactional(readOnly = true)
 	@Override
-	public DefaultResponse<TeamResponseDto> getTeamByTeamId(Long teamId) {
+	public DefaultResponse<TeamAndMemberResponseDto> getTeamByTeamId(Long teamId) {
 		Optional<Team> findByTeamAsTeamId = teamRepository.findById(teamId);
 
-		if (findByTeamAsTeamId.isPresent()) {
+		List<PeopleResponseDto> peopleResponseDtos =
+			peopleRepository.findAllByTeamId(teamId)
+				.stream()
+				.filter(Objects::nonNull)
+				.map(people -> PeopleResponseDto.builder()
+					.peopleId(people.getPeopleId())
+					.teamId(people.getTeam().getTeamId())
+					.lastName(people.getLastName())
+					.firstName(people.getFirstName())
+					.sex(people.getSex())
+					.bloodType(people.getBloodType())
+					.serveYears(people.getServeYears())
+					.role(people.getRole())
+					.hometown(people.getHometown())
+					.build())
+				.collect(Collectors.toList());
+
+		if (findByTeamAsTeamId.isPresent() && !peopleResponseDtos.isEmpty()) {
 			Team team = findByTeamAsTeamId.get();
 
 			return DefaultResponse.response(
 				HttpStatus.OK.value(),
 				"OK",
-				TeamResponseDto.builder()
+				TeamAndMemberResponseDto.builder()
 					.teamId(team.getTeamId())
 					.manager(team.getManager())
 					.office(team.getOffice())
@@ -109,6 +133,39 @@ public class TeamResolverImpl implements TeamResolver{
 					.mascot(team.getMascot())
 					.cleaningDuty(team.getCleaningDuty())
 					.project(team.getProject())
+					.peopleResponseDtos(peopleResponseDtos)
+					.build());
+
+		} else if (findByTeamAsTeamId.isPresent() && peopleResponseDtos.isEmpty()) {
+			Team team = findByTeamAsTeamId.get();
+
+			return DefaultResponse.response(
+				HttpStatus.OK.value(),
+				"OK",
+				TeamAndMemberResponseDto.builder()
+					.teamId(team.getTeamId())
+					.manager(team.getManager())
+					.office(team.getOffice())
+					.extensionNumber(team.getExtensionNumber())
+					.mascot(team.getMascot())
+					.cleaningDuty(team.getCleaningDuty())
+					.project(team.getProject())
+					.peopleResponseDtos(new ArrayList<>())
+					.build());
+
+		} else if (findByTeamAsTeamId.isEmpty() && !peopleResponseDtos.isEmpty()) {
+			return DefaultResponse.response(
+				HttpStatus.OK.value(),
+				"OK",
+				TeamAndMemberResponseDto.builder()
+					.teamId(null)
+					.manager("Not Found Data")
+					.office("Not Found Data")
+					.extensionNumber("Not Found Data")
+					.mascot("Not Found Data")
+					.cleaningDuty("Not Found Data")
+					.project("Not Found Data")
+					.peopleResponseDtos(peopleResponseDtos)
 					.build());
 		}
 

@@ -5,7 +5,14 @@ type Query {
         usedBy: String,
         newOrUsed: String,
         page: Int,
-        size: Int): DefaultListResponse!,
+        size: Int): DefaultListEquipmentResponse!,
+
+    getEquipmentsAdv(
+        equipmentId: String,
+        usedBy: String,
+        newOrUsed: String,
+        page: Int,
+        size: Int): DefaultEquipmentsAdvResponse!,
 
     getEquipment(equipmentId: String!): DefaultResponse!
 
@@ -18,9 +25,9 @@ type Query {
         role: Role,
         hometown: String
         page: Int,
-        size: Int): DefaultListResponse!,
+        size: Int): DefaultListPeopleResponse!,
 
-    getPeopleByPeopleId(peopleId: Int!): DefaultResponse!
+    getPeopleByPeopleId(peopleId: Int!): DefaultPeopleResponse!
 
     getPeopleByTeamId(
         teamId: Int!,
@@ -31,9 +38,9 @@ type Query {
         usedBy: String,
         developedBy: String,
         page: Int,
-        size: Int): DefaultListResponse!,
+        size: Int): DefaultListSoftwareResponseDto!,
 
-    getSoftwareBySoftwareId(softwareId: String!): DefaultResponse!
+    getSoftwareBySoftwareId(softwareId: String!): DefaultSoftwareResponseDto!
 
     getSupplyList(
         page: Int,
@@ -54,9 +61,9 @@ type Query {
         cleaningDuty: String,
         project: String,
         page: Int,
-        size: Int): DefaultListResponse!,
+        size: Int): DefaultListTeamResponse!,
 
-    getTeamByTeamId(teamId: Int!): DefaultResponse!
+    getTeamByTeamId(teamId: Int!): DefaultTeamResponse!
 
     getRoleByRoleId(roleId: String!): DefaultResponse!
 }

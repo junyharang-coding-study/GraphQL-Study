@@ -1,7 +1,17 @@
-query getPeople {
-  getPeople(peopleId: 1) {
+query getPeopleByPeopleId {
+  getPeopleByPeopleId(peopleId: 1) {
     statusCode,
     message,
-    data
+    data {
+      peopleId,
+      teamId,
+      lastName,
+      firstName,
+      sex,
+      bloodType,
+      serveYears,
+      role,
+      hometown
+    }
   }
 }

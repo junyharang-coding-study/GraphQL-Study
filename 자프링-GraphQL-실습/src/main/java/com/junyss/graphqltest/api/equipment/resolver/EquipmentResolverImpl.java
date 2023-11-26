@@ -1,24 +1,29 @@
 package com.junyss.graphqltest.api.equipment.resolver;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.Random;
+import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
+import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.junyss.graphqltest.api.equipment.model.dto.request.EquipmentRequestDto;
+import com.junyss.graphqltest.api.equipment.model.dto.request.EquipmentSearchRequestDto;
+import com.junyss.graphqltest.api.equipment.model.dto.response.EquipmentResponseDto;
+import com.junyss.graphqltest.api.equipment.model.dto.response.EquipmentsAdvResponseDto;
+import com.junyss.graphqltest.api.equipment.model.entity.Equipment;
+import com.junyss.graphqltest.api.equipment.repository.EquipmentRepository;
+import com.junyss.graphqltest.api.equipment.repository.querydsl.EquipmentQueryDslRepository;
 import com.junyss.graphqltest.common.constant.DefaultResponse;
 import com.junyss.graphqltest.common.constant.Pagination;
 import com.junyss.graphqltest.common.util.GraphQLSupportUtil;
 import com.junyss.graphqltest.common.util.ObjectUtil;
 import com.junyss.graphqltest.common.util.PagingProcessUtil;
-import com.junyss.graphqltest.api.equipment.model.dto.request.EquipmentRequestDto;
-import com.junyss.graphqltest.api.equipment.model.dto.request.EquipmentSearchRequestDto;
-import com.junyss.graphqltest.api.equipment.model.dto.response.EquipmentResponseDto;
-import com.junyss.graphqltest.api.equipment.model.entity.Equipment;
-import com.junyss.graphqltest.api.equipment.repository.EquipmentRepository;
-import com.junyss.graphqltest.api.equipment.repository.querydsl.EquipmentQueryDslRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -78,6 +83,61 @@ public class EquipmentResolverImpl implements EquipmentResolver {
 		}
 	}
 
+	@Override
+	public DefaultResponse<List<EquipmentsAdvResponseDto>> getEquipmentsAdv(
+		@Argument String equipmentId,
+		@Argument String usedBy,
+		@Argument String newOrUsed,
+		@Argument Integer page,
+		@Argument Integer size) {
+
+		Page<EquipmentResponseDto> result = equipmentQueryDslRepository.findBySearchAndPaging(
+			new EquipmentSearchRequestDto(
+				equipmentId,
+				usedBy,
+				newOrUsed),
+			PagingProcessUtil.processPaging(page, size));
+
+		if (ObjectUtil.checkObjectExistence(result)) {
+			return DefaultResponse.response(HttpStatus.NOT_FOUND.value(), "NOT FOUND DATA");
+		}
+
+		List<EquipmentsAdvResponseDto> equipmentsAdvResponseDtoList = GraphQLSupportUtil.pageToList(result)
+			.stream()
+			.filter(Objects::nonNull)
+			.map(equipmentResponseDto -> {
+				EquipmentsAdvResponseDto equipmentsAdvResponseDto = new EquipmentsAdvResponseDto();
+				equipmentsAdvResponseDto.setEquipmentId(equipmentResponseDto.getEquipmentId());
+				equipmentsAdvResponseDto.setUsedBy(equipmentResponseDto.getUsedBy());
+				equipmentsAdvResponseDto.setCount(equipmentResponseDto.getCount());
+				equipmentsAdvResponseDto.setNewOrUsed(equipmentResponseDto.getNewOrUsed());
+
+				if (equipmentResponseDto.getUsedBy().equals("developer")) {
+					equipmentsAdvResponseDto.setUseRate(
+						Float.parseFloat(
+							String.format(
+								"%.2f",
+								new Random()
+									.nextDouble())));
+				}
+				equipmentsAdvResponseDto.setIsNew(equipmentResponseDto.getNewOrUsed().equals("new"));
+
+				return equipmentsAdvResponseDto;
+
+			})
+			.collect(Collectors.toList());
+
+		if (equipmentsAdvResponseDtoList.isEmpty()) {
+			return DefaultResponse.response(HttpStatus.NOT_FOUND.value(), "NOT FOUND DATA");
+		}
+
+		return DefaultResponse.response(
+			HttpStatus.OK.value(),
+			"OK",
+			equipmentsAdvResponseDtoList,
+			new Pagination(result));
+	}
+
 	@Transactional(readOnly = true)
 	@Override
 	public DefaultResponse<EquipmentResponseDto> getEquipment(String equipmentId) {
@@ -104,7 +164,8 @@ public class EquipmentResolverImpl implements EquipmentResolver {
 	@Override
 	public DefaultResponse<String> updateEquipment(EquipmentRequestDto equipmentRequestDto) {
 
-		Optional<Equipment> equipmentRepositoryById = equipmentRepository.findById(equipmentRequestDto.getEquipmentId());
+		Optional<Equipment> equipmentRepositoryById = equipmentRepository.findById(
+			equipmentRequestDto.getEquipmentId());
 
 		Equipment equipment = checkUpdateRequest(equipmentRequestDto, equipmentRepositoryById);
 
@@ -132,7 +193,8 @@ public class EquipmentResolverImpl implements EquipmentResolver {
 		return DefaultResponse.response(HttpStatus.NOT_FOUND.value(), "NOT FOUND DELETE TARGET", equipmentId);
 	}
 
-	private Equipment checkUpdateRequest(EquipmentRequestDto equipmentRequestDto, Optional<Equipment> equipmentRepositoryById) {
+	private Equipment checkUpdateRequest(EquipmentRequestDto equipmentRequestDto,
+		Optional<Equipment> equipmentRepositoryById) {
 		if (equipmentRepositoryById.isEmpty()) {
 			return null;
 		} else {

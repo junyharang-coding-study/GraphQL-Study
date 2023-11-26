@@ -25,6 +25,21 @@ input EquipmentRequestDto {
     newOrUsed: String
 }
 
+type EquipmentResponseDto implements Tool {
+    equipmentId: ID!,
+    usedBy: Role!,
+    count: Int!,
+    newOrUsed: String!
+}
+
+type EquipmentsAdvDto implements Tool {
+    equipmentId: ID!,
+    usedBy: Role!,
+    count: Int!,
+    useRate: Float,
+    isNew: Boolean!
+}
+
 input PeopleRequestDto {
     teamId: ID!,
     lastName: String!,
@@ -48,6 +63,18 @@ input PeopleUpdateRequestDto {
     hometown: String
 }
 
+type PeopleResponseDto {
+    peopleId: ID!,
+    teamId: ID!,
+    lastName: String!,
+    firstName: String!,
+    sex: Sex!,
+    bloodType: BloodType!,
+    serveYears: Int!,
+    role: Role!,
+    hometown: String!
+}
+
 input SoftwareRequestDto {
     softwareId: String!,
     usedBy: String!,
@@ -62,9 +89,21 @@ input SoftwareUpdateRequestDto {
     description: String
 }
 
+type SoftwareResponseDto implements Tool {
+    softwareId: ID!,
+    usedBy: Role!,
+    developedBy: String!,
+    description: String
+}
+
 input SupplyRequestDto {
     supplyId: String!,
     teamId: ID!,
+}
+
+type SupplyResponseDto {
+    supplyId: ID!,
+    teamId: ID!
 }
 
 input TeamRequestDto {
@@ -75,6 +114,27 @@ input TeamRequestDto {
     mascot: String,
     cleaningDuty: String!,
     project: String
+}
+
+type TeamResponseDto {
+    teamId: ID!,
+    manager: String!,
+    office: String!,
+    extensionNumber: String!,
+    mascot: String,
+    cleaningDuty: String!,
+    project: String
+}
+
+type TeamAndMemberResponseDto {
+    teamId: ID!,
+    manager: String!,
+    office: String!,
+    extensionNumber: String!,
+    mascot: String,
+    cleaningDuty: String!,
+    project: String,
+    members: [PeopleResponseDto!]!
 }
 
 input TeamUpdateRequestDto {
@@ -97,22 +157,4 @@ input RoleUpdateRequestDto {
     roleId: String!,
     job: String,
     requirement: String
-}
-
-enum Sex {
-    male,
-    female
-}
-
-enum  Role {
-    developer,
-    designer,
-    planner
-}
-
-enum BloodType {
-    A,
-    B,
-    O,
-    AB
 }

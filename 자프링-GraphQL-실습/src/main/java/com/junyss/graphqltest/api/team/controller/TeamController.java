@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 
 import com.junyss.graphqltest.api.team.model.dto.request.TeamRequestDto;
 import com.junyss.graphqltest.api.team.model.dto.request.TeamUpdateRequestDto;
+import com.junyss.graphqltest.api.team.model.dto.response.TeamAndMemberResponseDto;
 import com.junyss.graphqltest.api.team.model.dto.response.TeamResponseDto;
 import com.junyss.graphqltest.api.team.resolver.TeamResolver;
 import com.junyss.graphqltest.common.constant.DefaultResponse;
@@ -49,7 +50,7 @@ public class TeamController {
 	}
 
 	@QueryMapping
-	public DefaultResponse<TeamResponseDto> getTeamByTeamId (@Argument Long teamId) {
+	public DefaultResponse<TeamAndMemberResponseDto> getTeamByTeamId (@Argument Long teamId) {
 		return teamResolver.getTeamByTeamId(teamId);
 	}
 

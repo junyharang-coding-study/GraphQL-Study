@@ -2,9 +2,16 @@ type EquipmentId {
     equipmentId: ID!
 }
 
-type EquipmentResponseDto {
-    equipmentId: ID!,
-    usedBy: String!,
-    count: Int!,
-    newOrUsed: String!
+type DefaultListEquipmentResponse {
+    statusCode: Int!,
+    message: String!,
+    data: [EquipmentResponseDto!]!,
+    pagination: String
+}
+
+type DefaultEquipmentsAdvResponse {
+    statusCode: Int!,
+    message: String!,
+    data: [EquipmentsAdvDto!]!,
+    pagination: String
 }

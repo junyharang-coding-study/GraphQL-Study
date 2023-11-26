@@ -7,6 +7,7 @@ import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
+import com.junyss.graphqltest.api.equipment.model.dto.response.EquipmentsAdvResponseDto;
 import com.junyss.graphqltest.common.constant.DefaultResponse;
 import com.junyss.graphqltest.api.equipment.model.dto.request.EquipmentRequestDto;
 import com.junyss.graphqltest.api.equipment.model.dto.response.EquipmentResponseDto;
@@ -41,6 +42,21 @@ public class EquipmentController {
 		@Argument Integer page,
 		@Argument Integer size) {
 		return equipmentResolver.getEquipmentList(equipmentId, usedBy, newOrUsed, page, size);
+	}
+
+	@QueryMapping
+	public DefaultResponse<List<EquipmentsAdvResponseDto>> getEquipmentsAdv (
+		@Argument String equipmentId,
+		@Argument String usedBy,
+		@Argument String newOrUsed,
+		@Argument Integer page,
+		@Argument Integer size) {
+		return equipmentResolver.getEquipmentsAdv(
+			equipmentId,
+			usedBy,
+			newOrUsed,
+			page,
+			size);
 	}
 
 	@QueryMapping

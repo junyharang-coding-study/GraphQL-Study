@@ -1,0 +1,6 @@
+{
+  "extends": "./tsconfig.json",
+  "exclude": [
+    "juny-graph-ql-study/node_modules",
+    "test", "dist", "**/*spec.ts"]
+}

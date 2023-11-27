@@ -1,73 +1,64 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+### ⚠️ 소스 코드 관련 주의 사항(Precautions for Source Code)
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+---
+본 코드는 Java + Spring Boot 그리고, JPA, QueryDSL을 이용하여 Spring For GraphQL에 대해 이용하는 방법을 주니의 블로그에 설명과 함께 실습하고, 사용해볼 수 있도록 만든 코드 입니다.
+본 코드를 내려 받고 바로 실행 시키면 따른 설정 없이 바로 실습해 볼 수 있습니다. <br>
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+다만, 아래 사항을 반드시 지켜주시기 바랍니다. <br>
 
-## Description
+첫째: 실습을 위해 소스 코드를 내려 받기 전 ⭐️ (Star)를 한번만 꾹 눌러주세요. <br>
+둘째: 반드시 자신의 Git Hub Repository (레포지터리)에 Fork 한 뒤 그 곳에서 내려 받아 이용해 주세요. <br>
+셋째: 실습 하면서 발생되는 버그 등에 대해서 수정하시게 되면 많은 사람들과 공유를 위해 [📨 Mail](junyharang8592@gmail.com) 주시면 해당 수정 뒤 PR 보낼 수 있는 Branch를 열어 드리고 알려드리겠습니다. <br>
+넷째: 자신의 Git Hub 등에 코드를 공개하시고자 할 경우 본 README.md를 수정, 삭제하지 말아주시기 부탁드립니다! 🙏 <br>
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+공부하시는 데 도움이 되시기 바랍니다 😀 <br>
 
-## Installation
+This code is designed to help you practice and use Java + Spring Boot and how to use Spring For GraphQL using JPA, QueryDSL with explanations on Juny's blog.
+If you download this code and run it right away, you can practice it right away without the settings that you follow. <br>
 
-```bash
-$ npm install
-```
+However, please make sure to follow the following. <br>
 
-## Running the app
+First: Press ⭐(Star) once before downloading the source code for practice. <br>
+Second: Make sure to fork your Git Hub Repository and download it from there to use it. <br>
+Third: If you fix bugs that occur during the practice, please [📨 send me an email](junyharang8592@gmail.com) for sharing with many people, and I will open a branch where you can send PR after the correction and let you know. <br>
 
-```bash
-# development
-$ npm run start
+I hope it helps you study 😀 <br>
+<br><br>
 
-# watch mode
-$ npm run start:dev
+# 🚀 실습 소개
 
-# production mode
-$ npm run start:prod
-```
+각 종 언어와 Framwork를 사용하여 GraphQL 실습 및 공부
 
-## Test
+<br><br>
 
-```bash
-# unit tests
-$ npm run test
+[![img.png](img.png)](https://link.coupang.com/a/bglCvF) <br><br>
 
-# e2e tests
-$ npm run test:e2e
+## Project Code 정리
 
-# test coverage
-$ npm run test:cov
-```
+### 🗂 목차
 
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+---
+●[GraphQL과 Apollo 첫번째 이야기 - 개념 익히기](https://junyharang.tistory.com/509)
+<br>
+●[GraphQL과 Apollo 두번째 이야기 - REST API란?](https://junyharang.tistory.com/457)
+<br>
+●[GraphQL과 Apollo 세번째 이야기 - GraphQL의 정보 주고 받는 방식](https://junyharang.tistory.com/511)
+<br>
+●[GraphQL과 Apollo 네번째 이야기 - Apollo란?](https://junyharang.tistory.com/512)
+<br>
+●[GraphQL과 Apollo 다섯번째 이야기 - GraphQL을 간단하게 구현해 보아요 😀](https://junyharang.tistory.com/513)
+<br>
+●[GraphQL과 Apollo 여섯번째 이야기 - GraphQL Module화에 대해 알아보아요 😀](https://junyharang.tistory.com/514)
+<br>
+●[GraphQL과 Apollo 일곱번째 이야기 - GraphQL Data Type에 대해 알아보아요 😀](https://junyharang.tistory.com/515)
+<br>
+●[GraphQL과 Apollo 여덟번째 이야기 - GraphQL Union과 Interface 그리고 인자와 인풋 타입에 대해 알아보아요 😀](https://junyharang.tistory.com/516)
+<br>
+●[GraphQL과 Apollo 아홉번째 이야기 - Java + Spring Boot에서 GraphQL 사용해 보기](https://junyharang.tistory.com/517)
+<br>
+●[GraphQL과 Apollo 열번째 이야기 - Java + Spring Boot에서 GraphQL 사용해 보기 - 실습 해보기](https://junyharang.tistory.com/518)
+<br>
+●[GraphQL과 Apollo 열한번째 이야기 - Java + Spring Boot에서 GraphQL 사용해 보기 - Junit5을 이용한 Test(실습 중)](#)
+<br>
+●[GraphQL과 Apollo 열두번째 이야기 - GraphQL과 Apollo 열두번째 이야기 - TypeScript + Nest.js에서 GraphQL 사용해 보기 - 실습 환경 구성(실습 중)](#)
+<br><br>

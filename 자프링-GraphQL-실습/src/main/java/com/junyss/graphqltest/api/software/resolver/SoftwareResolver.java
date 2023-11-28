@@ -2,23 +2,56 @@ package com.junyss.graphqltest.api.software.resolver;
 
 import java.util.List;
 
-import com.junyss.graphqltest.api.software.model.dto.response.SoftwareResponseDto;
+import org.springframework.graphql.data.method.annotation.Argument;
+import org.springframework.graphql.data.method.annotation.MutationMapping;
+import org.springframework.graphql.data.method.annotation.QueryMapping;
+import org.springframework.stereotype.Controller;
+
 import com.junyss.graphqltest.common.constant.DefaultResponse;
 import com.junyss.graphqltest.api.software.model.dto.request.SoftwareRequestDto;
 import com.junyss.graphqltest.api.software.model.dto.request.SoftwareUpdateRequestDto;
+import com.junyss.graphqltest.api.software.model.dto.response.SoftwareResponseDto;
+import com.junyss.graphqltest.api.software.service.SoftwareService;
 
-public interface SoftwareResolver {
-	DefaultResponse<String> saveForSoftware(SoftwareRequestDto softwareRequestDto);
+import lombok.RequiredArgsConstructor;
 
-	DefaultResponse<List<SoftwareResponseDto>> getSoftwareList(
-		String usedBy,
-		String developedBy,
-		Integer page,
-		Integer size);
+@RequiredArgsConstructor
+@Controller
+public class SoftwareResolver {
 
-	DefaultResponse<SoftwareResponseDto> getSoftwareBySoftwareId(String softwareId);
+	private final SoftwareService softwareService;
 
-	DefaultResponse<String> updateSoftware(SoftwareUpdateRequestDto softwareUpdateRequestDto);
+	@MutationMapping
+	public DefaultResponse<String> saveForSoftware (@Argument("input") SoftwareRequestDto softwareRequestDto) {
+		return softwareService.saveForSoftware(softwareRequestDto);
+	}
 
-	DefaultResponse<String> deleteSoftware(String softwareId);
+	@QueryMapping
+	public DefaultResponse<List<SoftwareResponseDto>> getSoftwareList (
+		@Argument String usedBy,
+		@Argument String developedBy,
+		@Argument Integer page,
+		@Argument Integer size){
+
+		return softwareService.getSoftwareList(
+			usedBy,
+			developedBy,
+			page,
+			size);
+	}
+
+	@QueryMapping
+	public DefaultResponse<SoftwareResponseDto> getSoftwareBySoftwareId (@Argument String softwareId) {
+		return softwareService.getSoftwareBySoftwareId(softwareId);
+	}
+
+	@MutationMapping
+	public DefaultResponse<String> updateSoftware (@Argument("input") SoftwareUpdateRequestDto softwareUpdateRequestDto) {
+		return softwareService.updateSoftware(softwareUpdateRequestDto);
+	}
+
+	@MutationMapping
+	public DefaultResponse<String> deleteSoftware (@Argument String softwareId) {
+		return softwareService.deleteSoftware(softwareId);
+	}
 }

@@ -1,4 +1,4 @@
-package com.junyss.graphqltest.api.team.controller;
+package com.junyss.graphqltest.api.team.resolver;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import com.junyss.graphqltest.api.team.model.dto.request.TeamRequestDto;
 import com.junyss.graphqltest.api.team.model.dto.request.TeamUpdateRequestDto;
 import com.junyss.graphqltest.api.team.model.dto.response.TeamAndMemberResponseDto;
 import com.junyss.graphqltest.api.team.model.dto.response.TeamResponseDto;
-import com.junyss.graphqltest.api.team.resolver.TeamResolver;
+import com.junyss.graphqltest.api.team.service.TeamService;
 import com.junyss.graphqltest.common.constant.DefaultResponse;
 
 import lombok.RequiredArgsConstructor;
@@ -20,11 +20,11 @@ import lombok.RequiredArgsConstructor;
 @Controller
 public class TeamController {
 
-	private final TeamResolver teamResolver;
+	private final TeamService teamService;
 
 	@MutationMapping
 	public DefaultResponse<Long> saveForTeam (@Argument("input") TeamRequestDto teamRequestDto) {
-		return teamResolver.saveForTeam(teamRequestDto);
+		return teamService.saveForTeam(teamRequestDto);
 	}
 
 	@QueryMapping
@@ -38,7 +38,7 @@ public class TeamController {
 		@Argument Integer page,
 		@Argument Integer size) {
 
-		return teamResolver.getTeamList(
+		return teamService.getTeamList(
 			manager,
 			office,
 			extensionNumber,
@@ -51,16 +51,16 @@ public class TeamController {
 
 	@QueryMapping
 	public DefaultResponse<TeamAndMemberResponseDto> getTeamByTeamId (@Argument Long teamId) {
-		return teamResolver.getTeamByTeamId(teamId);
+		return teamService.getTeamByTeamId(teamId);
 	}
 
 	@MutationMapping
 	public DefaultResponse<Long> updateTeam (@Argument("input") TeamUpdateRequestDto teamUpdateRequestDto) {
-		return teamResolver.updateTeam(teamUpdateRequestDto);
+		return teamService.updateTeam(teamUpdateRequestDto);
 	}
 
 	@MutationMapping
 	public DefaultResponse<Long> deleteTeam (@Argument Long teamId) {
-		return teamResolver.deleteTeam(teamId);
+		return teamService.deleteTeam(teamId);
 	}
 }

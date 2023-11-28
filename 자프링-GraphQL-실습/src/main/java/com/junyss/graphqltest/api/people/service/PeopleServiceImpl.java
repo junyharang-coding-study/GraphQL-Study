@@ -1,4 +1,4 @@
-package com.junyss.graphqltest.api.people.resolver;
+package com.junyss.graphqltest.api.people.service;
 
 import java.util.List;
 import java.util.Optional;
@@ -31,7 +31,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Service
-public class PeopleResolverImpl implements PeopleResolver {
+public class PeopleServiceImpl implements PeopleService {
 
 	private final PeopleRepository peopleRepository;
 	private final PeopleQueryDslRepository peopleQueryDslRepository;

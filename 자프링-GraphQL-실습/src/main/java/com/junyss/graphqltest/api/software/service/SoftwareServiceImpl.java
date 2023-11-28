@@ -1,4 +1,4 @@
-package com.junyss.graphqltest.api.software.resolver;
+package com.junyss.graphqltest.api.software.service;
 
 import java.util.List;
 import java.util.Optional;
@@ -25,7 +25,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Service
-public class SoftwareResolverImpl implements SoftwareResolver {
+public class SoftwareServiceImpl implements SoftwareService {
 
 	private final SoftwareRepository softwareRepository;
 	private final SoftwareQueryDslRepository softwareQueryDslRepository;

@@ -1,4 +1,4 @@
-package com.junyss.graphqltest.api.team.resolver;
+package com.junyss.graphqltest.api.team.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +31,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Service
-public class TeamResolverImpl implements TeamResolver {
+public class TeamServiceImpl implements TeamService {
 
 	private final TeamRepository teamRepository;
 	private final TeamQueryDslRepository teamQueryDslRepository;

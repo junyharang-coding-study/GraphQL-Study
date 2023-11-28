@@ -1,4 +1,4 @@
-package com.junyss.graphqltest.api.role.resolver;
+package com.junyss.graphqltest.api.role.service;
 
 import java.util.Optional;
 
@@ -17,7 +17,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Service
-public class RoleResolverImpl implements RoleResolver {
+public class RoleServiceImpl implements RoleService {
 
 	private final RoleRepository roleRepository;
 

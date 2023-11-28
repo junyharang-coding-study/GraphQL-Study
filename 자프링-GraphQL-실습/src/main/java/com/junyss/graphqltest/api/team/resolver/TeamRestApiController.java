@@ -1,11 +1,11 @@
-package com.junyss.graphqltest.api.team.controller;
+package com.junyss.graphqltest.api.team.resolver;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.junyss.graphqltest.api.team.model.dto.response.TeamAndMemberResponseDto;
-import com.junyss.graphqltest.api.team.resolver.TeamResolver;
+import com.junyss.graphqltest.api.team.service.TeamService;
 import com.junyss.graphqltest.common.constant.DefaultResponse;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -19,7 +19,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 public class TeamRestApiController {
 
-	private final TeamResolver teamResolver;
+	private final TeamService teamService;
 
 	@Operation(summary = "Team과 People 정보 상세 조회", description = "Team과 People 정보 상세 조회 API Router")
 	@ApiResponses(value = {
@@ -28,6 +28,6 @@ public class TeamRestApiController {
 	})
 	@GetMapping("/team/{teamId}")
 	public DefaultResponse<TeamAndMemberResponseDto> getTeamByTeamId (@PathVariable("teamId") Long teamId) {
-		return teamResolver.getTeamByTeamId(teamId);
+		return teamService.getTeamByTeamId(teamId);
 	}
 }

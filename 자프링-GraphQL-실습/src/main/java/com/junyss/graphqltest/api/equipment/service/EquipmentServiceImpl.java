@@ -1,4 +1,4 @@
-package com.junyss.graphqltest.api.equipment.resolver;
+package com.junyss.graphqltest.api.equipment.service;
 
 import java.util.List;
 import java.util.Objects;
@@ -29,7 +29,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Service
-public class EquipmentResolverImpl implements EquipmentResolver {
+public class EquipmentServiceImpl implements EquipmentService {
 
 	private final EquipmentRepository equipmentRepository;
 	private final EquipmentQueryDslRepository equipmentQueryDslRepository;

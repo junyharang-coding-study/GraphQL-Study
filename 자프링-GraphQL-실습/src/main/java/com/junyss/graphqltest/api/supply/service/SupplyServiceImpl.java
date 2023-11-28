@@ -1,4 +1,4 @@
-package com.junyss.graphqltest.api.supply.resolver;
+package com.junyss.graphqltest.api.supply.service;
 
 import java.util.List;
 import java.util.Optional;
@@ -25,7 +25,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Service
-public class SupplyResolverImpl implements SupplyResolver {
+public class SupplyServiceImpl implements SupplyService {
 
 	private final SupplyRepository supplyRepository;
 	private final SupplyQueryDslRepository supplyQueryDslRepository;

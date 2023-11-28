@@ -17,23 +17,28 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "seed:run": "ts-node ./node_modules/typeorm-extension/bin/cli.cjs seed:run",
+    "seed:create": "ts-node ./node_modules/typeorm-extension/bin/cli.cjs seed:create"
   },
   "dependencies": {
     "@apollo/server": "^4.9.5",
     "@mercuriusjs/federation": "^2.0.0",
     "@nestjs/apollo": "^12.0.11",
     "@nestjs/common": "^10.0.0",
+    "@nestjs/config": "^3.1.1",
     "@nestjs/core": "^10.0.0",
     "@nestjs/graphql": "^12.0.11",
     "@nestjs/platform-express": "^10.0.0",
     "@nestjs/typeorm": "^10.0.1",
+    "dotenv": "^16.3.1",
     "graphql": "^16.8.1",
     "graphql-tools": "^9.0.0",
-    "reflect-metadata": "^0.1.13",
+    "joi": "^17.11.0",
     "rxjs": "^7.8.1",
     "sqlite3": "^5.1.6",
-    "typeorm": "^0.3.17"
+    "typeorm": "^0.3.17",
+    "typeorm-extension": "^3.2.0"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.0.0",

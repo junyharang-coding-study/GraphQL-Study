@@ -49,9 +49,6 @@ INSERT INTO people (team_id, last_name, first_name, sex, blood_type, serve_years
 VALUES (4, 'Christine', 'Harris', 'female', 'B', 2, 'developer', 'Ohio');
 
 INSERT INTO people (team_id, last_name, first_name, sex, blood_type, serve_years, role, hometown)
-VALUES (4, 'Christine', 'Harris', 'female', 'B', 2, 'developer', 'Ohio');
-
-INSERT INTO people (team_id, last_name, first_name, sex, blood_type, serve_years, role, hometown)
 VALUES (2,'Page','Adams','female','O',5,'developer','California');
 
 INSERT INTO people (team_id, last_name, first_name, sex, blood_type, serve_years, role, hometown)

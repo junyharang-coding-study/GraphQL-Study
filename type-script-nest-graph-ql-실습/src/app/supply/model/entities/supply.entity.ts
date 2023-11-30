@@ -4,10 +4,15 @@ import { TeamEntity } from "../../../team/model/entities/team.entity";
 @Entity("supply")
 @Unique(["supplyId"])
 export class SupplyEntity {
-  @PrimaryColumn("varchar", { name: "software_id", length: 255, nullable: false, comment: "ID" })
-  supplyId: string;
+  @PrimaryColumn("varchar", { name: "supply_id", length: 255, nullable: false, comment: "ID" })
+  supplyId!: string;
 
   @ManyToOne(() => TeamEntity)
   @JoinColumn({ name: "team_id" })
-  team: Promise<TeamEntity>;
+  team!: Promise<TeamEntity>;
 }
+
+// export type SupplyEntityPartial = {
+//   supplyId?: string;
+//   team?: TeamEntity | Promise<TeamEntity>;
+// };

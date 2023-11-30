@@ -7,7 +7,7 @@ import { TeamEntity } from "../../../team/model/entities/team.entity";
 @Entity("people")
 @Unique(["peopleId"])
 export class PeopleEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ name: "people_id" })
   peopleId: number;
 
   @ManyToOne(() => TeamEntity)

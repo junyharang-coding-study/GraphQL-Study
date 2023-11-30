@@ -12,7 +12,7 @@ export class SqliteConfigProvider implements TypeOrmOptionsFactory {
       database: this.configService.get("DB_HOST", ":memory:"),
       synchronize: true,
       entities: ["src/**/*.entity.ts"],
-      migrations: ["src/database/migrations/*.ts"],
+      migrations: ["src/database/migrations/**/*.ts"],
       migrationsTableName: "migrations",
     };
   }

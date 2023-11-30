@@ -1,8 +1,8 @@
 ### ⚠️ 소스 코드 관련 주의 사항(Precautions for Source Code)
 
 ---
-본 코드는 Java + Spring Boot 그리고, JPA, QueryDSL을 이용하여 Spring For GraphQL에 대해 이용하는 방법을 주니의 블로그에 설명과 함께 실습하고, 사용해볼 수 있도록 만든 코드 입니다.
-본 코드를 내려 받고 바로 실행 시키면 따른 설정 없이 바로 실습해 볼 수 있습니다. <br>
+본 코드는 TypeScript + Nest.js 그리고, TypeORM, Query Builder를 이용하여 Apollo를 이용한 GraphQL에 대해 이용하는 방법을 주니의 블로그에 설명과 함께 실습하고, 사용해볼 수 있도록 만든 코드 입니다.
+본 코드를 내려 받고 바로 [실습 서버 구동 방법](#🎬-실습-서버-구동-방법) 방법대로 명령어를 입력하여 실행 시키면 따른 설정 없이 바로 실습해 볼 수 있습니다. <br>
 
 다만, 아래 사항을 반드시 지켜주시기 바랍니다. <br>
 
@@ -13,14 +13,21 @@
 
 공부하시는 데 도움이 되시기 바랍니다 😀 <br>
 
-This code is designed to help you practice and use Java + Spring Boot and how to use Spring For GraphQL using JPA, QueryDSL with explanations on Juny's blog.
-If you download this code and run it right away, you can practice it right away without the settings that you follow. <br>
+This code is made so that you can practice and use TypeScript + Nest.js, 
+and how to use GraphQL using Apollo using TypeORM, Query Builder with explanation on Juny's blog. 
+If you download this code and [enter and execute the command](#🎬-실습-서버-구동-방법) as soon as you run the training server, 
+you can practice it right away without the settings that you follow.
 
-However, please make sure to follow the following. <br>
+However, please make sure to follow the following.
 
-First: Press ⭐(Star) once before downloading the source code for practice. <br>
+First: Press ⭐ ️ once before downloading the source code for practice. <br>
+
 Second: Make sure to fork your Git Hub Repository and download it from there to use it. <br>
-Third: If you fix bugs that occur during the practice, please [📨 send me an email](junyharang8592@gmail.com) for sharing with many people, and I will open a branch where you can send PR after the correction and let you know. <br>
+
+Third: If you fix bugs that occur during the practice, please [📨 send me an email](junyharang8592@gmail.com) to share with many people, 
+and I will open a branch where you can send PR after the correction and let you know. <br>
+
+Fourth: If you want to publish your code on your Git Hub, etc., please don't edit and delete this README.md ! 🙏<br>
 
 I hope it helps you study 😀 <br>
 <br><br>
@@ -33,32 +40,58 @@ I hope it helps you study 😀 <br>
 
 [![img.png](img.png)](https://link.coupang.com/a/bglCvF) <br><br>
 
+### 🎬 실습 서버 구동 방법
+
+![img_1.png](img_1.png)
+
+package.json을 보면 npm run start:dev를 했을 때, npm run shema:drop 이 실행 되어 Embedded SQLite의 Table과 Data가 먼저 삭제 됩니다.
+이 후 npm run migraion:run 명령어가 실행되면서 Embedded SQLite의 Mock Data와 함께 Table이 다시 만들어 집니다.
+그런 뒤 Hot Reload를 이용한 Server 구동이 시작됩니다.
+
+따.라.서 
+
+```bash
+npm run start:dev
+```
+
+위 명령어만 입력해 주시면 됩니다.
+Just you write this command in the command line.
+
+<br><br>
+
+[![img.png](img.png)](https://link.coupang.com/a/bglCvF) <br><br>
+
 ## Project Code 정리
 
 ### 🗂 목차
 
 ---
-●[GraphQL과 Apollo 첫번째 이야기 - 개념 익히기](https://junyharang.tistory.com/509)
+✅ [GraphQL과 Apollo 첫번째 이야기 - 개념 익히기](https://junyharang.tistory.com/509)
 <br>
-●[GraphQL과 Apollo 두번째 이야기 - REST API란?](https://junyharang.tistory.com/457)
+✅ [GraphQL과 Apollo 두번째 이야기 - REST API란?](https://junyharang.tistory.com/457)
 <br>
-●[GraphQL과 Apollo 세번째 이야기 - GraphQL의 정보 주고 받는 방식](https://junyharang.tistory.com/511)
+✅ [GraphQL과 Apollo 세번째 이야기 - GraphQL의 정보 주고 받는 방식](https://junyharang.tistory.com/511)
 <br>
-●[GraphQL과 Apollo 네번째 이야기 - Apollo란?](https://junyharang.tistory.com/512)
+✅ [GraphQL과 Apollo 네번째 이야기 - Apollo란?](https://junyharang.tistory.com/512)
 <br>
-●[GraphQL과 Apollo 다섯번째 이야기 - GraphQL을 간단하게 구현해 보아요 😀](https://junyharang.tistory.com/513)
+✅ [GraphQL과 Apollo 다섯번째 이야기 - GraphQL을 간단하게 구현해 보아요 😀](https://junyharang.tistory.com/513)
 <br>
-●[GraphQL과 Apollo 여섯번째 이야기 - GraphQL Module화에 대해 알아보아요 😀](https://junyharang.tistory.com/514)
+✅ [GraphQL과 Apollo 여섯번째 이야기 - GraphQL Module화에 대해 알아보아요 😀](https://junyharang.tistory.com/514)
 <br>
-●[GraphQL과 Apollo 일곱번째 이야기 - GraphQL Data Type에 대해 알아보아요 😀](https://junyharang.tistory.com/515)
+✅ [GraphQL과 Apollo 일곱번째 이야기 - GraphQL Data Type에 대해 알아보아요 😀](https://junyharang.tistory.com/515)
 <br>
-●[GraphQL과 Apollo 여덟번째 이야기 - GraphQL Union과 Interface 그리고 인자와 인풋 타입에 대해 알아보아요 😀](https://junyharang.tistory.com/516)
+✅ [GraphQL과 Apollo 여덟번째 이야기 - GraphQL Union과 Interface 그리고 인자와 인풋 타입에 대해 알아보아요 😀](https://junyharang.tistory.com/516)
 <br>
-●[GraphQL과 Apollo 아홉번째 이야기 - Java + Spring Boot에서 GraphQL 사용해 보기](https://junyharang.tistory.com/517)
+✅ [GraphQL과 Apollo 아홉번째 이야기 - Java + Spring Boot에서 GraphQL 사용해 보기](https://junyharang.tistory.com/517)
 <br>
-●[GraphQL과 Apollo 열번째 이야기 - Java + Spring Boot에서 GraphQL 사용해 보기 - 실습 해보기](https://junyharang.tistory.com/518)
+✅ [GraphQL과 Apollo 열번째 이야기 - Java + Spring Boot에서 GraphQL 사용해 보기 - 실습 해보기](https://junyharang.tistory.com/518)
 <br>
-●[GraphQL과 Apollo 열한번째 이야기 - Java + Spring Boot에서 GraphQL 사용해 보기 - Junit5을 이용한 Test(실습 중)](#)
+✅ [GraphQL과 Apollo 열한번째 이야기 - Java + Spring Boot에서 GraphQL 사용해 보기 - Junit5을 이용한 Test(실습 중)](#)
 <br>
-●[GraphQL과 Apollo 열두번째 이야기 - GraphQL과 Apollo 열두번째 이야기 - TypeScript + Nest.js에서 GraphQL 사용해 보기 - 실습 환경 구성(실습 중)](#)
+✅ [GraphQL과 Apollo 열두번째 이야기 - GraphQL과 Apollo 열두번째 이야기 - TypeScript + Nest.js에서 GraphQL 사용해 보기 - 실습 환경 구성(실습 중)](#)
+
+#### 🤔 내가 만난 문제
+⚠️ [\[Nest.js\] TypeORM Table 관계가 맺어졌을 때, Seeding \(feat. Migration\)](https://junyharang.tistory.com/521)
 <br><br>
+
+[![img_2.png](img_2.png)](https://www.coupang.com/vp/products/6988869296?itemId=17098451667&src=1139000&spec=10799999&addtag=400&ctag=6988869296&lptag=AF2671443&itime=20231201002328&pageType=PRODUCT&pageValue=6988869296&wPcid=16967842423750573774767&wRef=junyharang.tistory.com&wTime=20231201002328&redirect=landing&traceid=V0-101-68ea2f3ffb6eb8b6&mcid=d89a48f3b9e04a8e8d13ea4ce797cf56&placementid=&clickBeacon=&campaignid=&contentcategory=&imgsize=&tsource=&pageid=&deviceid=&token=&contenttype=&subid=&impressionid=&campaigntype=&requestid=&contentkeyword=&subparam=&isAddedCart=)

@@ -3,7 +3,7 @@ import { Column, Entity, PrimaryGeneratedColumn, Unique } from "typeorm";
 @Entity("team")
 @Unique(["teamId"])
 export class TeamEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ name: "team_id" })
   teamId: number;
 
   @Column("varchar", { name: "manager", length: 255, nullable: false })

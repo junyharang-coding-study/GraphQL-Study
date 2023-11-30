@@ -9,7 +9,7 @@ const configService = new ConfigService();
 export default new DataSource({
   type: "sqlite",
   database: configService.get("DB_HOST", ":memory:"),
-  synchronize: true,
+  synchronize: false,
   entities: ["src/**/*.entity.ts"],
   migrations: ["src/database/migrations/*.ts"],
   migrationsTableName: "migrations",

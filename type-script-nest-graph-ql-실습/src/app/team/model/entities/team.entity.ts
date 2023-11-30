@@ -4,23 +4,23 @@ import { Column, Entity, PrimaryGeneratedColumn, Unique } from "typeorm";
 @Unique(["teamId"])
 export class TeamEntity {
   @PrimaryGeneratedColumn({ name: "team_id" })
-  teamId: number;
+  teamId!: number;
 
   @Column("varchar", { name: "manager", length: 255, nullable: false })
-  manager: string;
+  manager!: string;
 
   @Column("varchar", { name: "office", length: 5, nullable: false, comment: "사무실 호수" })
-  office: string;
+  office!: string;
 
   @Column("varchar", { name: "extension_number", length: 5, nullable: false, comment: "팀 관리자" })
-  extensionNumber: string;
+  extensionNumber!: string;
 
   @Column("varchar", { name: "mascot", length: 10, nullable: true, comment: "마스코트" })
-  mascot: string;
+  mascot?: string;
 
   @Column("varchar", { name: "cleaning_duty", length: 10, nullable: false, comment: "청소 당번 요일" })
-  cleaningDuty: string;
+  cleaningDuty!: string;
 
   @Column("varchar", { name: "project", length: 10, nullable: false, comment: "프로젝트 명" })
-  project: string;
+  project?: string;
 }

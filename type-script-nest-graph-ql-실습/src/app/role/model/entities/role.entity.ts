@@ -4,11 +4,11 @@ import { Column, Entity, PrimaryColumn, Unique } from "typeorm";
 @Unique(["roleId"])
 export class RoleEntity {
   @PrimaryColumn("varchar", { name: "role_id", length: 255, nullable: false, comment: "ID" })
-  roleId: string;
+  roleId!: string;
 
   @Column("varchar", { name: "job", length: 255, nullable: false, comment: "구분" })
-  job: string;
+  job!: string;
 
   @Column("varchar", { name: "requirement", nullable: false })
-  requirement: string;
+  requirement!: string;
 }

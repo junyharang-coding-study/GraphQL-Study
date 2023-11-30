@@ -11,8 +11,3 @@ export class SupplyEntity {
   @JoinColumn({ name: "team_id" })
   team!: Promise<TeamEntity>;
 }
-
-// export type SupplyEntityPartial = {
-//   supplyId?: string;
-//   team?: TeamEntity | Promise<TeamEntity>;
-// };

@@ -1,8 +1,9 @@
 ### ⚠️ 소스 코드 관련 주의 사항(Precautions for Source Code)
 
 ---
-본 코드는 Java + Spring Boot 그리고, JPA, QueryDSL을 이용하여 Spring For GraphQL에 대해 이용하는 방법을 주니의 블로그에 설명과 함께 실습하고, 사용해볼 수 있도록 만든 코드 입니다.
-본 코드를 내려 받고 바로 실행 시키면 따른 설정 없이 바로 실습해 볼 수 있습니다. <br>
+본 코드는 Java + Spring Boot 그리고, JPA, QueryDSL을 이용하여 Spring For GraphQL에 대해 이용하는 방법과 
+TypeScript + Nest.js 그리고, TypeORM, Query Builder를 이용하여 Apollo를 이용한 GraphQL에 대해 이용하는 방법을 주니의 블로그에 설명과 함께 실습하고, 사용해볼 수 있도록 만든 코드 입니다.
+<br>
 
 다만, 아래 사항을 반드시 지켜주시기 바랍니다. <br>
 
@@ -13,8 +14,8 @@
 
 공부하시는 데 도움이 되시기 바랍니다 😀 <br>
 
-This code is designed to help you practice and use Java + Spring Boot and how to use Spring For GraphQL using JPA, QueryDSL with explanations on Juny's blog.
-If you download this code and run it right away, you can practice it right away without the settings that you follow. <br>
+This code is used for Java + Spring Boot, JPA, QueryDSL, and Spring For GraphQL  
+TypeScript + Nest.js, and how to use GraphQL using Apollo using TypeORM, Query Builder, is a code that can be practiced and used with explanation on Juni's blog.<br>
 
 However, please make sure to follow the following. <br>
 

@@ -7,6 +7,11 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { ConfigModule } from "@nestjs/config";
 import { CONFIG_VALIDATOR } from "./common/config/config.validator";
 import { SqliteConfigProvider } from "./common/config/sqlite/sqlite-config.provider";
+import { EquipmentResolver } from "./app/equipment/resolver/equipment.resolver";
+import { EquipmentServiceImpl } from "./app/equipment/service/equipment-service-impl";
+import { EquipmentModule } from "./app/equipment/module/equipment-module";
+import { TypeormCustomModule } from "./app/common/custom/module/typeorm-custom.module";
+import { EquipmentRepository } from "./app/equipment/repository/equipment.repository";
 
 @Module({
   imports: [
@@ -20,8 +25,12 @@ import { SqliteConfigProvider } from "./common/config/sqlite/sqlite-config.provi
       driver: ApolloDriver,
       playground: true,
     }),
+
+    TypeormCustomModule.forCustomRepository([EquipmentRepository]),
+
+    EquipmentModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [AppController, EquipmentResolver],
+  providers: [AppService, EquipmentServiceImpl],
 })
 export class AppModule {}

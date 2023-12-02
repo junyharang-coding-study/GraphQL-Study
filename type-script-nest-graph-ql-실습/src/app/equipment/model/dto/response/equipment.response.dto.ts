@@ -1,4 +1,4 @@
-import { Equipment } from "../../entities/equipment";
+import { EquipmentEntity } from "../../entities/equipment.entity";
 
 export class EquipmentResponseDto {
   private equipmentId: string;
@@ -6,7 +6,7 @@ export class EquipmentResponseDto {
   private count: number;
   private newOrUsed: string;
 
-  static toDto(equipment: Equipment): EquipmentResponseDto {
+  static toDto(equipment: EquipmentEntity): EquipmentResponseDto {
     const equipmentResponseDto = new EquipmentResponseDto();
     equipmentResponseDto.equipmentId = equipment.equipmentId;
     equipmentResponseDto.usedBy = equipment.usedBy;

@@ -1,38 +1,43 @@
-import { Args, Mutation, Query, Resolver } from "@nestjs/graphql";
-import { Body, UsePipes, ValidationPipe } from "@nestjs/common";
-import { EquipmentService } from "../service/equipment-service.interface";
+import { Args, Int, Mutation, Query, Resolver } from "@nestjs/graphql";
+import { Body, Logger, UsePipes, ValidationPipe } from "@nestjs/common";
 import { DefaultResponse } from "../../common/constant/default.response";
 import { EquipmentResponseDto } from "../model/dto/response/equipment.response.dto";
 import { EquipmentRequestDto } from "../model/dto/request/equipment-request.dto";
+import { EquipmentEntity } from "../model/entities/equipment.entity";
+import { EquipmentServiceImpl } from "../service/equipment-service-impl";
 
-@Resolver()
+@Resolver(() => EquipmentEntity)
 export class EquipmentResolver {
-  constructor(private readonly equipmentService: EquipmentService) {}
+  private log = new Logger("equipment.resolver.ts");
+  constructor(private readonly equipmentService: EquipmentServiceImpl) {}
 
-  @UsePipes(ValidationPipe)
-  @Mutation(() => DefaultResponse)
-  async saveForEquipment(@Args("input") @Body() equipmentRequestDto: EquipmentRequestDto): Promise<DefaultResponse<string>> {
+  @UsePipes(new ValidationPipe({ transform: true }))
+  @Mutation(() => DefaultResponse<string>)
+  async saveForEquipment(
+    @Args("input", { type: () => EquipmentRequestDto }) @Body() equipmentRequestDto: EquipmentRequestDto,
+  ): Promise<DefaultResponse<string>> {
+    this.log.log("saveForEquipment 동작");
     return this.equipmentService.saveForEquipment(equipmentRequestDto);
   }
 
-  @UsePipes(ValidationPipe)
-  @Query(() => DefaultResponse)
+  // @UsePipes(new ValidationPipe({ transform: true }))
+  @Query(() => DefaultResponse<EquipmentResponseDto[]>)
   async getEquipmentList(
-    @Args("usedBy") usedBy: string,
-    @Args("newOrUsed") newOrUsed: string,
-    @Args("page") page: number,
-    @Args("perPageSize") perPageSize: number,
+    @Args("usedBy", { type: () => String, nullable: true }) usedBy: string,
+    @Args("newOrUsed", { type: () => String, nullable: true }) newOrUsed: string,
+    @Args("page", { type: () => Int, nullable: true }) page: number,
+    @Args("perPageSize", { type: () => Int, nullable: true }) perPageSize: number,
   ): Promise<DefaultResponse<EquipmentResponseDto[]>> {
     return this.equipmentService.getEquipmentList(usedBy, newOrUsed, page, perPageSize);
   }
 
-  @Query(() => DefaultResponse)
-  async getEquipment(@Args("equipmentId") equipmentId: string): Promise<DefaultResponse<EquipmentResponseDto>> {
+  @Query(() => DefaultResponse<EquipmentResponseDto>)
+  async getEquipment(@Args("equipmentId", { type: () => String }) equipmentId: string): Promise<DefaultResponse<EquipmentResponseDto>> {
     return this.equipmentService.getEquipment(equipmentId);
   }
 
-  @Mutation(() => DefaultResponse)
-  async deleteEquipment(@Args("equipmentId") equipmentId: string): Promise<DefaultResponse<string>> {
+  @Mutation(() => DefaultResponse<string>)
+  async deleteEquipment(@Args("equipmentId", { type: () => String }) equipmentId: string): Promise<DefaultResponse<string>> {
     return this.equipmentService.deleteEquipment(equipmentId);
   }
 }

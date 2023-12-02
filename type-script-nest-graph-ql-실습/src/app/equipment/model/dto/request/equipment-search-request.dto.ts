@@ -12,7 +12,7 @@ export class EquipmentSearchRequestDto extends PageRequestDto {
     super();
   }
 
-  static toDto(usedBy: string | null, newOrUsed: string | null, pageNumber: number | null, perPageSize: number | null) {
+  static toDto(usedBy: string | null, newOrUsed: string | null, pageNumber: number | null, perPageSize: number | null): EquipmentSearchRequestDto {
     const equipmentSearchRequestDto = new EquipmentSearchRequestDto();
     equipmentSearchRequestDto.usedBy = usedBy;
     equipmentSearchRequestDto.newOrUsed = newOrUsed;

@@ -10,7 +10,8 @@ export default new DataSource({
   type: "sqlite",
   database: configService.get("DB_HOST", ":memory:"),
   synchronize: false,
-  entities: ["src/**/*.entity.ts"],
+  // entities: ["src/**/*.entity.ts"],
+  entities: [__dirname + "/../**/*.entity.ts"],
   migrations: ["src/database/migrations/*.ts"],
   migrationsTableName: "migrations",
 });

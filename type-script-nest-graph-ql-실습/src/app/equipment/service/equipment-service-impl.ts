@@ -1,36 +1,42 @@
-import { HttpStatus, Injectable } from "@nestjs/common";
-import { EquipmentService } from "./equipment-service.interface";
+import { HttpStatus, Injectable, Logger } from "@nestjs/common";
 import { DefaultResponse } from "../../common/constant/default.response";
 import { EquipmentResponseDto } from "../model/dto/response/equipment.response.dto";
 import { EquipmentRequestDto } from "../model/dto/request/equipment-request.dto";
-import { validate } from "class-validator";
 import { EquipmentRepository } from "../repository/equipment.repository";
-import { Equipment } from "../model/entities/equipment";
 import { EquipmentSearchRequestDto } from "../model/dto/request/equipment-search-request.dto";
-import { EquipmentQueryBuilderRepository } from "../repository/equipment.query.builder.repository";
 import { Page } from "../../common/constant/page";
 
 @Injectable()
-export class EquipmentServiceImpl implements EquipmentService {
-  constructor(
-    private readonly equipmentRepository: EquipmentRepository,
-    private readonly equipmentQueryBuilderRepository: EquipmentQueryBuilderRepository,
-  ) {}
+export class EquipmentServiceImpl {
+  private logger = new Logger("equipment-service-impl.ts");
+  constructor(private readonly equipmentRepository: EquipmentRepository) {}
 
   async saveForEquipment(equipmentRequestDto: EquipmentRequestDto): Promise<DefaultResponse<string>> {
+    this.logger.log("EquipmentServiceImpl - saveForEquipment 동작");
     if (equipmentRequestDto === undefined || !equipmentRequestDto) {
       // DTO undefined
       return DefaultResponse.response(HttpStatus.NO_CONTENT, "Failed Create");
     }
 
-    const validationError = await validate(equipmentRequestDto);
+    // const validationError = await validate(equipmentRequestDto);
 
-    if (validationError.length > 0) {
-      // 유효성 검사 실패 혹은
-      return DefaultResponse.response(HttpStatus.BAD_REQUEST, "Validation failed");
-    }
+    // if (validationError.length > 0) {
+    //   // 유효성 검사 실패 혹은
+    //   return DefaultResponse.response(HttpStatus.BAD_REQUEST, "Validation failed");
+    // }
 
-    const savedEquipment = await this.equipmentRepository.save(Equipment.toEntity(equipmentRequestDto));
+    this.logger.log(`EquipmentRequestDto 타입: ${typeof EquipmentRequestDto}`);
+    this.logger.log(equipmentRequestDto);
+
+    const equipment = EquipmentRequestDto.toEntity(equipmentRequestDto);
+
+    this.logger.log(`equipment 타입: ${typeof equipment}`);
+    this.logger.log(equipment);
+
+    const savedEquipment = await this.equipmentRepository.save(equipment);
+
+    this.logger.log(`savedEquipment 타입: ${typeof savedEquipment}`);
+    this.logger.log(savedEquipment);
 
     if (savedEquipment.equipmentId === undefined) {
       return DefaultResponse.response(HttpStatus.INTERNAL_SERVER_ERROR, "Server Error");
@@ -40,9 +46,16 @@ export class EquipmentServiceImpl implements EquipmentService {
   }
 
   async getEquipmentList(usedBy: string, newOrUsed: string, page: number, perPageSize: number): Promise<DefaultResponse<EquipmentResponseDto[]>> {
+    this.logger.log("EquipmentServiceImpl - getEquipmentList 동작");
+
     const equipmentSearchRequestDto = EquipmentSearchRequestDto.toDto(usedBy, newOrUsed, page, perPageSize);
 
-    const result = await this.equipmentQueryBuilderRepository.dynamicQueryByDto(equipmentSearchRequestDto);
+    this.logger.log(`equipmentSearchRequestDto 값: ${typeof equipmentSearchRequestDto}`);
+    console.log(equipmentSearchRequestDto);
+
+    const result = await this.equipmentRepository.dynamicQueryByDto(equipmentSearchRequestDto);
+
+    this.logger.log(`result 값: ${result}`);
 
     if (result === null) {
       return DefaultResponse.response(HttpStatus.NOT_FOUND, "Data Not Found");

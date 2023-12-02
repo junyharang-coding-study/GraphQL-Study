@@ -8,7 +8,7 @@ declare const module: any;
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const port = process.env.PORT || 8081;
-  app.useGlobalPipes(new ValidationPipe());
+  app.useGlobalPipes(new ValidationPipe({ transform: true })); // 글로벌 스코프 적용
   await app.listen(port);
 
   if (module.hot) {

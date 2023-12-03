@@ -45,7 +45,7 @@ export class EquipmentResolver {
     return this.equipmentService.updateEquipment(equipmentRequestDto);
   }
 
-  @Mutation(() => DefaultResponse<string>)
+  @Mutation(() => Promise<DefaultResponse<string>>)
   async deleteEquipment(@Args("equipmentId", { type: () => String }) equipmentId: string): Promise<DefaultResponse<string>> {
     return this.equipmentService.deleteEquipment(equipmentId);
   }

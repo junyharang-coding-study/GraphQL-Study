@@ -12,26 +12,19 @@ export class EquipmentServiceImpl {
   constructor(private readonly equipmentRepository: EquipmentRepository) {}
 
   async saveForEquipment(equipmentRequestDto: EquipmentRequestDto): Promise<DefaultResponse<string>> {
-    this.logger.log("EquipmentServiceImpl - saveForEquipment 동작");
     if (equipmentRequestDto === null || !equipmentRequestDto) {
-      // DTO undefined
       return DefaultResponse.response(HttpStatus.NO_CONTENT, "Failed Create");
     }
 
-    this.logger.log(`EquipmentRequestDto 타입: ${typeof EquipmentRequestDto}`);
-    this.logger.log(equipmentRequestDto);
+    const findByEquipmentIdEntity = await this.findByEquipmentId(equipmentRequestDto.equipmentId);
 
-    const equipment = equipmentRequestDto.toEntity(equipmentRequestDto);
+    if (findByEquipmentIdEntity !== null) {
+      return DefaultResponse.response(HttpStatus.BAD_REQUEST, "Target ID For Save is Already in the DB");
+    }
 
-    this.logger.log(`equipment 타입: ${typeof equipment}`);
-    this.logger.log(equipment);
+    const savedEquipment = await this.equipmentRepository.saveEquipment(equipmentRequestDto.toEntity(equipmentRequestDto));
 
-    const savedEquipment = await this.equipmentRepository.saveEquipment(equipment);
-
-    this.logger.log(`savedEquipment 타입: ${typeof savedEquipment}`);
-    this.logger.log(savedEquipment);
-
-    if (savedEquipment.equipmentId === undefined) {
+    if (savedEquipment === null) {
       return DefaultResponse.response(HttpStatus.INTERNAL_SERVER_ERROR, "Server Error");
     }
 
@@ -68,7 +61,7 @@ export class EquipmentServiceImpl {
 
   async getEquipment(equipmentId: string): Promise<DefaultResponse<EquipmentResponseDto>> {
     if (equipmentId !== null) {
-      const equipment = await this.equipmentRepository.findByEquipmentId(equipmentId);
+      const equipment = await this.findByEquipmentId(equipmentId);
 
       if (equipment !== null) {
         return DefaultResponse.responseWithData(HttpStatus.OK, "OK", EquipmentResponseDto.toDto(equipment));
@@ -96,17 +89,26 @@ export class EquipmentServiceImpl {
     return DefaultResponse.responseWithData(HttpStatus.OK, "Success Update", findByEquipmentId.equipmentId);
   }
 
-  deleteEquipment(equipmentId: string): DefaultResponse<string> {
-    if (equipmentId !== null && typeof equipmentId === "string") {
-      const equipment = this.equipmentRepository.delete({ equipmentId: equipmentId });
+  async deleteEquipment(equipmentId: string): Promise<DefaultResponse<string>> {
+    if (equipmentId !== null && typeof equipmentId === "string" && equipmentId.length >= 1) {
+      const findByEquipmentId = await this.findByEquipmentId(equipmentId);
 
-      if (equipment !== null) {
-        return DefaultResponse.responseWithData(HttpStatus.OK, "OK", equipmentId);
+      if (findByEquipmentId === null) {
+        return DefaultResponse.response(HttpStatus.NOT_FOUND, "Delete Target Not Found");
       }
 
-      return DefaultResponse.response(HttpStatus.NOT_FOUND, "Data Not Found");
+      const equipment = await this.equipmentRepository.delete({ equipmentId: equipmentId });
+
+      if (equipment === null) {
+        return DefaultResponse.response(HttpStatus.INTERNAL_SERVER_ERROR, "Delete Failed");
+      }
+      return DefaultResponse.responseWithData(HttpStatus.OK, "OK", equipmentId);
     }
 
     return DefaultResponse.response(HttpStatus.BAD_REQUEST, "Bad Request");
+  }
+
+  private findByEquipmentId(equipmentId: string) {
+    return this.equipmentRepository.findByEquipmentId(equipmentId);
   }
 }

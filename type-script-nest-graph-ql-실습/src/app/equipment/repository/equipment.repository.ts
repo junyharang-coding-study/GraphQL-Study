@@ -1,13 +1,10 @@
 import { Repository, UpdateResult } from "typeorm";
 import { EquipmentEntity } from "../model/entities/equipment.entity";
 import { EquipmentSearchRequestDto } from "../model/dto/request/equipment-search-request.dto";
-import dataSource from "../../../../data-source";
 import { Injectable, Logger } from "@nestjs/common";
-import { EquipmentRequestDto } from "../model/dto/request/equipment-request.dto";
 import { InjectRepository } from "@nestjs/typeorm";
 
 @Injectable()
-// @TypeormRepository(EquipmentEntity)
 export class EquipmentRepository {
   private logger = new Logger("equipment.repository.ts");
 
@@ -24,8 +21,8 @@ export class EquipmentRepository {
 
     const selectQueryBuilder = this.equipmentRepository
       .createQueryBuilder("equipment")
-      .limit(equipmentSearchRequestDto.getPerPageSize())
-      .offset(equipmentSearchRequestDto.getPageNumber());
+      .take(equipmentSearchRequestDto.getPerPageSize())
+      .skip(equipmentSearchRequestDto.getPageNumber());
 
     if (this.hasSearchUsedBy(equipmentSearchRequestDto.usedBy)) {
       selectQueryBuilder.andWhere("equipment.usedBy = :usedBy", { usedBy: `%${equipmentSearchRequestDto.usedBy}%` });
@@ -34,6 +31,9 @@ export class EquipmentRepository {
     if (this.hasNewOrUsed(equipmentSearchRequestDto.newOrUsed)) {
       selectQueryBuilder.andWhere("equipment.newOrUsed = :newOrUsed", { usedBy: `%${equipmentSearchRequestDto.newOrUsed}%` });
     }
+
+    this.logger.log(`selectQueryBuilder.disableEscaping().getManyAndCount() 타입: ${typeof selectQueryBuilder.disableEscaping().getManyAndCount()}`);
+    console.log(selectQueryBuilder.disableEscaping().getManyAndCount());
 
     return selectQueryBuilder.disableEscaping().getManyAndCount();
   }

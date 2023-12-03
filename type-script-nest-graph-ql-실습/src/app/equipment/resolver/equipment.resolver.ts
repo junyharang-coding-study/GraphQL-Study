@@ -36,6 +36,15 @@ export class EquipmentResolver {
     return this.equipmentService.getEquipment(equipmentId);
   }
 
+  @UsePipes(new ValidationPipe({ transform: true }))
+  @Mutation(() => DefaultResponse<string>)
+  async updateEquipment(
+    @Args("input", { type: () => EquipmentRequestDto }) @Body() equipmentRequestDto: EquipmentRequestDto,
+  ): Promise<DefaultResponse<string>> {
+    this.log.log("updateEquipment 동작");
+    return this.equipmentService.updateEquipment(equipmentRequestDto);
+  }
+
   @Mutation(() => DefaultResponse<string>)
   async deleteEquipment(@Args("equipmentId", { type: () => String }) equipmentId: string): Promise<DefaultResponse<string>> {
     return this.equipmentService.deleteEquipment(equipmentId);

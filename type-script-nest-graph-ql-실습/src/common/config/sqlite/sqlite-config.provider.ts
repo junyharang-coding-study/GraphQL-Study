@@ -2,6 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from "@nestjs/typeorm";
 import { ConfigService } from "@nestjs/config";
 import { join } from "path";
+import { EquipmentEntity } from "src/app/equipment/model/entities/equipment.entity";
 
 @Injectable()
 export class SqliteConfigProvider implements TypeOrmOptionsFactory {
@@ -12,10 +13,12 @@ export class SqliteConfigProvider implements TypeOrmOptionsFactory {
       type: "sqlite",
       database: this.configService.get("DB_HOST", ":memory:"),
       synchronize: true,
-      entities: [join(__dirname, "**", "*.entity.{ts,js}")],
+      // entities: [join(__dirname, "**", "*.entity.{ts,js}")],
+      entities: [EquipmentEntity],
       // migrations: ["src/database/migrations/**/*.ts"],
       migrations: [join(__dirname, "**", "*.Seed*.{ts,js}")],
       migrationsTableName: "migrations",
+      logging: true, // 디버그 로깅 활성화
     };
   }
 }

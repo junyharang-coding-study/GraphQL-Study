@@ -13,27 +13,20 @@ export class EquipmentServiceImpl {
 
   async saveForEquipment(equipmentRequestDto: EquipmentRequestDto): Promise<DefaultResponse<string>> {
     this.logger.log("EquipmentServiceImpl - saveForEquipment 동작");
-    if (equipmentRequestDto === undefined || !equipmentRequestDto) {
+    if (equipmentRequestDto === null || !equipmentRequestDto) {
       // DTO undefined
       return DefaultResponse.response(HttpStatus.NO_CONTENT, "Failed Create");
     }
 
-    // const validationError = await validate(equipmentRequestDto);
-
-    // if (validationError.length > 0) {
-    //   // 유효성 검사 실패 혹은
-    //   return DefaultResponse.response(HttpStatus.BAD_REQUEST, "Validation failed");
-    // }
-
     this.logger.log(`EquipmentRequestDto 타입: ${typeof EquipmentRequestDto}`);
     this.logger.log(equipmentRequestDto);
 
-    const equipment = EquipmentRequestDto.toEntity(equipmentRequestDto);
+    const equipment = equipmentRequestDto.toEntity(equipmentRequestDto);
 
     this.logger.log(`equipment 타입: ${typeof equipment}`);
     this.logger.log(equipment);
 
-    const savedEquipment = await this.equipmentRepository.save(equipment);
+    const savedEquipment = await this.equipmentRepository.saveEquipment(equipment);
 
     this.logger.log(`savedEquipment 타입: ${typeof savedEquipment}`);
     this.logger.log(savedEquipment);
@@ -50,10 +43,14 @@ export class EquipmentServiceImpl {
 
     const equipmentSearchRequestDto = EquipmentSearchRequestDto.toDto(usedBy, newOrUsed, page, perPageSize);
 
+    if (equipmentSearchRequestDto === null) {
+      return DefaultResponse.response(HttpStatus.BAD_REQUEST, "Bad Request");
+    }
+
     this.logger.log(`equipmentSearchRequestDto 값: ${typeof equipmentSearchRequestDto}`);
     console.log(equipmentSearchRequestDto);
 
-    const result = await this.equipmentRepository.dynamicQueryByDto(equipmentSearchRequestDto);
+    const result = await this.equipmentRepository.dynamicQuerySearchAndPagingByDto(equipmentSearchRequestDto);
 
     this.logger.log(`result 값: ${result}`);
 
@@ -71,16 +68,32 @@ export class EquipmentServiceImpl {
 
   async getEquipment(equipmentId: string): Promise<DefaultResponse<EquipmentResponseDto>> {
     if (equipmentId !== null) {
-      const equipment = this.equipmentRepository.findByEquipmentId(equipmentId);
+      const equipment = await this.equipmentRepository.findByEquipmentId(equipmentId);
 
       if (equipment !== null) {
-        return DefaultResponse.responseWithData(HttpStatus.OK, "OK", EquipmentResponseDto.toDto(await equipment));
+        return DefaultResponse.responseWithData(HttpStatus.OK, "OK", EquipmentResponseDto.toDto(equipment));
       }
 
       return DefaultResponse.response(HttpStatus.NOT_FOUND, "Data Not Found");
     }
 
     return DefaultResponse.response(HttpStatus.BAD_REQUEST, "Bad Request");
+  }
+
+  async updateEquipment(equipmentRequestDto: EquipmentRequestDto): Promise<DefaultResponse<string>> {
+    if (EquipmentRequestDto === null) {
+      return DefaultResponse.response(HttpStatus.BAD_REQUEST, "Bad Request");
+    }
+
+    const findByEquipmentId = await this.equipmentRepository.findByEquipmentId(equipmentRequestDto.equipmentId);
+
+    if (findByEquipmentId === null) {
+      return DefaultResponse.response(HttpStatus.BAD_REQUEST, "Bad Request");
+    }
+
+    await this.equipmentRepository.updateEquipment(equipmentRequestDto.equipmentId, equipmentRequestDto.toEntity(equipmentRequestDto));
+
+    return DefaultResponse.responseWithData(HttpStatus.OK, "Success Update", findByEquipmentId.equipmentId);
   }
 
   deleteEquipment(equipmentId: string): DefaultResponse<string> {

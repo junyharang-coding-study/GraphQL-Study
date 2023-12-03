@@ -1,0 +1,35 @@
+type Query {
+    getEquipmentList(
+        usedBy: String,
+        newOrUsed: String,
+        page: Int,
+        perPageSize: Int): EquipmentListResponse!,
+
+    getEquipment(equipmentId: String!): FindByEquipmentResponse!
+}
+
+type Mutation {
+    saveForEquipment(input: EquipmentRequestDto): InputEquipmentResponse!,
+    updateEquipment(input: EquipmentRequestDto): InputEquipmentResponse!,
+    deleteEquipment(equipmentId: String!): InputEquipmentResponse!,
+}
+
+type Pagination {
+    perPageSize: Int!,
+    totalCount: Int!,
+    totalPage: Int!
+}
+
+type DefaultListResponse {
+    statusCode: Int!,
+    message: String!,
+    pagination: Pagination!,
+    data: [String!]!,
+}
+
+type DefaultResponse {
+    statusCode: Int!,
+    message: String!,
+    pagination: Pagination,
+    data: String,
+}

@@ -1,0 +1,36 @@
+input EquipmentRequestDto {
+    equipmentId: String,
+    usedBy: String,
+    count: Int,
+    newOrUsed: String
+}
+
+type EquipmentId {
+    equipmentId: ID!,
+}
+
+type EquipmentResponseDto {
+    equipmentId: ID!,
+    usedBy: String!,
+    count: Int!,
+    newOrUsed: String!
+}
+
+type EquipmentListResponse {
+    statusCode: Int!,
+    message: String!,
+    pagination: Pagination!,
+    data: [EquipmentResponseDto!]!,
+}
+
+type FindByEquipmentResponse {
+    statusCode: Int!,
+    message: String!,
+    data: EquipmentResponseDto,
+}
+
+type InputEquipmentResponse {
+    statusCode: Int!,
+    message: String!,
+    data: String,
+}

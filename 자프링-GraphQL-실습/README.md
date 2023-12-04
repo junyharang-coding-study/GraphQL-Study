@@ -60,10 +60,15 @@ I hope it helps you study 😀 <br>
 <br>
 ✅[GraphQL과 Apollo 열한번째 이야기 - Java + Spring Boot에서 GraphQL 사용해 보기 - Junit5을 이용한 Test(실습 중)](#)
 <br>
-✅ [GraphQL과 Apollo 열두번째 이야기 - GraphQL과 Apollo 열두번째 이야기 - TypeScript + Nest.js에서 GraphQL 사용해 보기 - 실습 환경 구성(실습 중)](#)
+✅ [GraphQL과 Apollo 열두번째 이야기 - GraphQL과 Apollo 열두번째 이야기 - TypeScript + Nest.js에서 GraphQL 사용해 보기 - 실습 환경 구성](https://junyharang.tistory.com/524)
+<br><br>
 
 #### 🤔 내가 만난 문제
 ⚠️[\[Nest.js\] TypeORM Table 관계가 맺어졌을 때, Seeding \(feat. Migration\)](https://junyharang.tistory.com/521)
+<br><br>
+
+#### 📋 부록
+🔍[\[Nest.js\]초기 환경 구성 (feat. TypeORM, QueryBuilder, GraphQL, Apollo)](https://junyharang.tistory.com/520)
 <br><br>
 
 #### 🔊 알려드려요!
@@ -73,10 +78,10 @@ I hope it helps you study 😀 <br>
 [![img.png](img.png)](https://link.coupang.com/a/bglCvF) <br><br>
 
 해당 소스코드 안에는 Graphiql에서 테스트할 수 있는 Scala 문법을 미리 정리해 두었어요.
-/src/main/resources/graphql/query 에 위치해 있고, 여기에 있는 문법들을 Graphiql에서 사용하시면 바로바로 테스트 할 수 있어요!
+`src/main/resources/graphql/query` 에 위치해 있고, 여기에 있는 문법들을 [Graphiql](http://localhost:8080/graphiql?path=/graphql)에서 사용하시면 바로바로 테스트 할 수 있어요!
 
 또한, 이 소스코드를 내려 받으시면 추가 설정 없이 바로 실습이 가능합니다!
-Embedded H2 DB In Memory Mode로 DB가 구성 되어 있기 때문이에요. 😀
+[Embedded H2 DB In Memory Mode](http://localhost:8080/h2-console/login.jsp)로 DB가 구성 되어 있기 때문이에요. 😀
 
 실습을 위해 내려 받으실 때는 본인의 Repository로 Fork를 한 뒤에 내려 받아주세요!
 또한, Star를 눌러주시면 정말 많이 힘이 날 거 같아요. 🤭

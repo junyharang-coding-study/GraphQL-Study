@@ -61,10 +61,15 @@ I hope it helps you study 😀 <br>
 <br>
 ✅[GraphQL과 Apollo 열한번째 이야기 - Java + Spring Boot에서 GraphQL 사용해 보기 - Junit5을 이용한 Test(실습 중)](#)
 <br>
-✅ [GraphQL과 Apollo 열두번째 이야기 - GraphQL과 Apollo 열두번째 이야기 - TypeScript + Nest.js에서 GraphQL 사용해 보기 - 실습 환경 구성(실습 중)](#)
+✅ [GraphQL과 Apollo 열두번째 이야기 - GraphQL과 Apollo 열두번째 이야기 - TypeScript + Nest.js에서 GraphQL 사용해 보기 - 실습 환경 구성](https://junyharang.tistory.com/524)
+<br><br>
 
 #### 🤔 내가 만난 문제
 ⚠️[\[Nest.js\] TypeORM Table 관계가 맺어졌을 때, Seeding \(feat. Migration\)](https://junyharang.tistory.com/521)
+<br><br>
+
+#### 📋 부록
+🔍[\[Nest.js\]초기 환경 구성 (feat. TypeORM, QueryBuilder, GraphQL, Apollo)](https://junyharang.tistory.com/520)
 <br><br>
 
 [![img.png](img.png)](https://link.coupang.com/a/bglCvF) <br><br>

@@ -12,7 +12,7 @@ export class EquipmentRepository {
     return this.equipmentRepository.save(equipment);
   }
 
-  async dynamicQuerySearchAndPagingByDto(equipmentSearchRequestDto: EquipmentSearchRequestDto): Promise<EquipmentEntity[]> {
+  async dynamicQuerySearchAndPagingByDto(equipmentSearchRequestDto: EquipmentSearchRequestDto): Promise<[EquipmentEntity[], number]> {
     const selectQueryBuilder = this.equipmentRepository
       .createQueryBuilder("equipment")
       .limit(equipmentSearchRequestDto.getPerPageSize())
@@ -30,7 +30,7 @@ export class EquipmentRepository {
       selectQueryBuilder.orderBy("equipment.equipmentId", "DESC");
     }
 
-    return await selectQueryBuilder.getMany();
+    return await selectQueryBuilder.getManyAndCount();
   }
 
   findByEquipmentId(equipmentId: string): Promise<EquipmentEntity> {

@@ -6,9 +6,10 @@ import { EquipmentRepository } from "../repository/equipment.repository";
 import { EquipmentSearchRequestDto } from "../model/dto/request/equipment-search-request.dto";
 import { Page } from "../../common/constant/page";
 import { EquipmentEntity } from "../model/entities/equipment.entity";
+import { EquipmentUpdateRequestDto } from "../model/dto/request/equipment-update-request.dto";
 
 @Injectable()
-export class EquipmentServiceImpl {
+export class EquipmentService {
   constructor(private readonly equipmentRepository: EquipmentRepository) {}
 
   async saveForEquipment(equipmentRequestDto: EquipmentRequestDto): Promise<DefaultResponse<string>> {
@@ -42,17 +43,19 @@ export class EquipmentServiceImpl {
 
     const result = await this.equipmentRepository.dynamicQuerySearchAndPagingByDto(equipmentSearchRequestDto);
 
-    if (result.length === 0) {
+    if (result[0].length === 0) {
       return DefaultResponse.response(HttpStatus.NOT_FOUND, "Data Not Found");
     }
 
-    const responseDtoPage = new Page(
-      equipmentSearchRequestDto.perPageSize,
-      result.length,
-      result.map((equipment) => new EquipmentResponseDto(equipment)),
+    return DefaultResponse.responseWithPaginationAndData(
+      HttpStatus.OK,
+      "Success",
+      new Page(
+        result[0].length,
+        result[1],
+        result[0].map((equipment) => new EquipmentResponseDto(equipment)),
+      ),
     );
-
-    return DefaultResponse.responseWithPaginationAndData(HttpStatus.OK, "Success", responseDtoPage);
   }
 
   async getEquipment(equipmentId: string): Promise<DefaultResponse<EquipmentResponseDto>> {
@@ -69,24 +72,27 @@ export class EquipmentServiceImpl {
     return DefaultResponse.response(HttpStatus.BAD_REQUEST, "Bad Request");
   }
 
-  async updateEquipment(equipmentRequestDto: EquipmentRequestDto): Promise<DefaultResponse<string>> {
-    if (EquipmentRequestDto === null) {
+  async updateEquipment(equipmentUpdateRequestDto: EquipmentUpdateRequestDto): Promise<DefaultResponse<string>> {
+    if (equipmentUpdateRequestDto.equipmentId === null) {
       return DefaultResponse.response(HttpStatus.BAD_REQUEST, "Bad Request");
     }
 
-    const findByEquipmentId = await this.equipmentRepository.findByEquipmentId(equipmentRequestDto.equipmentId);
+    const findByEquipmentId = await this.equipmentRepository.findByEquipmentId(equipmentUpdateRequestDto.equipmentId);
 
     if (findByEquipmentId === null) {
       return DefaultResponse.response(HttpStatus.BAD_REQUEST, "Bad Request");
     }
 
-    await this.equipmentRepository.updateEquipment(equipmentRequestDto.equipmentId, equipmentRequestDto.toEntity(equipmentRequestDto));
+    await this.equipmentRepository.updateEquipment(
+      equipmentUpdateRequestDto.equipmentId,
+      equipmentUpdateRequestDto.toEntity(equipmentUpdateRequestDto),
+    );
 
     return DefaultResponse.responseWithData(HttpStatus.OK, "Success Update", findByEquipmentId.equipmentId);
   }
 
   async deleteEquipment(equipmentId: string): Promise<DefaultResponse<string>> {
-    if (equipmentId !== null && typeof equipmentId === "string" && equipmentId.length >= 1) {
+    if (equipmentId !== null) {
       const findByEquipmentId = await this.findByEquipmentId(equipmentId);
 
       if (findByEquipmentId === null) {

@@ -61,7 +61,9 @@ I hope it helps you study 😀 <br>
 <br>
 ✅[GraphQL과 Apollo 열한번째 이야기 - Java + Spring Boot에서 GraphQL 사용해 보기 - Junit5을 이용한 Test(실습 중)](#)
 <br>
-✅ [GraphQL과 Apollo 열두번째 이야기 - GraphQL과 Apollo 열두번째 이야기 - TypeScript + Nest.js에서 GraphQL 사용해 보기 - 실습 환경 구성](https://junyharang.tistory.com/524)
+✅ [GraphQL과 Apollo 열두번째 이야기 - TypeScript + Nest.js에서 GraphQL 사용해 보기 - 실습 환경 구성](https://junyharang.tistory.com/524)
+<br>
+✅ [GraphQL과 Apollo 열세번째 이야기 - TypeScript + Nest.js에서 GraphQL 사용해 보기 - 실습 환경 테스트](https://junyharang.tistory.com/525)
 <br><br>
 
 #### 🤔 내가 만난 문제

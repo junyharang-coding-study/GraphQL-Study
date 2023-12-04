@@ -13,9 +13,7 @@ export class SqliteConfigProvider implements TypeOrmOptionsFactory {
       type: "sqlite",
       database: this.configService.get("DB_HOST", ":memory:"),
       synchronize: true,
-      // entities: [join(__dirname, "**", "*.entity.{ts,js}")],
       entities: [EquipmentEntity],
-      // migrations: ["src/database/migrations/**/*.ts"],
       migrations: [join(__dirname, "**", "*.Seed*.{ts,js}")],
       migrationsTableName: "migrations",
       logging: true, // 디버그 로깅 활성화

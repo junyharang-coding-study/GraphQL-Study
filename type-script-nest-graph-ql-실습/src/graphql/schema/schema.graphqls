@@ -10,8 +10,8 @@ type Query {
 }
 
 type Mutation {
-    saveForEquipment(input: EquipmentRequestDto): InputEquipmentResponse!,
-    updateEquipment(input: EquipmentRequestDto): InputEquipmentResponse!,
+    saveForEquipment(input: EquipmentRequestDto!): InputEquipmentResponse!,
+    updateEquipment(input: EquipmentUpdateRequestDto): InputEquipmentResponse!,
     deleteEquipment(equipmentId: String!): InputEquipmentResponse!,
 }
 

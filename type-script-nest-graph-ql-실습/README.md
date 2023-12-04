@@ -44,17 +44,26 @@ I hope it helps you study 😀 <br>
 
 ![img_1.png](img_1.png)
 
-package.json을 보면 npm run start:dev를 했을 때, npm run shema:drop 이 실행 되어 Embedded SQLite의 Table과 Data가 먼저 삭제 됩니다.
-이 후 npm run migraion:run 명령어가 실행되면서 Embedded SQLite의 Mock Data와 함께 Table이 다시 만들어 집니다.
-그런 뒤 Hot Reload를 이용한 Server 구동이 시작됩니다.
+`package.json`을 보면 `npm run start:dev`를 했을 때, `npm run shema:drop` 이 실행 되어 Embedded SQLite의 Table과 Data가 먼저 삭제 됩니다.
+이 후 `npm run migraion:run` 명령어가 실행되면서 Embedded SQLite의 Mock Data와 함께 Table이 다시 만들어 집니다.
+그런 뒤 Hot Reload를 이용한 Server 구동이 시작됩니다. <br>
 
-따.라.서 
+그렇기 때문에 따로 데이터베이스를 연결할 필요 없이 실습이 가능합니다.<br>
+
+If you look at `package.json`, when you run npm run `start:dev`, `npm run shema:drop` is executed and the table and data of Embedded SQLite are deleted first.
+The `npm run migration:run` command then creates the table again with Mock Data from Embedded SQLite.
+After that, the server starts to run using Hot Reload. <br>
+
+That's why you can practice without having to connect a database separately.<br>
+
+따.라.서<br>
+therefore<br>
 
 ```bash
 npm run start:dev
 ```
 
-위 명령어만 입력해 주시면 됩니다.
+위 명령어만 입력해 주시면 됩니다.<br>
 Just you write this command in the command line.
 
 <br><br>

@@ -1,6 +1,6 @@
 query findBygetEquipmentListSeachUsedByAndPaging {
   getEquipmentList(
-    usedBy: "developer",
+    newOrUsed: "used",
     page: 1,
     perPageSize: 10
   ) {

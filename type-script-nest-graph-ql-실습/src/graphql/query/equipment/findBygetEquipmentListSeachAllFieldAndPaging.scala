@@ -3,21 +3,21 @@ query findBygetEquipmentListSeachAllFieldAndPaging {
     usedBy: "developer",
     newOrUsed: "used",
     page: 1,
-    perPageSize: 3
-  )
-  {
+    perPageSize: 10,
+    orderBy: true
+  ) {
     statusCode,
     message,
     pagination {
       perPageSize,
       totalCount,
-      totalPage
-    },
-    data {
-      equipmentId,
-      usedBy,
-      count,
-      newOrUsed
+      totalPage,
+      data {
+        equipmentId,
+        usedBy,
+        count,
+        newOrUsed
+      }
     }
   }
 }

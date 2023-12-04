@@ -20,15 +20,15 @@ export class EquipmentResolver {
     return this.equipmentService.saveForEquipment(equipmentRequestDto);
   }
 
-  // @UsePipes(new ValidationPipe({ transform: true }))
   @Query(() => DefaultResponse<EquipmentResponseDto[]>)
   async getEquipmentList(
     @Args("usedBy", { type: () => String, nullable: true }) usedBy: string,
     @Args("newOrUsed", { type: () => String, nullable: true }) newOrUsed: string,
     @Args("page", { type: () => Int, nullable: true }) page: number,
     @Args("perPageSize", { type: () => Int, nullable: true }) perPageSize: number,
-  ): Promise<DefaultResponse<EquipmentResponseDto[]>> {
-    return this.equipmentService.getEquipmentList(usedBy, newOrUsed, page, perPageSize);
+    @Args("orderBy", { type: () => Boolean, nullable: true }) orderBy: boolean,
+  ): Promise<DefaultResponse<EquipmentResponseDto>> {
+    return this.equipmentService.getEquipmentList(usedBy, newOrUsed, page, perPageSize, orderBy);
   }
 
   @Query(() => DefaultResponse<EquipmentResponseDto>)

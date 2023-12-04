@@ -1,12 +1,12 @@
 import { Page } from "./page";
 
 export class DefaultResponse<T> {
-  statusCode: number;
-  message: string;
-  pagination?: Page;
+  statusCode!: number;
+  message!: string;
+  pagination?: Page<T>;
   data?: T;
 
-  constructor(statusCode: number, message: string, pagination?: Page, data?: T) {
+  constructor(statusCode: number, message: string, pagination?: Page<T>, data?: T) {
     this.statusCode = statusCode;
     this.message = message;
     this.pagination = pagination;
@@ -21,7 +21,7 @@ export class DefaultResponse<T> {
     return new DefaultResponse<T>(statusCode, message, undefined, data);
   }
 
-  static responseWithPaginationAndData<T>(statusCode: number, message: string, pagination: Page, data: T): DefaultResponse<T> {
-    return new DefaultResponse<T>(statusCode, message, pagination, data);
+  static responseWithPaginationAndData<T>(statusCode: number, message: string, pagination: Page<T>): DefaultResponse<T> {
+    return new DefaultResponse<T>(statusCode, message, pagination);
   }
 }

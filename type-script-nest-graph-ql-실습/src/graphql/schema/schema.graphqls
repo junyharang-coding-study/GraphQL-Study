@@ -3,7 +3,8 @@ type Query {
         usedBy: String,
         newOrUsed: String,
         page: Int,
-        perPageSize: Int): EquipmentListResponse!,
+        perPageSize: Int,
+        orderBy: Boolean): EquipmentListResponse!,
 
     getEquipment(equipmentId: String!): FindByEquipmentResponse!
 }

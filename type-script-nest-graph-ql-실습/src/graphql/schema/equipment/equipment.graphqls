@@ -19,8 +19,14 @@ type EquipmentResponseDto {
 type EquipmentListResponse {
     statusCode: Int!,
     message: String!,
-    pagination: Pagination!,
-    data: [EquipmentResponseDto!]!,
+    pagination: EquipmentListPagination
+}
+
+type EquipmentListPagination {
+    perPageSize: Int!,
+    totalCount: Int!,
+    totalPage: Int!
+    data: [EquipmentResponseDto!]!
 }
 
 type FindByEquipmentResponse {

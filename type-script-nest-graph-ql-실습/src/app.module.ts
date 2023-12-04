@@ -19,11 +19,8 @@ import { EquipmentModule } from "./app/equipment/module/equipment-module";
       driver: ApolloDriver,
       playground: true,
       installSubscriptionHandlers: true,
-      // autoSchemaFile: join(process.cwd(), "src/graphql/schema.graphqls"),
       typePaths: ["./**/*.graphqls"],
     }),
-
-    // TypeormCustomModule.forCustomRepository([EquipmentRepository]),
     EquipmentModule,
   ],
 })

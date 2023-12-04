@@ -6,12 +6,10 @@ export class EquipmentResponseDto {
   private count: number;
   private newOrUsed: string;
 
-  static toDto(equipment: EquipmentEntity): EquipmentResponseDto {
-    const equipmentResponseDto = new EquipmentResponseDto();
-    equipmentResponseDto.equipmentId = equipment.equipmentId;
-    equipmentResponseDto.usedBy = equipment.usedBy;
-    equipmentResponseDto.count = equipment.count;
-    equipmentResponseDto.newOrUsed = equipment.newOrUsed;
-    return equipmentResponseDto;
+  constructor(entity: EquipmentEntity) {
+    this.equipmentId = entity.equipmentId;
+    this.usedBy = entity.usedBy;
+    this.count = entity.count;
+    this.newOrUsed = entity.newOrUsed;
   }
 }

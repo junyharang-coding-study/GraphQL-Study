@@ -1,16 +1,17 @@
-import { HttpStatus, Injectable } from "@nestjs/common";
+import { HttpStatus, Inject, Injectable } from "@nestjs/common";
 import { DefaultResponse } from "../../common/constant/default.response";
 import { EquipmentResponseDto } from "../model/dto/response/equipment.response.dto";
 import { EquipmentRequestDto } from "../model/dto/request/equipment-request.dto";
-import { EquipmentRepository } from "../repository/equipment.repository";
 import { EquipmentSearchRequestDto } from "../model/dto/request/equipment-search-request.dto";
 import { Page } from "../../common/constant/page";
 import { EquipmentEntity } from "../model/entities/equipment.entity";
 import { EquipmentUpdateRequestDto } from "../model/dto/request/equipment-update-request.dto";
+import { EquipmentService } from "./equipment-service.interface";
+import { EquipmentRepository } from "../repository/equipment-repository.interface";
 
 @Injectable()
-export class EquipmentService {
-  constructor(private readonly equipmentRepository: EquipmentRepository) {}
+export class EquipmentImplService implements EquipmentService {
+  constructor(@Inject("EquipmentRepository") private readonly equipmentRepository: EquipmentRepository) {}
 
   async saveForEquipment(equipmentRequestDto: EquipmentRequestDto): Promise<DefaultResponse<string>> {
     if (equipmentRequestDto === null || !equipmentRequestDto) {

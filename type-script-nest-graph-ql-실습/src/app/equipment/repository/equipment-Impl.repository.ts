@@ -1,11 +1,12 @@
-import { Repository, UpdateResult } from "typeorm";
+import { DeleteResult, Repository, UpdateResult } from "typeorm";
 import { EquipmentEntity } from "../model/entities/equipment.entity";
 import { EquipmentSearchRequestDto } from "../model/dto/request/equipment-search-request.dto";
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
+import { EquipmentRepository } from "./equipment-repository.interface";
 
 @Injectable()
-export class EquipmentRepository {
+export class EquipmentImplRepository implements EquipmentRepository {
   constructor(@InjectRepository(EquipmentEntity) private readonly equipmentRepository: Repository<EquipmentEntity>) {}
 
   async saveEquipment(equipment: EquipmentEntity): Promise<EquipmentEntity> {
@@ -41,7 +42,7 @@ export class EquipmentRepository {
     return this.equipmentRepository.update(equipmentId, equipmentEntity);
   }
 
-  delete(equipmentId: { equipmentId: string }) {
+  delete(equipmentId: { equipmentId: string }): Promise<DeleteResult> {
     return this.equipmentRepository.delete(equipmentId);
   }
 }

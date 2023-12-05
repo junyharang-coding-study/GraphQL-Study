@@ -1,15 +1,15 @@
 import { Args, Int, Mutation, Query, Resolver } from "@nestjs/graphql";
-import { Body, UsePipes, ValidationPipe } from "@nestjs/common";
+import { Body, Inject, UsePipes, ValidationPipe } from "@nestjs/common";
 import { DefaultResponse } from "../../common/constant/default.response";
 import { EquipmentResponseDto } from "../model/dto/response/equipment.response.dto";
 import { EquipmentRequestDto } from "../model/dto/request/equipment-request.dto";
 import { EquipmentEntity } from "../model/entities/equipment.entity";
-import { EquipmentService } from "../service/equipment.service";
 import { EquipmentUpdateRequestDto } from "../model/dto/request/equipment-update-request.dto";
+import { EquipmentService } from "../service/equipment-service.interface";
 
 @Resolver(() => EquipmentEntity)
 export class EquipmentResolver {
-  constructor(private readonly equipmentService: EquipmentService) {}
+  constructor(@Inject("EquipmentService") private readonly equipmentService: EquipmentService) {}
 
   @UsePipes(new ValidationPipe({ transform: true }))
   @Mutation(() => DefaultResponse<string>)

@@ -14,7 +14,7 @@ export class EquipmentImplService implements EquipmentService {
   constructor(@Inject("EquipmentRepository") private readonly equipmentRepository: EquipmentRepository) {}
 
   async saveForEquipment(equipmentRequestDto: EquipmentRequestDto): Promise<DefaultResponse<string>> {
-    if (equipmentRequestDto === null || !equipmentRequestDto) {
+    if (equipmentRequestDto === null) {
       return DefaultResponse.response(HttpStatus.NO_CONTENT, "Failed Create");
     }
 
@@ -78,10 +78,10 @@ export class EquipmentImplService implements EquipmentService {
       return DefaultResponse.response(HttpStatus.BAD_REQUEST, "Bad Request");
     }
 
-    const findByEquipmentId = await this.equipmentRepository.findByEquipmentId(equipmentUpdateRequestDto.equipmentId);
+    const equipment = await this.findByEquipmentId(equipmentUpdateRequestDto.equipmentId);
 
-    if (findByEquipmentId === null) {
-      return DefaultResponse.response(HttpStatus.BAD_REQUEST, "Bad Request");
+    if (equipment === null) {
+      return DefaultResponse.response(HttpStatus.NOT_FOUND, "Update Target Not Found");
     }
 
     await this.equipmentRepository.updateEquipment(
@@ -89,7 +89,7 @@ export class EquipmentImplService implements EquipmentService {
       equipmentUpdateRequestDto.toEntity(equipmentUpdateRequestDto),
     );
 
-    return DefaultResponse.responseWithData(HttpStatus.OK, "Success Update", findByEquipmentId.equipmentId);
+    return DefaultResponse.responseWithData(HttpStatus.OK, "Success Update", equipment.equipmentId);
   }
 
   async deleteEquipment(equipmentId: string): Promise<DefaultResponse<string>> {
@@ -100,9 +100,9 @@ export class EquipmentImplService implements EquipmentService {
         return DefaultResponse.response(HttpStatus.NOT_FOUND, "Delete Target Not Found");
       }
 
-      const equipment = await this.equipmentRepository.delete({ equipmentId: equipmentId });
+      const deleteResult = await this.equipmentRepository.delete({ equipmentId: equipmentId });
 
-      if (equipment === null) {
+      if (deleteResult === null) {
         return DefaultResponse.response(HttpStatus.INTERNAL_SERVER_ERROR, "Delete Failed");
       }
       return DefaultResponse.responseWithData(HttpStatus.OK, "OK", equipmentId);

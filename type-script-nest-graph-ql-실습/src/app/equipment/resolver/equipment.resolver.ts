@@ -13,7 +13,7 @@ export class EquipmentResolver {
 
   @UsePipes(new ValidationPipe({ transform: true }))
   @Mutation(() => DefaultResponse<string>)
-  async saveForEquipment(
+  async saveEquipment(
     @Args("input", { type: () => EquipmentRequestDto }) @Body() equipmentRequestDto: EquipmentRequestDto,
   ): Promise<DefaultResponse<string>> {
     return this.equipmentService.saveForEquipment(equipmentRequestDto);

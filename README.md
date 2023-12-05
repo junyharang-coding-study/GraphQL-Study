@@ -39,9 +39,6 @@ I hope it helps you study 😀 <br>
 ### 🗂 목차
 
 ---
-### 🗂 목차
-
----
 ✅ [GraphQL과 Apollo 첫번째 이야기 - 개념 익히기](https://junyharang.tistory.com/509)
 <br><br>
 ✅ [GraphQL과 Apollo 두번째 이야기 - REST API란?](https://junyharang.tistory.com/457)

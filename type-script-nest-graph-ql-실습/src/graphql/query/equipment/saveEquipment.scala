@@ -1,4 +1,4 @@
-mutation saveForEquipment {
+mutation saveEquipment {
   saveForEquipment(input: {
     equipmentId: "MacBook",
     usedBy: "developer",

@@ -6,6 +6,7 @@ import { ConfigModule } from "@nestjs/config";
 import { CONFIG_VALIDATOR } from "./common/config/config.validator";
 import { SqliteConfigProvider } from "./common/config/sqlite/sqlite-config.provider";
 import { EquipmentModule } from "./app/equipment/module/equipment-module";
+import { PeopleModule } from "./app/people/module/people.module";
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { EquipmentModule } from "./app/equipment/module/equipment-module";
       typePaths: ["./**/*.graphqls"],
     }),
     EquipmentModule,
+    PeopleModule,
   ],
 })
 export class AppModule {}

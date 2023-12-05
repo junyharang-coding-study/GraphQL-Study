@@ -1,7 +1,6 @@
 import { Column, Entity, PrimaryGeneratedColumn, Unique } from "typeorm";
-import { Field, InputType, ObjectType } from "@nestjs/graphql";
+import { Field, ObjectType } from "@nestjs/graphql";
 
-@InputType()
 @ObjectType()
 @Entity("team")
 @Unique(["teamId"])

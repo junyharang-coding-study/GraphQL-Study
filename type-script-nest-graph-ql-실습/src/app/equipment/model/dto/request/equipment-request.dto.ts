@@ -4,7 +4,6 @@ import { EquipmentEntity } from "../../entities/equipment.entity";
 
 @InputType()
 export class EquipmentRequestDto {
-  @IsNotEmpty()
   @IsString()
   @Field(() => String)
   equipmentId: string;

@@ -5,14 +5,20 @@ type Query {
         page: Int,
         perPageSize: Int,
         orderBy: Boolean): EquipmentListResponse!,
+    getEquipment(equipmentId: String!): FindByEquipmentResponse!,
 
-    getEquipment(equipmentId: String!): FindByEquipmentResponse!
+    getPeopleList(peopleSearchRequestDto: PeopleSearchRequestDto): PeopleListResponse!,
+    getPeople(peopleId: Int!): FindByPeopleResponse!,
 }
 
 type Mutation {
-    saveForEquipment(input: EquipmentRequestDto!): InputEquipmentResponse!,
+    saveEquipment(input: EquipmentRequestDto!): InputEquipmentResponse!,
     updateEquipment(input: EquipmentUpdateRequestDto): InputEquipmentResponse!,
     deleteEquipment(equipmentId: String!): InputEquipmentResponse!,
+
+    savePeople(input: PeopleRequestDto!): InputPeopleResponse!,
+    updatePeople(input: PeopleUpdateRequestDto): InputPeopleResponse!,
+    deletePeople(peopleId: Int!): InputPeopleResponse!,
 }
 
 type Pagination {

@@ -1,0 +1,73 @@
+input PeopleRequestDto {
+    teamId: Int!,
+    lastName: String!,
+    firstName: String!,
+    sex: Sex!,
+    bloodType: BloodType!,
+    serveYears: Int!,
+    role: Role!,
+    hometown: String!,
+}
+
+input PeopleSearchRequestDto {
+    teamId: Int,
+    lastName: String,
+    firstName: String,
+    sex: Sex,
+    bloodType: BloodType,
+    serveYears: Int,
+    role: Role,
+    hometown: String,
+    page: Int,
+    perPageSize: Int,
+    orderBy: Boolean
+}
+
+input PeopleUpdateRequestDto {
+    peopleId: Int!,
+    teamId: Int,
+    lastName: String,
+    firstName: String,
+    sex: Sex,
+    bloodType: BloodType,
+    serveYears: Int,
+    role: Role,
+    hometown: String,
+}
+
+type PeopleResponseDto {
+    peopleId: Int!,
+    teamId: Int!,
+    lastName: String!,
+    firstName: String!,
+    sex: Sex!,
+    bloodType: BloodType!,
+    serveYears: Int!,
+    role: Role!,
+    hometown: String!,
+}
+
+type PeopleListResponse {
+    statusCode: Int!,
+    message: String!,
+    pagination: PeopleListPagination
+}
+
+type PeopleListPagination {
+    perPageSize: Int!,
+    totalCount: Int!,
+    totalPage: Int!
+    data: [PeopleResponseDto!]!
+}
+
+type FindByPeopleResponse {
+    statusCode: Int!,
+    message: String!,
+    data: PeopleResponseDto,
+}
+
+type InputPeopleResponse {
+    statusCode: Int!,
+    message: String!,
+    data: String,
+}

@@ -1,0 +1,17 @@
+enum Sex {
+    male,
+    female
+}
+
+enum  Role {
+    developer,
+    designer,
+    planner
+}
+
+enum BloodType {
+    A,
+    B,
+    O,
+    AB
+}

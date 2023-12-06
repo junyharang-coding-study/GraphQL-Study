@@ -12,6 +12,16 @@ type Query {
 
     getRoleList(roleSearchRequestDto: RoleSearchRequestDto): RoleListResponse!,
     getRole(roleId: String!): FindByRoleResponse!,
+
+    getSoftwareList(
+        usedBy: String,
+        developedBy: String,
+        description: String,
+        pageNumber: Int!,
+        perPageSize: Int!,
+        orderBy: Boolean
+    ): SoftwareListResponse!,
+    getSoftware(softwareId: String!): FindBySoftwareResponse!,
 }
 
 type Mutation {
@@ -26,6 +36,10 @@ type Mutation {
     saveRole(input: RoleRequestDto!): InputRoleResponse!,
     updateRole(input: RoleUpdateRequestDto): InputRoleResponse!,
     deleteRole(roleId: String!): InputRoleResponse!,
+
+    saveSoftware(input: SoftwareRequestDto!): InputSoftwareResponse!,
+    updateSoftware(input: SoftwareUpdateRequestDto): InputSoftwareResponse!,
+    deleteSoftware(softwareId: String!): InputSoftwareResponse!,
 }
 
 type Pagination {

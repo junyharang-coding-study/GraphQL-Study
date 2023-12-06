@@ -7,9 +7,8 @@ import { CONFIG_VALIDATOR } from "./common/config/config.validator";
 import { SqliteConfigProvider } from "./common/config/sqlite/sqlite-config.provider";
 import { EquipmentModule } from "./app/equipment/module/equipment-module";
 import { PeopleModule } from "./app/people/module/people.module";
-import { RoleResolver } from "./app/role/resolver/role.resolver";
-import { RoleServiceImpl } from "./app/role/service/role-service-impl.service";
 import { RoleModule } from "./app/role/module/role.module";
+import { SoftwareModule } from "./app/software/module/software.module";
 
 @Module({
   imports: [
@@ -28,6 +27,7 @@ import { RoleModule } from "./app/role/module/role.module";
     EquipmentModule,
     PeopleModule,
     RoleModule,
+    SoftwareModule,
   ],
 })
 export class AppModule {}

@@ -23,11 +23,11 @@ export class EquipmentResolver {
   async getEquipmentList(
     @Args("usedBy", { type: () => String, nullable: true }) usedBy: string,
     @Args("newOrUsed", { type: () => String, nullable: true }) newOrUsed: string,
-    @Args("page", { type: () => Int, nullable: true }) page: number,
+    @Args("pageNumber", { type: () => Int, nullable: true }) pageNumber: number,
     @Args("perPageSize", { type: () => Int, nullable: true }) perPageSize: number,
     @Args("orderBy", { type: () => Boolean, nullable: true }) orderBy: boolean,
   ): Promise<DefaultResponse<EquipmentResponseDto>> {
-    return this.equipmentService.getEquipmentList(usedBy, newOrUsed, page, perPageSize, orderBy);
+    return this.equipmentService.getEquipmentList(usedBy, newOrUsed, pageNumber, perPageSize, orderBy);
   }
 
   @Query(() => DefaultResponse<EquipmentResponseDto>)

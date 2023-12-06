@@ -1,7 +1,8 @@
 import { IsNotEmpty, IsString } from "class-validator";
-import { Field } from "@nestjs/graphql";
+import { Field, InputType } from "@nestjs/graphql";
 import { RoleEntity } from "../../entities/role.entity";
 
+@InputType()
 export class RoleUpdateRequestDto {
   @IsNotEmpty()
   @IsString()

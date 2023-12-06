@@ -9,7 +9,7 @@ export interface EquipmentService {
   getEquipmentList(
     usedBy: string,
     newOrUsed: string,
-    page: number,
+    pageNumber: number,
     perPageSize: number,
     orderBy: boolean,
   ): Promise<DefaultResponse<EquipmentResponseDto>>;

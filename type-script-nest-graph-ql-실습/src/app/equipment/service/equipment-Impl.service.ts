@@ -36,13 +36,13 @@ export class EquipmentImplService implements EquipmentService {
   async getEquipmentList(
     usedBy: string,
     newOrUsed: string,
-    page: number,
+    pageNumber: number,
     perPageSize: number,
     orderBy: boolean,
   ): Promise<DefaultResponse<EquipmentResponseDto>> {
-    const equipmentSearchRequestDto = EquipmentSearchRequestDto.toDto(usedBy, newOrUsed, page, perPageSize, orderBy);
-
-    const result = await this.equipmentRepository.dynamicQuerySearchAndPagingByDto(equipmentSearchRequestDto);
+    const result = await this.equipmentRepository.dynamicQuerySearchAndPagingByDto(
+      EquipmentSearchRequestDto.toDto(usedBy, newOrUsed, pageNumber, perPageSize, orderBy),
+    );
 
     if (result[0].length === 0) {
       return DefaultResponse.response(HttpStatus.NOT_FOUND, "Data Not Found");

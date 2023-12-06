@@ -1,0 +1,54 @@
+input SoftwareRequestDto {
+    softwareId: ID!,
+    usedBy: String!,
+    developedBy: String!,
+    description: String!
+}
+
+input SoftwareSearchRequestDto {
+    usedBy: String,
+    developedBy: String,
+    description: String,
+    pageNumber: Int!,
+    perPageSize: Int!,
+    orderBy: Boolean
+}
+
+input SoftwareUpdateRequestDto {
+    softwareId: ID!,
+    usedBy: String,
+    developedBy: String,
+    description: String
+}
+
+type SoftwareResponseDto {
+    softwareId: ID!,
+    usedBy: String!,
+    developedBy: String!,
+    description: String!
+}
+
+type SoftwareListResponse {
+    statusCode: Int!,
+    message: String!,
+    pagination: SoftwareListPagination
+}
+
+type SoftwareListPagination {
+    perPageSize: Int!,
+    totalCount: Int!,
+    totalPage: Int!
+    data: [SoftwareResponseDto!]!
+}
+
+type FindBySoftwareResponse {
+    statusCode: Int!,
+    message: String!,
+    data: SoftwareResponseDto,
+}
+
+type InputSoftwareResponse {
+    statusCode: Int!,
+    message: String!,
+    data: String,
+}

@@ -4,7 +4,6 @@ import { PeopleEntity } from "../model/entities/people.entity";
 import { Repository } from "typeorm";
 import { PeopleSearchRequestDto } from "../model/dto/request/people-search-request.dto";
 import { PeopleRepository } from "./people-repository.interface";
-import { TeamEntity } from "../../team/model/entities/team.entity";
 
 @Injectable()
 export class PeopleQueryBuilderRepository implements PeopleRepository {
@@ -13,12 +12,12 @@ export class PeopleQueryBuilderRepository implements PeopleRepository {
   async dynamicQuerySearchAndPagingByDto(peopleSearchRequestDto: PeopleSearchRequestDto): Promise<[PeopleEntity[], number]> {
     const selectQueryBuilder = this.peopleRepository
       .createQueryBuilder("people")
-      .leftJoinAndSelect(TeamEntity, "team", "team.teamId = people.teamId")
-      .limit(peopleSearchRequestDto.getPerPageSize())
-      .offset(peopleSearchRequestDto.getPageNumber());
+      .leftJoinAndSelect("people.team", "team")
+      .take(peopleSearchRequestDto.getLimit())
+      .skip(peopleSearchRequestDto.getOffset());
 
     if (peopleSearchRequestDto.teamId) {
-      selectQueryBuilder.andWhere("people.teamId = :teamId", { teamId: peopleSearchRequestDto.teamId });
+      selectQueryBuilder.andWhere("people.team.teamId = :teamId", { teamId: peopleSearchRequestDto.teamId });
     }
 
     if (peopleSearchRequestDto.lastName) {
@@ -54,5 +53,13 @@ export class PeopleQueryBuilderRepository implements PeopleRepository {
     }
 
     return await selectQueryBuilder.getManyAndCount();
+  }
+
+  findOneJoinTeam(peopleId: number): Promise<PeopleEntity> {
+    return this.peopleRepository
+      .createQueryBuilder("people")
+      .leftJoinAndSelect("people.team", "team")
+      .where("people.peopleId = :peopleId", { peopleId: peopleId })
+      .getOne();
   }
 }

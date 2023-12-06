@@ -16,8 +16,8 @@ export class EquipmentImplRepository implements EquipmentRepository {
   async dynamicQuerySearchAndPagingByDto(equipmentSearchRequestDto: EquipmentSearchRequestDto): Promise<[EquipmentEntity[], number]> {
     const selectQueryBuilder = this.equipmentRepository
       .createQueryBuilder("equipment")
-      .limit(equipmentSearchRequestDto.getPerPageSize())
-      .offset(equipmentSearchRequestDto.getPageNumber());
+      .limit(equipmentSearchRequestDto.getLimit())
+      .offset(equipmentSearchRequestDto.getOffset());
 
     if (equipmentSearchRequestDto.usedBy) {
       selectQueryBuilder.andWhere("equipment.usedBy = :usedBy", { usedBy: `${equipmentSearchRequestDto.usedBy}` });

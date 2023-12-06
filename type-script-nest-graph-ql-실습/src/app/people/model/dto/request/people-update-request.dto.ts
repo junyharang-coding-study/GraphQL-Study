@@ -1,23 +1,24 @@
-import { IsInt, IsNotEmpty, IsString } from "class-validator";
+import { IsInt, IsNotEmpty, IsNumber, IsString } from "class-validator";
 import { Field, InputType } from "@nestjs/graphql";
 import { Sex } from "../../../../../common/enum/people.sex.enum";
 import { BloodType } from "../../../../../common/enum/people.blood-type.enum";
 import { Role } from "../../../../../common/enum/people.role.enum";
 import { PeopleEntity } from "../../entities/people.entity";
+import { Logger } from "@nestjs/common";
 import { TeamEntity } from "../../../../team/model/entities/team.entity";
 
 @InputType()
 export class PeopleUpdateRequestDto {
   @IsNotEmpty()
-  @IsString()
-  @Field(() => String)
+  @IsNumber()
+  @Field(() => Number)
   peopleId: number;
 
-  @IsString()
-  @Field(() => String)
+  @IsNumber()
+  @Field(() => Number)
   teamId: number;
 
-  @IsInt()
+  @IsString()
   @Field(() => String)
   lastName: string;
 
@@ -25,19 +26,16 @@ export class PeopleUpdateRequestDto {
   @Field(() => String)
   firstName: string;
 
-  @IsString()
   @Field(() => Sex)
   sex: Sex;
 
-  @IsString()
   @Field(() => BloodType)
   bloodType: BloodType;
 
-  @IsString()
+  @IsNumber()
   @Field(() => Number)
   serveYears: number;
 
-  @IsString()
   @Field(() => Role)
   role: Role;
 
@@ -47,6 +45,7 @@ export class PeopleUpdateRequestDto {
 
   toEntity(peopleUpdateRequestDto: PeopleUpdateRequestDto): PeopleEntity {
     const people = new PeopleEntity();
+    people.team = new TeamEntity(); // team을 초기화
     people.team.teamId = peopleUpdateRequestDto.teamId;
     people.lastName = peopleUpdateRequestDto.lastName;
     people.firstName = peopleUpdateRequestDto.firstName;

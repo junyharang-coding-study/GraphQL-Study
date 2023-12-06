@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn, Unique } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn, RelationId, Unique } from "typeorm";
 import { Sex } from "../../../../common/enum/people.sex.enum";
 import { Role } from "../../../../common/enum/people.role.enum";
 import { BloodType } from "../../../../common/enum/people.blood-type.enum";
@@ -13,9 +13,9 @@ export class PeopleEntity {
   @PrimaryGeneratedColumn({ name: "people_id" })
   peopleId: number;
 
-  @Field(() => Number)
-  @OneToOne(() => TeamEntity)
-  @JoinColumn()
+  @Field(() => TeamEntity)
+  @ManyToOne(() => TeamEntity)
+  @JoinColumn({ name: "team_id" })
   team: TeamEntity;
 
   @Field(() => String)

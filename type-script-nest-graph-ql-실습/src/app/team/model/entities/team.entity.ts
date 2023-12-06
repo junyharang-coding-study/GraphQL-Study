@@ -1,9 +1,9 @@
-import { Column, Entity, PrimaryGeneratedColumn, Unique } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 import { Field, ObjectType } from "@nestjs/graphql";
 
 @ObjectType()
 @Entity("team")
-@Unique(["teamId"])
+// @Unique(["teamId"])
 export class TeamEntity {
   @Field(() => Number)
   @PrimaryGeneratedColumn({ name: "team_id" })

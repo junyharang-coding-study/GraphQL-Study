@@ -18,7 +18,7 @@ input PeopleSearchRequestDto {
     serveYears: Int,
     role: Role,
     hometown: String,
-    page: Int,
+    pageNumber: Int,
     perPageSize: Int,
     orderBy: Boolean
 }

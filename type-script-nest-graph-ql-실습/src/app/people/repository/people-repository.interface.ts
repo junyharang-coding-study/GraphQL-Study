@@ -3,4 +3,6 @@ import { PeopleSearchRequestDto } from "../model/dto/request/people-search-reque
 
 export interface PeopleRepository {
   dynamicQuerySearchAndPagingByDto(peopleSearchRequestDto: PeopleSearchRequestDto): Promise<[PeopleEntity[], number]>;
+
+  findOneJoinTeam(peopleId: number): Promise<PeopleEntity>;
 }

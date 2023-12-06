@@ -1,4 +1,4 @@
-import { HttpStatus, Inject, Injectable } from "@nestjs/common";
+import { HttpStatus, Inject, Injectable, Logger } from "@nestjs/common";
 import { PeopleService } from "./people-service.interface";
 import { PeopleRepository } from "../repository/people-repository.interface";
 import { DefaultResponse } from "../../common/constant/default.response";
@@ -10,17 +10,25 @@ import { PeopleEntity } from "../model/entities/people.entity";
 import { Page } from "../../common/constant/page";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
+import { TeamEntity } from "../../team/model/entities/team.entity";
 
 @Injectable()
 export class PeopleServiceImpl implements PeopleService {
   constructor(
     @InjectRepository(PeopleEntity) private readonly peopleRepository: Repository<PeopleEntity>,
     @Inject("PeopleQueryBuilderRepository") private readonly peopleQueryBuilderRepository: PeopleRepository,
+    @InjectRepository(TeamEntity) private readonly teamRepository: Repository<TeamEntity>,
   ) {}
 
   async savePeople(peopleRequestDto: PeopleRequestDto): Promise<DefaultResponse<number>> {
     if (peopleRequestDto === null) {
       return DefaultResponse.response(HttpStatus.NO_CONTENT, "Failed Create");
+    }
+
+    const teamId = peopleRequestDto.teamId;
+
+    if ((await this.teamRepository.findOne({ where: { teamId } })) === null) {
+      return DefaultResponse.response(HttpStatus.NOT_FOUND, "Non-existent team information");
     }
 
     const savedPeople = await this.peopleRepository.save(peopleRequestDto.toEntity(peopleRequestDto));
@@ -55,7 +63,7 @@ export class PeopleServiceImpl implements PeopleService {
       return DefaultResponse.response(HttpStatus.BAD_REQUEST, "Bad Request");
     }
 
-    const people = await this.peopleRepository.findOne({ where: { peopleId } });
+    const people = await this.peopleQueryBuilderRepository.findOneJoinTeam(peopleId);
 
     if (people === null) {
       return DefaultResponse.response(HttpStatus.NOT_FOUND, "Data Not Found");
@@ -65,20 +73,19 @@ export class PeopleServiceImpl implements PeopleService {
   }
 
   async updatePeople(peopleUpdateRequestDto: PeopleUpdateRequestDto): Promise<DefaultResponse<number>> {
-    if (peopleUpdateRequestDto.peopleId === null) {
+    const peopleId = peopleUpdateRequestDto.peopleId;
+
+    if (peopleId === null) {
       return DefaultResponse.response(HttpStatus.BAD_REQUEST, "Bad Request");
     }
 
-    const peopleId = peopleUpdateRequestDto.peopleId;
-    const people = await this.peopleRepository.findOne({ where: { peopleId } });
-
-    if (people === null) {
-      return DefaultResponse.response(HttpStatus.NOT_FOUND, "Update Target Not Found");
+    if ((await this.peopleQueryBuilderRepository.findOneJoinTeam(peopleId)) === null) {
+      return DefaultResponse.response(HttpStatus.NOT_FOUND, "Data Not Found");
     }
 
-    await this.peopleRepository.update(peopleUpdateRequestDto.peopleId, peopleUpdateRequestDto.toEntity(peopleUpdateRequestDto));
+    await this.peopleRepository.update(peopleId, peopleUpdateRequestDto.toEntity(peopleUpdateRequestDto));
 
-    return DefaultResponse.responseWithData(HttpStatus.OK, "Success Update", people.peopleId);
+    return DefaultResponse.responseWithData(HttpStatus.OK, "Success Update", peopleId);
   }
 
   async deletePeople(peopleId: number): Promise<DefaultResponse<number>> {
@@ -86,10 +93,8 @@ export class PeopleServiceImpl implements PeopleService {
       return DefaultResponse.response(HttpStatus.BAD_REQUEST, "Bad Request");
     }
 
-    const people = await this.peopleRepository.findOne({ where: { peopleId } });
-
-    if (people === null) {
-      return DefaultResponse.response(HttpStatus.NOT_FOUND, "Delete Target Not Found");
+    if ((await this.peopleQueryBuilderRepository.findOneJoinTeam(peopleId)) === null) {
+      return DefaultResponse.response(HttpStatus.NOT_FOUND, "Data Not Found");
     }
 
     const deleteResult = await this.peopleRepository.delete({ peopleId: peopleId });

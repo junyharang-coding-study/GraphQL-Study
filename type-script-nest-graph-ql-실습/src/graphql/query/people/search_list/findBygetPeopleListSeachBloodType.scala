@@ -1,9 +1,17 @@
-query findBygetPeopleListSeachBloodTypeAndPaging {
-  getPeopleList(
+query findBygetPeopleListSeachBloodType {
+  getPeopleList(peopleSearchRequestDto: {
+    # teamId: 1,
+    # lastName: "",
+    # firstName: "",
+    # sex: male,
     bloodType: B,
-    page: 1,
-    size: 5
-  ) {
+    # serveYears: 1,
+    # role: developer,
+    # hometown: "",
+    # page: 1,
+    # perPageSize: 5,
+    # orderBy: true,
+  }) {
     statusCode,
     message,
     pagination {

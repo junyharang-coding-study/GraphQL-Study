@@ -42,7 +42,7 @@ type Query {
         perPageSize: Int!,
         orderBy: Boolean
     ): SupplyListResponse!,
-    getSupply(supplyId: Int!): FindBySupplyResponse!,
+    getSupply(supplyId: String!): FindBySupplyResponse!,
 }
 
 type Mutation {

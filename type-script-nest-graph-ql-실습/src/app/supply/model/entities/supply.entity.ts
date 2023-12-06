@@ -14,5 +14,5 @@ export class SupplyEntity {
   @Field(() => Number)
   @ManyToOne(() => TeamEntity, { onDelete: "CASCADE" })
   @JoinColumn({ name: "team_id" })
-  team: Promise<TeamEntity>;
+  team: TeamEntity;
 }

@@ -1,10 +1,9 @@
-import { IsInt, IsNotEmpty, IsNumber, IsString } from "class-validator";
+import { IsNotEmpty, IsNumber, IsString } from "class-validator";
 import { Field, InputType } from "@nestjs/graphql";
 import { Sex } from "../../../../../common/enum/people.sex.enum";
 import { BloodType } from "../../../../../common/enum/people.blood-type.enum";
 import { Role } from "../../../../../common/enum/people.role.enum";
 import { PeopleEntity } from "../../entities/people.entity";
-import { Logger } from "@nestjs/common";
 import { TeamEntity } from "../../../../team/model/entities/team.entity";
 
 @InputType()

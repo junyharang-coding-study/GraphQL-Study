@@ -25,8 +25,4 @@ export abstract class PageRequestDto {
   getLimit(): number {
     return this.perPageSize;
   }
-
-  getOrderBy(): boolean {
-    return this.orderBy;
-  }
 }

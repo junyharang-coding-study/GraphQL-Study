@@ -1,4 +1,4 @@
-import { HttpStatus, Inject, Injectable, Logger } from "@nestjs/common";
+import { HttpStatus, Inject, Injectable } from "@nestjs/common";
 import { PeopleService } from "./people-service.interface";
 import { PeopleRepository } from "../repository/people-repository.interface";
 import { DefaultResponse } from "../../common/constant/default.response";

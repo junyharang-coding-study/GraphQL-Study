@@ -2,7 +2,7 @@ import { Module } from "@nestjs/common";
 import { EquipmentResolver } from "../resolver/equipment.resolver";
 import { EquipmentImplService } from "../service/equipment-Impl.service";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { EquipmentImplRepository } from "../repository/equipment-Impl.repository";
+import { EquipmentQueryBuilderRepository } from "../repository/equipment-query-builder-repository.service";
 import { EquipmentEntity } from "../model/entities/equipment.entity";
 
 @Module({
@@ -14,10 +14,10 @@ import { EquipmentEntity } from "../model/entities/equipment.entity";
       provide: "EquipmentService",
       useClass: EquipmentImplService,
     },
-    EquipmentImplRepository,
+    EquipmentQueryBuilderRepository,
     {
       provide: "EquipmentRepository",
-      useClass: EquipmentImplRepository,
+      useClass: EquipmentQueryBuilderRepository,
     },
   ],
 })

@@ -1,0 +1,65 @@
+input TeamRequestDto {
+    manager: String!,
+    office: String!,
+    extensionNumber: String!,
+    mascot: String,
+    cleaningDuty: String!,
+    project: String,
+}
+
+input TeamSearchRequestDto {
+    manager: String,
+    office: String,
+    extensionNumber: String,
+    mascot: String,
+    cleaningDuty: String,
+    project: String,
+    pageNumber: Int!,
+    perPageSize: Int!,
+    orderBy: Boolean
+}
+
+input TeamUpdateRequestDto {
+    teamId: Int!
+    manager: String,
+    office: String,
+    extensionNumber: String,
+    mascot: String,
+    cleaningDuty: String,
+    project: String,
+}
+
+type TeamResponseDto {
+    teamId: ID!
+    manager: String!,
+    office: String!,
+    extensionNumber: String!,
+    mascot: String,
+    cleaningDuty: String!,
+    project: String,
+}
+
+type TeamListResponse {
+    statusCode: Int!,
+    message: String!,
+    pagination: TeamListPagination
+}
+
+type TeamListPagination {
+    perPageSize: Int!,
+    totalCount: Int!,
+    totalPage: Int!
+    data: [TeamResponseDto!]!
+}
+
+type FindByTeamResponse {
+    statusCode: Int!,
+    message: String!,
+    data: TeamResponseDto,
+}
+
+type InputTeamResponse {
+    statusCode: Int!,
+    message: String!,
+    data: String,
+}

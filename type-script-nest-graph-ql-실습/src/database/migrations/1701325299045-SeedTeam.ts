@@ -46,7 +46,7 @@ export class SeedTeam1701325303468 implements MigrationInterface {
               name: "mascot",
               type: "varchar",
               length: "10",
-              isNullable: false,
+              isNullable: true,
               comment: "마스코트",
             },
 
@@ -62,7 +62,7 @@ export class SeedTeam1701325303468 implements MigrationInterface {
               name: "project",
               type: "varchar",
               length: "10",
-              isNullable: false,
+              isNullable: true,
               comment: "프로젝트 명",
             },
           ],

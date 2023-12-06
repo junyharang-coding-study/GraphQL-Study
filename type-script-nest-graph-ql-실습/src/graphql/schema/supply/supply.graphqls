@@ -1,0 +1,46 @@
+input SupplyRequestDto {
+    supplyId: ID!,
+    teamId: Int!,
+}
+
+input SupplySearchRequestDto {
+    teamId: Int,
+    pageNumber: Int!,
+    perPageSize: Int!,
+    orderBy: Boolean
+}
+
+input SupplyUpdateRequestDto {
+    supplyId: ID!,
+    teamId: Int,
+}
+
+type SupplyResponseDto {
+    supplyId: ID!,
+    teamId: Int!,
+}
+
+type SupplyListResponse {
+    statusCode: Int!,
+    message: String!,
+    pagination: SupplyListPagination
+}
+
+type SupplyListPagination {
+    perPageSize: Int!,
+    totalCount: Int!,
+    totalPage: Int!
+    data: [SupplyResponseDto!]!
+}
+
+type FindBySupplyResponse {
+    statusCode: Int!,
+    message: String!,
+    data: SupplyResponseDto,
+}
+
+type InputSupplyResponse {
+    statusCode: Int!,
+    message: String!,
+    data: String,
+}

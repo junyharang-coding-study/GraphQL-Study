@@ -6,7 +6,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { EquipmentRepository } from "./equipment-repository.interface";
 
 @Injectable()
-export class EquipmentImplRepository implements EquipmentRepository {
+export class EquipmentQueryBuilderRepository implements EquipmentRepository {
   constructor(@InjectRepository(EquipmentEntity) private readonly equipmentRepository: Repository<EquipmentEntity>) {}
 
   async saveEquipment(equipment: EquipmentEntity): Promise<EquipmentEntity> {

@@ -5,10 +5,11 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { ConfigModule } from "@nestjs/config";
 import { CONFIG_VALIDATOR } from "./common/config/config.validator";
 import { SqliteConfigProvider } from "./common/config/sqlite/sqlite-config.provider";
-import { EquipmentModule } from "./app/equipment/module/equipment-module";
+import { EquipmentModule } from "./app/equipment/module/equipment.module";
 import { PeopleModule } from "./app/people/module/people.module";
 import { RoleModule } from "./app/role/module/role.module";
 import { SoftwareModule } from "./app/software/module/software.module";
+import { TeamModule } from "./app/team/module/team.module";
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { SoftwareModule } from "./app/software/module/software.module";
     PeopleModule,
     RoleModule,
     SoftwareModule,
+    TeamModule,
   ],
 })
 export class AppModule {}

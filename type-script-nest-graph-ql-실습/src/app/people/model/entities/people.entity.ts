@@ -14,7 +14,7 @@ export class PeopleEntity {
   peopleId: number;
 
   @Field(() => TeamEntity)
-  @ManyToOne(() => TeamEntity)
+  @ManyToOne(() => TeamEntity, { onDelete: "CASCADE" })
   @JoinColumn({ name: "team_id" })
   team: TeamEntity;
 

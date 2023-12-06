@@ -5,7 +5,6 @@ import { SoftwareService } from "../service/software-service.interface";
 import { DefaultResponse } from "../../common/constant/default.response";
 import { RoleEntity } from "../../role/model/entities/role.entity";
 import { SoftwareRequestDto } from "../model/dto/request/software-request.dto";
-import { SoftwareSearchRequestDto } from "../model/dto/request/software-search-request.dto";
 import { SoftwareResponseDto } from "../model/dto/response/software-response.dto";
 import { SoftwareUpdateRequestDto } from "../model/dto/request/software-update-request.dto";
 

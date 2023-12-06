@@ -22,6 +22,27 @@ type Query {
         orderBy: Boolean
     ): SoftwareListResponse!,
     getSoftware(softwareId: String!): FindBySoftwareResponse!,
+
+    getTeamList(
+        manager: String,
+        office: String,
+        extensionNumber: String,
+        mascot: String,
+        cleaningDuty: String,
+        project: String,
+        pageNumber: Int!,
+        perPageSize: Int!,
+        orderBy: Boolean
+    ): TeamListResponse!,
+    getTeam(teamId: Int!): FindByTeamResponse!,
+
+    getSupplyList(
+        teamId: Int,
+        pageNumber: Int!,
+        perPageSize: Int!,
+        orderBy: Boolean
+    ): SupplyListResponse!,
+    getSupply(supplyId: Int!): FindBySupplyResponse!,
 }
 
 type Mutation {
@@ -40,6 +61,14 @@ type Mutation {
     saveSoftware(input: SoftwareRequestDto!): InputSoftwareResponse!,
     updateSoftware(input: SoftwareUpdateRequestDto): InputSoftwareResponse!,
     deleteSoftware(softwareId: String!): InputSoftwareResponse!,
+
+    saveTeam(input: TeamRequestDto!): InputTeamResponse!,
+    updateTeam(input: TeamUpdateRequestDto): InputTeamResponse!,
+    deleteTeam(teamId: Int!): InputTeamResponse!,
+
+    saveSupply(input: SupplyRequestDto!): InputSupplyResponse!,
+    updateSupply(input: SupplyUpdateRequestDto): InputSupplyResponse!,
+    deleteSupply(supplyId: String!): InputTeamResponse!,
 }
 
 type Pagination {

@@ -12,7 +12,7 @@ export class SupplyEntity {
   supplyId: string;
 
   @Field(() => Number)
-  @ManyToOne(() => TeamEntity)
+  @ManyToOne(() => TeamEntity, { onDelete: "CASCADE" })
   @JoinColumn({ name: "team_id" })
   team: Promise<TeamEntity>;
 }

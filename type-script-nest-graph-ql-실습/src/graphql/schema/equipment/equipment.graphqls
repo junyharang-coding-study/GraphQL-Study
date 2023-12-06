@@ -1,19 +1,15 @@
 input EquipmentRequestDto {
-    equipmentId: String!,
+    equipmentId: ID!,
     usedBy: String!,
     count: Int!,
     newOrUsed: String!
 }
 
 input EquipmentUpdateRequestDto {
-    equipmentId: String!,
+    equipmentId: ID!,
     usedBy: String,
     count: Int,
     newOrUsed: String
-}
-
-type EquipmentId {
-    equipmentId: ID,
 }
 
 type EquipmentResponseDto {

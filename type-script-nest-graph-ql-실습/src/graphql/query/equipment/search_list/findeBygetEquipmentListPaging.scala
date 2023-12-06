@@ -1,7 +1,6 @@
-query findBygetEquipmentListSeachUsedByAndPaging {
+query findeBygetEquipmentListPaging {
   getEquipmentList(
-    usedBy: "developer",
-    page: 1,
+    pageNumber: 1,
     perPageSize: 10
   ) {
     statusCode,
@@ -17,6 +16,5 @@ query findBygetEquipmentListSeachUsedByAndPaging {
         newOrUsed
       }
     }
-    ,
   }
 }

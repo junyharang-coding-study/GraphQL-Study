@@ -1,7 +1,7 @@
 query findBygetEquipmentListSeachUsedByAndPaging {
   getEquipmentList(
     newOrUsed: "used",
-    page: 1,
+    pageNumber: 1,
     perPageSize: 10
   ) {
     statusCode,

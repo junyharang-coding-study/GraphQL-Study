@@ -2,13 +2,16 @@ type Query {
     getEquipmentList(
         usedBy: String,
         newOrUsed: String,
-        page: Int,
-        perPageSize: Int,
+        pageNumber: Int!,
+        perPageSize: Int!,
         orderBy: Boolean): EquipmentListResponse!,
     getEquipment(equipmentId: String!): FindByEquipmentResponse!,
 
     getPeopleList(peopleSearchRequestDto: PeopleSearchRequestDto): PeopleListResponse!,
     getPeople(peopleId: Int!): FindByPeopleResponse!,
+
+    getRoleList(roleSearchRequestDto: RoleSearchRequestDto): RoleListResponse!,
+    getRole(roleId: String!): FindByRoleResponse!,
 }
 
 type Mutation {
@@ -19,6 +22,10 @@ type Mutation {
     savePeople(input: PeopleRequestDto!): InputPeopleResponse!,
     updatePeople(input: PeopleUpdateRequestDto): InputPeopleResponse!,
     deletePeople(peopleId: Int!): InputPeopleResponse!,
+
+    saveRole(input: RoleRequestDto!): InputRoleResponse!,
+    updateRole(input: RoleUpdateRequestDto): InputRoleResponse!,
+    deleteRole(roleId: String!): InputRoleResponse!,
 }
 
 type Pagination {

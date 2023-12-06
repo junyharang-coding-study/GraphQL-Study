@@ -1,17 +1,15 @@
-query findBygetEquipmentListSeachAllFieldAndPaging {
+query findBygetEquipmentListSeachUsedByAndPaging {
   getEquipmentList(
     usedBy: "developer",
-    newOrUsed: "used",
-    page: 1,
-    perPageSize: 10,
-    orderBy: true
+    pageNumber: 1,
+    perPageSize: 10
   ) {
     statusCode,
     message,
     pagination {
       perPageSize,
       totalCount,
-      totalPage,
+      totalPage
       data {
         equipmentId,
         usedBy,
@@ -19,5 +17,6 @@ query findBygetEquipmentListSeachAllFieldAndPaging {
         newOrUsed
       }
     }
+    ,
   }
 }

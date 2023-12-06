@@ -53,7 +53,7 @@ export class PeopleServiceImpl implements PeopleService {
       new Page(
         result[0].length,
         result[1],
-        result[0].map((people) => new PeopleResponseDto(people)),
+        result[0].map((people: PeopleEntity) => new PeopleResponseDto(people)),
       ),
     );
   }
@@ -80,7 +80,7 @@ export class PeopleServiceImpl implements PeopleService {
     }
 
     if ((await this.peopleQueryBuilderRepository.findOneJoinTeam(peopleId)) === null) {
-      return DefaultResponse.response(HttpStatus.NOT_FOUND, "Data Not Found");
+      return DefaultResponse.response(HttpStatus.NOT_FOUND, "Update Target Data Not Found");
     }
 
     await this.peopleRepository.update(peopleId, peopleUpdateRequestDto.toEntity(peopleUpdateRequestDto));
@@ -94,12 +94,10 @@ export class PeopleServiceImpl implements PeopleService {
     }
 
     if ((await this.peopleQueryBuilderRepository.findOneJoinTeam(peopleId)) === null) {
-      return DefaultResponse.response(HttpStatus.NOT_FOUND, "Data Not Found");
+      return DefaultResponse.response(HttpStatus.NOT_FOUND, "Delete Target Data Not Found");
     }
 
-    const deleteResult = await this.peopleRepository.delete({ peopleId: peopleId });
-
-    if (deleteResult === null) {
+    if ((await this.peopleRepository.delete({ peopleId: peopleId })) === null) {
       return DefaultResponse.response(HttpStatus.INTERNAL_SERVER_ERROR, "Delete Failed");
     }
 

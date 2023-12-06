@@ -1,8 +1,11 @@
 import { PageRequestDto } from "../../../../common/constant/page.request.dto";
+import { IsString } from "class-validator";
+import { Field, InputType } from "@nestjs/graphql";
 
+@InputType()
 export class EquipmentSearchRequestDto extends PageRequestDto {
-  usedBy: string | null;
-  newOrUsed: string | null;
+  @IsString() @Field(() => String) usedBy: string | null;
+  @IsString() @Field(() => String) newOrUsed: string | null;
 
   constructor() {
     super();

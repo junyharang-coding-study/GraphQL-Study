@@ -1,0 +1,50 @@
+input RoleRequestDto {
+    roleId: ID!,
+    job: String!,
+    requirement: String!
+}
+
+input RoleSearchRequestDto {
+    job: String,
+    requirement: String,
+    pageNumber: Int!,
+    perPageSize: Int!
+    orderBy: Boolean
+}
+
+input RoleUpdateRequestDto {
+    roleId: ID!,
+    job: String,
+    requirement: String
+}
+
+type RoleResponseDto {
+    roleId: ID!
+    job: String!,
+    requirement: String!
+}
+
+type RoleListResponse {
+    statusCode: Int!,
+    message: String!,
+    pagination: RoleListPagination
+}
+
+type RoleListPagination {
+    perPageSize: Int!,
+    totalCount: Int!,
+    totalPage: Int!
+    data: [RoleResponseDto!]!
+}
+
+type FindByRoleResponse {
+    statusCode: Int!,
+    message: String!,
+    data: RoleResponseDto,
+}
+
+type InputRoleResponse {
+    statusCode: Int!,
+    message: String!,
+    data: String,
+}

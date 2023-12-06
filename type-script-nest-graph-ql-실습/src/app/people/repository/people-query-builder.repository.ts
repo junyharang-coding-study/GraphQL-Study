@@ -17,35 +17,35 @@ export class PeopleQueryBuilderRepository implements PeopleRepository {
       .skip(peopleSearchRequestDto.getOffset());
 
     if (peopleSearchRequestDto.teamId) {
-      selectQueryBuilder.andWhere("people.team.teamId = :teamId", { teamId: peopleSearchRequestDto.teamId });
+      selectQueryBuilder.andWhere("people.team.teamId = :teamId", { teamId: `${peopleSearchRequestDto.teamId}` });
     }
 
     if (peopleSearchRequestDto.lastName) {
-      selectQueryBuilder.andWhere("people.lastName = :lastName", { lastName: peopleSearchRequestDto.lastName });
+      selectQueryBuilder.andWhere("people.lastName = :lastName", { lastName: `${peopleSearchRequestDto.lastName}` });
     }
 
     if (peopleSearchRequestDto.firstName) {
-      selectQueryBuilder.andWhere("people.firstName = :firstName", { firstName: peopleSearchRequestDto.firstName });
+      selectQueryBuilder.andWhere("people.firstName = :firstName", { firstName: `${peopleSearchRequestDto.firstName}` });
     }
 
     if (peopleSearchRequestDto.sex) {
-      selectQueryBuilder.andWhere("people.sex = :sex", { sex: peopleSearchRequestDto.sex });
+      selectQueryBuilder.andWhere("people.sex = :sex", { sex: `${peopleSearchRequestDto.sex}` });
     }
 
     if (peopleSearchRequestDto.bloodType) {
-      selectQueryBuilder.andWhere("people.bloodType = :bloodType", { bloodType: peopleSearchRequestDto.bloodType });
+      selectQueryBuilder.andWhere("people.bloodType = :bloodType", { bloodType: `${peopleSearchRequestDto.bloodType}` });
     }
 
     if (peopleSearchRequestDto.serveYears) {
-      selectQueryBuilder.andWhere("people.serveYears = :serveYears", { serveYears: peopleSearchRequestDto.serveYears });
+      selectQueryBuilder.andWhere("people.serveYears = :serveYears", { serveYears: `${peopleSearchRequestDto.serveYears}` });
     }
 
     if (peopleSearchRequestDto.role) {
-      selectQueryBuilder.andWhere("people.role = :role", { role: peopleSearchRequestDto.role });
+      selectQueryBuilder.andWhere("people.role = :role", { role: `${peopleSearchRequestDto.role}` });
     }
 
     if (peopleSearchRequestDto.hometown) {
-      selectQueryBuilder.andWhere("people.hometown = :hometown", { hometown: peopleSearchRequestDto.hometown });
+      selectQueryBuilder.andWhere("people.hometown = :hometown", { hometown: `${peopleSearchRequestDto.hometown}` });
     }
 
     if (peopleSearchRequestDto.orderBy === true) {

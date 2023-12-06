@@ -8,8 +8,8 @@ query findBygetPeopleListServeYears {
     serveYears: 1,
     # role: developer,
     # hometown: "",
-    # page: 1,
-    # perPageSize: 5,
+    pageNumber: 1,
+    perPageSize: 5,
     # orderBy: true,
   }) {
     statusCode,

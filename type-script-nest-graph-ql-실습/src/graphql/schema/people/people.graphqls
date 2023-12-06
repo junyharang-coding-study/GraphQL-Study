@@ -1,5 +1,5 @@
 input PeopleRequestDto {
-    teamId: Int!,
+    teamId: ID!,
     lastName: String!,
     firstName: String!,
     sex: Sex!,
@@ -10,7 +10,7 @@ input PeopleRequestDto {
 }
 
 input PeopleSearchRequestDto {
-    teamId: Int,
+    teamId: ID,
     lastName: String,
     firstName: String,
     sex: Sex,
@@ -18,13 +18,13 @@ input PeopleSearchRequestDto {
     serveYears: Int,
     role: Role,
     hometown: String,
-    pageNumber: Int,
-    perPageSize: Int,
+    pageNumber: Int!,
+    perPageSize: Int!,
     orderBy: Boolean
 }
 
 input PeopleUpdateRequestDto {
-    peopleId: Int!,
+    peopleId: ID!,
     teamId: Int,
     lastName: String,
     firstName: String,
@@ -36,7 +36,7 @@ input PeopleUpdateRequestDto {
 }
 
 type PeopleResponseDto {
-    peopleId: Int!,
+    peopleId: ID!,
     teamId: Int!,
     lastName: String!,
     firstName: String!,

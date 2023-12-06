@@ -8,8 +8,8 @@ query findBygetPeopleListHometownAndBooldType {
     # serveYears: 1,
     # role: developer,
     hometown: "California",
-    # page: 1,
-    # perPageSize: 5,
+    pageNumber: 1,
+    perPageSize: 5,
     # orderBy: true,
   }) {
     statusCode,

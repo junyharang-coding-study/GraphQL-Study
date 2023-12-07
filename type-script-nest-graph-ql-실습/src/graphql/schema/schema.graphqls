@@ -5,6 +5,14 @@ type Query {
         pageNumber: Int!,
         perPageSize: Int!,
         orderBy: Boolean): EquipmentListResponse!,
+
+    getEquipmentsAdv(
+        usedBy: String,
+        newOrUsed: String,
+        pageNumber: Int!,
+        perPageSize: Int!,
+        orderBy: Boolean): EquipmentListAdvResponse!,
+
     getEquipment(equipmentId: String!): FindByEquipmentResponse!,
 
     getPeopleList(peopleSearchRequestDto: PeopleSearchRequestDto): PeopleListResponse!,

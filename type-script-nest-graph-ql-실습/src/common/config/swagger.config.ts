@@ -11,7 +11,5 @@ export function swaggerConfig(app: INestApplication): void {
 
   const openAPIObject = SwaggerModule.createDocument(app, options);
 
-  console.log(`openAPIObject 값: ${JSON.stringify(openAPIObject)}`);
-
   SwaggerModule.setup("swagger-ui/index.html", app, openAPIObject);
 }

@@ -8,6 +8,7 @@ import { EquipmentEntity } from "../model/entities/equipment.entity";
 import { EquipmentUpdateRequestDto } from "../model/dto/request/equipment-update-request.dto";
 import { EquipmentService } from "./equipment-service.interface";
 import { EquipmentRepository } from "../repository/equipment-repository.interface";
+import { EquipmentAdvResponseDto } from "../model/dto/response/equipment-adv.response.dto";
 
 @Injectable()
 export class EquipmentImplService implements EquipmentService {
@@ -57,6 +58,30 @@ export class EquipmentImplService implements EquipmentService {
         result[0].map((equipment) => new EquipmentResponseDto(equipment)),
       ),
     );
+  }
+
+  async getEquipmentsAdv(
+    usedBy: string,
+    newOrUsed: string,
+    pageNumber: number,
+    perPageSize: number,
+    orderBy: boolean,
+  ): Promise<DefaultResponse<EquipmentAdvResponseDto>> {
+    const result = await this.equipmentRepository.dynamicQuerySearchAndPagingByDto(
+      EquipmentSearchRequestDto.toDto(usedBy, newOrUsed, pageNumber, perPageSize, orderBy),
+    );
+
+    if (result[0].length === 0) {
+      return DefaultResponse.response(HttpStatus.NOT_FOUND, "Data Not Found");
+    }
+
+    const equipmentAdvResponseDtos = result[0].map((equipment) => new EquipmentAdvResponseDto(equipment));
+
+    if (equipmentAdvResponseDtos === null) {
+      return DefaultResponse.response(HttpStatus.NOT_FOUND, "Data Not Found");
+    }
+
+    return DefaultResponse.responseWithPaginationAndData(HttpStatus.OK, "Success", new Page(result[0].length, result[1], equipmentAdvResponseDtos));
   }
 
   async getEquipment(equipmentId: string): Promise<DefaultResponse<EquipmentResponseDto>> {

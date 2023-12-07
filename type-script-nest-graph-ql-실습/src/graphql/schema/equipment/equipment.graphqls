@@ -5,6 +5,14 @@ input EquipmentRequestDto {
     newOrUsed: String!
 }
 
+type EquipmentsAdvDto {
+    equipmentId: ID!,
+    usedBy: String!,
+    count: Int!,
+    useRate: Float,
+    isNew: Boolean!
+}
+
 input EquipmentUpdateRequestDto {
     equipmentId: ID!,
     usedBy: String,
@@ -19,10 +27,25 @@ type EquipmentResponseDto {
     newOrUsed: String!
 }
 
+type EquipmentResponseAdvDto {
+    equipmentId: ID!,
+    usedBy: String!,
+    count: Int!,
+    newOrUsed: String!,
+    useRate: Float,
+    isNew: Boolean!
+}
+
 type EquipmentListResponse {
     statusCode: Int!,
     message: String!,
     pagination: EquipmentListPagination
+}
+
+type EquipmentListAdvResponse {
+    statusCode: Int!,
+    message: String!,
+    pagination: EquipmentListAdvPagination
 }
 
 type EquipmentListPagination {
@@ -30,6 +53,13 @@ type EquipmentListPagination {
     totalCount: Int!,
     totalPage: Int!
     data: [EquipmentResponseDto!]!
+}
+
+type EquipmentListAdvPagination {
+    perPageSize: Int!,
+    totalCount: Int!,
+    totalPage: Int!
+    data: [EquipmentResponseAdvDto!]!
 }
 
 type FindByEquipmentResponse {

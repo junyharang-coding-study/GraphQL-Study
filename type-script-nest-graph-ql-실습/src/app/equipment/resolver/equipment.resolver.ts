@@ -6,6 +6,7 @@ import { EquipmentRequestDto } from "../model/dto/request/equipment-request.dto"
 import { EquipmentEntity } from "../model/entities/equipment.entity";
 import { EquipmentUpdateRequestDto } from "../model/dto/request/equipment-update-request.dto";
 import { EquipmentService } from "../service/equipment-service.interface";
+import { EquipmentAdvResponseDto } from "../model/dto/response/equipment-adv.response.dto";
 
 @Resolver(() => EquipmentEntity)
 export class EquipmentResolver {
@@ -19,7 +20,7 @@ export class EquipmentResolver {
     return this.equipmentService.saveForEquipment(equipmentRequestDto);
   }
 
-  @Query(() => Promise<DefaultResponse<EquipmentResponseDto>>)
+  @Query(() => DefaultResponse<EquipmentResponseDto>)
   async getEquipmentList(
     @Args("usedBy", { type: () => String, nullable: true }) usedBy: string,
     @Args("newOrUsed", { type: () => String, nullable: true }) newOrUsed: string,
@@ -28,6 +29,17 @@ export class EquipmentResolver {
     @Args("orderBy", { type: () => Boolean, nullable: true }) orderBy: boolean,
   ): Promise<DefaultResponse<EquipmentResponseDto>> {
     return this.equipmentService.getEquipmentList(usedBy, newOrUsed, pageNumber, perPageSize, orderBy);
+  }
+
+  @Query(() => DefaultResponse<EquipmentAdvResponseDto>)
+  async getEquipmentsAdv(
+    @Args("usedBy", { type: () => String, nullable: true }) usedBy: string,
+    @Args("newOrUsed", { type: () => String, nullable: true }) newOrUsed: string,
+    @Args("pageNumber", { type: () => Int, nullable: true }) pageNumber: number,
+    @Args("perPageSize", { type: () => Int, nullable: true }) perPageSize: number,
+    @Args("orderBy", { type: () => Boolean, nullable: true }) orderBy: boolean,
+  ): Promise<DefaultResponse<EquipmentAdvResponseDto>> {
+    return this.equipmentService.getEquipmentsAdv(usedBy, newOrUsed, pageNumber, perPageSize, orderBy);
   }
 
   @Query(() => DefaultResponse<EquipmentResponseDto>)

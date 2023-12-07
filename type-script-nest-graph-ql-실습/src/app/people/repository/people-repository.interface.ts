@@ -5,4 +5,6 @@ export interface PeopleRepository {
   dynamicQuerySearchAndPagingByDto(peopleSearchRequestDto: PeopleSearchRequestDto): Promise<[PeopleEntity[], number]>;
 
   findOneJoinTeam(peopleId: number): Promise<PeopleEntity>;
+
+  findAllByTeamId(teamId: number): Promise<PeopleEntity[]>;
 }

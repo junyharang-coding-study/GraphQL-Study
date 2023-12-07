@@ -1,7 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { SupplyRepository } from "./supply-repository.interface";
 import { InjectRepository } from "@nestjs/typeorm";
-import { PeopleEntity } from "../../people/model/entities/people.entity";
 import { Repository } from "typeorm";
 import { SupplyEntity } from "../model/entities/supply.entity";
 import { SupplySearchRequestDto } from "../model/dto/request/supply-search-request.dto";
@@ -16,10 +15,6 @@ export class SupplyQueryBuilderRepository implements SupplyRepository {
       .leftJoinAndSelect("supply.team", "team")
       .take(supplySearchRequestDto.getLimit())
       .skip(supplySearchRequestDto.getOffset());
-
-    if (supplySearchRequestDto.supplyId) {
-      selectQueryBuilder.andWhere("supply.supplyId = :supplyId", { supplyId: `${supplySearchRequestDto.supplyId}` });
-    }
 
     if (supplySearchRequestDto.teamId) {
       selectQueryBuilder.andWhere("supply.team.teamId = :teamId", { teamId: `${supplySearchRequestDto.teamId}` });

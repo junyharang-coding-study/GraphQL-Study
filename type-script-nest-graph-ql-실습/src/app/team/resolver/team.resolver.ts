@@ -6,6 +6,7 @@ import { DefaultResponse } from "../../common/constant/default.response";
 import { TeamResponseDto } from "../model/dto/response/team-response.dto";
 import { TeamRequestDto } from "../model/dto/request/team-request.dto";
 import { TeamUpdateRequestDto } from "../model/dto/request/team-update.request.dto";
+import { TeamAndMemberResponseDto } from "../model/dto/response/team-and-member-response.dto";
 
 @Resolver(() => TeamEntity)
 export class TeamResolver {
@@ -35,6 +36,11 @@ export class TeamResolver {
   @Query(() => DefaultResponse<TeamResponseDto>)
   async getTeam(@Args("teamId", { type: () => String }) teamId: number): Promise<DefaultResponse<TeamResponseDto>> {
     return this.teamService.getTeam(teamId);
+  }
+
+  @Query(() => DefaultResponse<TeamAndMemberResponseDto>)
+  async getTeamByTeamId(@Args("teamId", { type: () => String }) teamId: number): Promise<DefaultResponse<TeamAndMemberResponseDto>> {
+    return this.teamService.getTeamByTeamId(teamId);
   }
 
   @UsePipes(new ValidationPipe({ transform: true }))

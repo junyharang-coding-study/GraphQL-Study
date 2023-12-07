@@ -39,6 +39,17 @@ type TeamResponseDto {
     project: String,
 }
 
+type TeamAndPeopleResponseDto {
+    teamId: ID!
+    manager: String!,
+    office: String!,
+    extensionNumber: String!,
+    mascot: String,
+    cleaningDuty: String!,
+    project: String,
+    members: [PeopleResponseDto!]!,
+}
+
 type TeamListResponse {
     statusCode: Int!,
     message: String!,
@@ -56,6 +67,12 @@ type FindByTeamResponse {
     statusCode: Int!,
     message: String!,
     data: TeamResponseDto,
+}
+
+type FindByTeamAndMemberResponse {
+    statusCode: Int!,
+    message: String!,
+    data: TeamAndPeopleResponseDto,
 }
 
 type InputTeamResponse {

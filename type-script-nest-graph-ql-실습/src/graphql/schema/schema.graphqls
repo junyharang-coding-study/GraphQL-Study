@@ -35,6 +35,7 @@ type Query {
         orderBy: Boolean
     ): TeamListResponse!,
     getTeam(teamId: Int!): FindByTeamResponse!,
+    getTeamByTeamId(teamId: Int!): FindByTeamAndMemberResponse!,
 
     getSupplyList(
         teamId: Int,

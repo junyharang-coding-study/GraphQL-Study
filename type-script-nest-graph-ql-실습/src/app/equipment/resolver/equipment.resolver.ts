@@ -19,7 +19,7 @@ export class EquipmentResolver {
     return this.equipmentService.saveForEquipment(equipmentRequestDto);
   }
 
-  @Query(() => DefaultResponse<Promise<[EquipmentEntity[], number]>>)
+  @Query(() => Promise<DefaultResponse<EquipmentResponseDto>>)
   async getEquipmentList(
     @Args("usedBy", { type: () => String, nullable: true }) usedBy: string,
     @Args("newOrUsed", { type: () => String, nullable: true }) newOrUsed: string,

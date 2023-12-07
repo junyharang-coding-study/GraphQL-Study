@@ -2,13 +2,16 @@ import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
 import * as process from "process";
 import { ValidationPipe } from "@nestjs/common";
+import { swaggerConfig } from "./common/config/swagger.config";
 
 declare const module: any;
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  swaggerConfig(app);
   const port = process.env.PORT || 8081;
   app.useGlobalPipes(new ValidationPipe({ transform: true })); // 글로벌 스코프 적용
+
   await app.listen(port);
 
   if (module.hot) {

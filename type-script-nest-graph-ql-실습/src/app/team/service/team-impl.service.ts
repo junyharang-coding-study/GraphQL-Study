@@ -10,14 +10,16 @@ import { TeamRequestDto } from "../model/dto/request/team-request.dto";
 import { TeamUpdateRequestDto } from "../model/dto/request/team-update.request.dto";
 import { Page } from "../../common/constant/page";
 import { TeamSearchRequestDto } from "../model/dto/request/team-search-request.dto";
-import { PeopleEntity } from "../../people/model/entities/people.entity";
-import { SupplyEntity } from "../../supply/model/entities/supply.entity";
+import { TeamAndMemberResponseDto } from "../model/dto/response/team-and-member-response.dto";
+import { PeopleRepository } from "../../people/repository/people-repository.interface";
+import { PeopleResponseDto } from "../../people/model/dto/response/people.response.dto";
 
 @Injectable()
 export class TeamImplService implements TeamService {
   constructor(
     @InjectRepository(TeamEntity) private readonly teamRepository: Repository<TeamEntity>,
     @Inject("TeamQueryBuilderRepository") private readonly teamQueryBuilderRepository: TeamRepository,
+    @Inject("PeopleQueryBuilderRepository") private readonly peopleQueryBuilderRepository: PeopleRepository,
   ) {}
 
   async saveTeam(teamRequestDto: TeamRequestDto): Promise<DefaultResponse<number>> {
@@ -76,6 +78,21 @@ export class TeamImplService implements TeamService {
     }
 
     return DefaultResponse.responseWithData(HttpStatus.OK, "OK", new TeamResponseDto(team));
+  }
+
+  async getTeamByTeamId(teamId: number): Promise<DefaultResponse<TeamAndMemberResponseDto>> {
+    if (teamId === null) {
+      return DefaultResponse.response(HttpStatus.BAD_REQUEST, "Bad Request");
+    }
+
+    const team = await this.teamRepository.findOne({ where: { teamId } });
+
+    const peopleResponseDto = (await this.peopleQueryBuilderRepository.findAllByTeamId(teamId)).map((people) => new PeopleResponseDto(people));
+
+    if (team !== null && peopleResponseDto !== null) {
+      return DefaultResponse.responseWithData(HttpStatus.OK, "Success", new TeamAndMemberResponseDto(team, peopleResponseDto));
+    }
+    return DefaultResponse.response(HttpStatus.INTERNAL_SERVER_ERROR, "Internal Server Error");
   }
 
   async updateTeam(teamUpdateRequestDto: TeamUpdateRequestDto): Promise<DefaultResponse<number>> {

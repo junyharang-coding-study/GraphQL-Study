@@ -62,4 +62,12 @@ export class PeopleQueryBuilderRepository implements PeopleRepository {
       .where("people.peopleId = :peopleId", { peopleId: peopleId })
       .getOne();
   }
+
+  findAllByTeamId(teamId: number): Promise<PeopleEntity[]> {
+    return this.peopleRepository
+      .createQueryBuilder("people")
+      .leftJoinAndSelect("people.team", "team")
+      .where("people.team.teamId = :teamId", { teamId: `${teamId}` })
+      .getMany();
+  }
 }

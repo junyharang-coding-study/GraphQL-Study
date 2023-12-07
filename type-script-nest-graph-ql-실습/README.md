@@ -100,6 +100,8 @@ Just you write this command in the command line.
 ✅ [GraphQL과 Apollo 열두번째 이야기 - TypeScript + Nest.js에서 GraphQL 사용해 보기 - 실습 환경 구성](https://junyharang.tistory.com/524)
 <br><br>
 ✅ [GraphQL과 Apollo 열세번째 이야기 - TypeScript + Nest.js에서 GraphQL 사용해 보기 - 실습 환경 테스트](https://junyharang.tistory.com/525)
+<br><br>
+✅ [GraphQL과 Apollo 열네번째 이야기 - TypeScript + Nest.js에서 GraphQL 사용해 보기 - 실습 해보기](https://junyharang.tistory.com/527)
 <br><br><br>
 
 #### 🤔 내가 만난 문제

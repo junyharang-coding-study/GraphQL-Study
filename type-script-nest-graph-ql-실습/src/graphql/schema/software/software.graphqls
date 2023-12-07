@@ -21,11 +21,11 @@ input SoftwareUpdateRequestDto {
     description: String
 }
 
-type SoftwareResponseDto {
+type SoftwareResponseDto implements Tool {
     softwareId: ID!,
-    usedBy: String!,
+    usedBy: Role!,
     developedBy: String!,
-    description: String!
+    description: String
 }
 
 type SoftwareListResponse {

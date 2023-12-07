@@ -20,16 +20,16 @@ input EquipmentUpdateRequestDto {
     newOrUsed: String
 }
 
-type EquipmentResponseDto {
+type EquipmentResponseDto implements Tool {
     equipmentId: ID!,
-    usedBy: String!,
+    usedBy: Role!,
     count: Int!,
     newOrUsed: String!
 }
 
-type EquipmentResponseAdvDto {
+type EquipmentResponseAdvDto implements Tool  {
     equipmentId: ID!,
-    usedBy: String!,
+    usedBy: Role!,
     count: Int!,
     newOrUsed: String!,
     useRate: Float,

@@ -1,0 +1,21 @@
+type RoleAndMebmersAndSoftwaresResponseDto {
+    roleId: String!,
+    requirement: String!,
+    members: [Members!]!
+    equipments: [equipments!]!,
+    softwares: [softwares!]!
+}
+
+type Members {
+    peopleId: ID!,
+    lastName: String!,
+    serveYears: Int!,
+}
+
+type equipments {
+    equipmentId: ID!,
+}
+
+type softwares {
+    softwareId: ID!
+}

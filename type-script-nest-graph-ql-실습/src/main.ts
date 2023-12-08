@@ -11,7 +11,13 @@ async function bootstrap() {
   swaggerConfig(app);
   const port = process.env.PORT || 8081;
   app.useGlobalPipes(new ValidationPipe({ transform: true })); // 글로벌 스코프 적용
-
+  app.enableCors({
+    // wrong!  in my case, anyway
+    origin: "http://localhost:3000",
+    methods: "GET,POST,",
+    allowedHeaders: "Content-Type, Accept",
+    credentials: true,
+  });
   await app.listen(port);
 
   if (module.hot) {

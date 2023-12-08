@@ -19,7 +19,9 @@ type Query {
     getPeople(peopleId: Int!): FindByPeopleResponse!,
 
     getRoleList(roleSearchRequestDto: RoleSearchRequestDto): RoleListResponse!,
+    getRoles: RoleListResponse!,
     getRole(roleId: String!): FindByRoleResponse!,
+    getRoleAndMembersAndEquipmentAndSoftware(roleId: String!): FindByMembersAndEquipmentsAndSoftwaresResponse!,
 
     getSoftwareList(
         usedBy: String,

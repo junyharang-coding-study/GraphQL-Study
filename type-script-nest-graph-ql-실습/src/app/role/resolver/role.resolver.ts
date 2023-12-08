@@ -7,6 +7,8 @@ import { RoleRequestDto } from "../model/dto/request/role-request.dto";
 import { RoleSearchRequestDto } from "../model/dto/request/role-search-request.dto";
 import { RoleResponseDto } from "../model/dto/response/role-response.dto";
 import { RoleUpdateRequestDto } from "../model/dto/request/role-update-request.dto";
+import { string } from "joi";
+import { RoleAndMebmersAndSoftwaresResponseDto } from "../model/dto/response/role-members-equipment.resonpose.dto";
 
 @Resolver(() => RoleEntity)
 export class RoleResolver {
@@ -25,9 +27,21 @@ export class RoleResolver {
     return this.roleService.getRoleList(roleSearchRequestDto);
   }
 
+  @Query(() => DefaultResponse<Promise<[RoleEntity[], number]>>)
+  async getRoles(): Promise<DefaultResponse<RoleResponseDto>> {
+    return this.roleService.getRoles();
+  }
+
   @Query(() => DefaultResponse<RoleResponseDto>)
   async getRole(@Args("roleId", { type: () => String }) roleId: string): Promise<DefaultResponse<RoleResponseDto>> {
     return this.roleService.getRole(roleId);
+  }
+
+  @Query(() => DefaultResponse<RoleAndMebmersAndSoftwaresResponseDto>)
+  async getRoleAndMembersAndEquipmentAndSoftware(
+    @Args("roleId", { type: () => String }) roleId: string,
+  ): Promise<DefaultResponse<RoleAndMebmersAndSoftwaresResponseDto>> {
+    return this.roleService.getRoleAndMembersAndEquipmentAndSoftware(roleId);
   }
 
   @UsePipes(new ValidationPipe({ transform: true }))

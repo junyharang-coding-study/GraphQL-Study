@@ -43,6 +43,12 @@ type FindByRoleResponse {
     data: RoleResponseDto,
 }
 
+type FindByMembersAndEquipmentsAndSoftwaresResponse {
+    statusCode: Int!,
+    message: String!,
+    data: RoleAndMebmersAndSoftwaresResponseDto,
+}
+
 type InputRoleResponse {
     statusCode: Int!,
     message: String!,

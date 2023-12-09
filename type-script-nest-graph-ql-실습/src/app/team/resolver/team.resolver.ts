@@ -34,12 +34,12 @@ export class TeamResolver {
   }
 
   @Query(() => DefaultResponse<TeamResponseDto>)
-  async getTeam(@Args("teamId", { type: () => String }) teamId: number): Promise<DefaultResponse<TeamResponseDto>> {
+  async getTeam(@Args("teamId", { type: () => Number }) teamId: number): Promise<DefaultResponse<TeamResponseDto>> {
     return this.teamService.getTeam(teamId);
   }
 
-  @Query(() => DefaultResponse<TeamAndMemberResponseDto>)
-  async getTeamByTeamId(@Args("teamId", { type: () => String }) teamId: number): Promise<DefaultResponse<TeamAndMemberResponseDto>> {
+  @Query(() => DefaultResponse<TeamAndMemberResponseDto[]>)
+  async getTeamByTeamId(@Args("teamId", { type: () => Number }) teamId?: number): Promise<DefaultResponse<TeamAndMemberResponseDto[]>> {
     return this.teamService.getTeamByTeamId(teamId);
   }
 

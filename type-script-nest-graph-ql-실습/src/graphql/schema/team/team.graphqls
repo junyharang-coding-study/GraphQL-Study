@@ -56,6 +56,12 @@ type TeamListResponse {
     pagination: TeamListPagination
 }
 
+type TeamsResponse {
+    statusCode: Int!,
+    message: String!,
+    data: [TeamResponseDto!]!
+}
+
 type TeamListPagination {
     perPageSize: Int!,
     totalCount: Int!,
@@ -72,7 +78,7 @@ type FindByTeamResponse {
 type FindByTeamAndMemberResponse {
     statusCode: Int!,
     message: String!,
-    data: TeamAndPeopleResponseDto,
+    data: [TeamAndPeopleResponseDto!]!,
 }
 
 type InputTeamResponse {

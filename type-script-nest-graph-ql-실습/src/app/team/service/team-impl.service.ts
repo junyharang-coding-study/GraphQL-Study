@@ -19,7 +19,6 @@ import { PeopleEntity } from "../../people/model/entities/people.entity";
 export class TeamImplService implements TeamService {
   constructor(
     @InjectRepository(TeamEntity) private readonly teamRepository: Repository<TeamEntity>,
-    @InjectRepository(PeopleEntity) private readonly peopleRepository: Repository<PeopleEntity>,
     @Inject("TeamQueryBuilderRepository") private readonly teamQueryBuilderRepository: TeamRepository,
     @Inject("PeopleQueryBuilderRepository") private readonly peopleQueryBuilderRepository: PeopleRepository,
   ) {}

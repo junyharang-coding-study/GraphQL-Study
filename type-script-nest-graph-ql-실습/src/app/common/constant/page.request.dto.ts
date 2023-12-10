@@ -1,22 +1,15 @@
 import { Field, InputType } from "@nestjs/graphql";
-import { IsBoolean, IsInt, IsNotEmpty, Min } from "class-validator";
 
 @InputType()
 export abstract class PageRequestDto {
-  @IsNotEmpty()
-  @IsInt()
-  @Min(1)
   @Field(() => Number)
-  pageNumber: number;
+  pageNumber?: number;
 
-  @IsNotEmpty()
-  @IsInt()
   @Field(() => Number)
-  perPageSize: number;
+  perPageSize?: number;
 
-  @IsBoolean()
   @Field(() => Boolean)
-  orderBy: boolean;
+  orderBy?: boolean;
 
   getOffset(): number {
     return (this.pageNumber - 1) * this.perPageSize;

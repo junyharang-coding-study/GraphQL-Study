@@ -11,7 +11,6 @@ import { SupplyUpdateRequestDto } from "../model/dto/request/supply-update-reque
 import { Page } from "../../common/constant/page";
 import { SupplyRepository } from "../repository/supply-repository.interface";
 import { TeamEntity } from "../../team/model/entities/team.entity";
-import { SoftwareSearchRequestDto } from "../../software/model/dto/request/software-search-request.dto";
 
 @Injectable()
 export class SupplyServiceImpl implements SupplyService {

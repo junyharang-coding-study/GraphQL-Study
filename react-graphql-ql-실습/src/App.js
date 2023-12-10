@@ -5,7 +5,6 @@ import {ApolloClient, InMemoryCache} from "@apollo/client";
 
 import Roles from './components/roles'
 import Teams from './components/teams'
-import People from './components/people'
 
 const apolloClient = new ApolloClient({
     uri: "http://localhost:8081/graphql",
@@ -19,12 +18,11 @@ function App() {
     let mainComp = {
         Roles: (<Roles/>),
         Teams: (<Teams/>),
-        People: (<People/>),
     }
 
     function NavMenus() {
         return [
-            'Roles', 'Teams', 'People'
+            'Roles', 'Teams'
         ].map((_menu, key) => {
             return (
                 <li key={key} className={menu === _menu ? 'on' : ''}

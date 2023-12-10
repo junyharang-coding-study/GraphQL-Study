@@ -42,6 +42,12 @@ type EquipmentListResponse {
     pagination: EquipmentListPagination
 }
 
+type EquipmentUnionResponse {
+    statusCode: Int!,
+    message: String!,
+    data: [EquipmentResponseDto!]!
+}
+
 type EquipmentListAdvResponse {
     statusCode: Int!,
     message: String!,

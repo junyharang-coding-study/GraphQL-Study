@@ -20,7 +20,7 @@ export class PeopleResolver {
 
   @Query(() => DefaultResponse<Promise<[PeopleEntity[], number]>>)
   async getPeopleList(
-    @Args("peopleSearchRequestDto", { type: () => PeopleSearchRequestDto }) peopleSearchRequestDto: PeopleSearchRequestDto,
+    @Args("peopleSearchRequestDto", { type: () => PeopleSearchRequestDto }) peopleSearchRequestDto?: PeopleSearchRequestDto,
   ): Promise<DefaultResponse<PeopleResponseDto>> {
     return this.peopleService.getPeopleList(peopleSearchRequestDto);
   }

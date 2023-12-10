@@ -10,11 +10,15 @@ export class PeopleQueryBuilderRepository implements PeopleRepository {
   constructor(@InjectRepository(PeopleEntity) private readonly peopleRepository: Repository<PeopleEntity>) {}
 
   async dynamicQuerySearchAndPagingByDto(peopleSearchRequestDto: PeopleSearchRequestDto): Promise<[PeopleEntity[], number]> {
-    const selectQueryBuilder = this.peopleRepository
-      .createQueryBuilder("people")
-      .leftJoinAndSelect("people.team", "team")
-      .take(peopleSearchRequestDto.getLimit())
-      .skip(peopleSearchRequestDto.getOffset());
+    const selectQueryBuilder = this.peopleRepository.createQueryBuilder("people").leftJoinAndSelect("people.team", "team");
+
+    if (peopleSearchRequestDto.getLimit() !== null && peopleSearchRequestDto.getLimit() !== undefined) {
+      selectQueryBuilder.take(peopleSearchRequestDto.getLimit());
+    }
+
+    if (peopleSearchRequestDto.getOffset() !== null && peopleSearchRequestDto.getLimit() !== undefined && !isNaN(peopleSearchRequestDto.getLimit())) {
+      selectQueryBuilder.skip(peopleSearchRequestDto.getOffset());
+    }
 
     if (peopleSearchRequestDto.teamId) {
       selectQueryBuilder.andWhere("people.team.teamId = :teamId", { teamId: `${peopleSearchRequestDto.teamId}` });

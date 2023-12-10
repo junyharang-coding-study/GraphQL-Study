@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn, RelationId, Unique } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, Unique } from "typeorm";
 import { Sex } from "../../../../common/enum/people.sex.enum";
 import { Role } from "../../../../common/enum/people.role.enum";
 import { BloodType } from "../../../../common/enum/people.blood-type.enum";

@@ -23,7 +23,13 @@ type SupplyResponseDto {
 type SupplyListResponse {
     statusCode: Int!,
     message: String!,
-    pagination: SupplyListPagination
+    pagination: [SupplyListPagination!]!
+}
+
+type SupplyUnionResponse {
+    statusCode: Int!,
+    message: String!,
+    data: [SupplyResponseDto!]!
 }
 
 type SupplyListPagination {

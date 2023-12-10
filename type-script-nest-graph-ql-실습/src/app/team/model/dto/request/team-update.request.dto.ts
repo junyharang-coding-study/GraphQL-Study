@@ -1,13 +1,12 @@
 import { Field, InputType } from "@nestjs/graphql";
-import { IsInt, IsNotEmpty, IsString } from "class-validator";
+import { IsString } from "class-validator";
 import { TeamEntity } from "../../entities/team.entity";
 
 @InputType()
 export class TeamUpdateRequestDto {
-  @IsNotEmpty()
-  @IsInt()
-  @Field(() => Number)
-  teamId: number;
+  @IsString()
+  @Field(() => String)
+  manager: string;
 
   @IsString()
   @Field(() => String)
@@ -31,6 +30,7 @@ export class TeamUpdateRequestDto {
 
   toEntity(teamUpdateRequestDto: TeamUpdateRequestDto): TeamEntity {
     const team = new TeamEntity();
+    team.manager = teamUpdateRequestDto.manager;
     team.office = teamUpdateRequestDto.office;
     team.extensionNumber = teamUpdateRequestDto.extensionNumber;
     team.mascot = teamUpdateRequestDto.mascot;

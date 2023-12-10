@@ -21,9 +21,9 @@ export interface TeamService {
 
   getTeam(teamId: number): Promise<DefaultResponse<TeamResponseDto>>;
 
-  getTeamByTeamId(teamId: number): Promise<DefaultResponse<TeamAndMemberResponseDto[]>>;
+  getTeamAndMembersByTeamIdOrNothing(teamId: number): Promise<DefaultResponse<TeamAndMemberResponseDto[]>>;
 
-  updateTeam(teamUpdateRequestDto: TeamUpdateRequestDto): Promise<DefaultResponse<number>>;
+  updateTeam(teamId: number, teamUpdateRequestDto: TeamUpdateRequestDto): Promise<DefaultResponse<number>>;
 
   deleteTeam(teamId: number): Promise<DefaultResponse<number>>;
 }

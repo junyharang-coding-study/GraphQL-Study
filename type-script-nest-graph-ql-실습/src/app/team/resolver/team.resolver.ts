@@ -1,4 +1,4 @@
-import { Args, Int, Mutation, Query, Resolver } from "@nestjs/graphql";
+import { Args, ID, Int, Mutation, Query, Resolver } from "@nestjs/graphql";
 import { TeamEntity } from "../model/entities/team.entity";
 import { Body, Inject, UsePipes, ValidationPipe } from "@nestjs/common";
 import { TeamService } from "../service/team-service.interface";
@@ -39,16 +39,19 @@ export class TeamResolver {
   }
 
   @Query(() => DefaultResponse<TeamAndMemberResponseDto[]>)
-  async getTeamByTeamId(@Args("teamId", { type: () => Number }) teamId?: number): Promise<DefaultResponse<TeamAndMemberResponseDto[]>> {
-    return this.teamService.getTeamByTeamId(teamId);
+  async getTeamAndMembersByTeamIdOrNothing(
+    @Args("teamId", { type: () => ID }) teamId?: number,
+  ): Promise<DefaultResponse<TeamAndMemberResponseDto[]>> {
+    return this.teamService.getTeamAndMembersByTeamIdOrNothing(teamId);
   }
 
   @UsePipes(new ValidationPipe({ transform: true }))
   @Mutation(() => DefaultResponse<string>)
   async updateTeam(
+    @Args("teamId", { type: () => ID }) teamId: number,
     @Args("input", { type: () => TeamUpdateRequestDto }) @Body() teamUpdateRequestDto: TeamUpdateRequestDto,
   ): Promise<DefaultResponse<number>> {
-    return this.teamService.updateTeam(teamUpdateRequestDto);
+    return this.teamService.updateTeam(teamId, teamUpdateRequestDto);
   }
 
   @Mutation(() => Promise<DefaultResponse<string>>)

@@ -12,7 +12,7 @@ export class TeamRestApiController {
   @ApiOperation({ summary: "Team과 People 정보 상세 조회", description: "Team과 People 정보 상세 조회 API Router" })
   @ApiCreatedResponse({ description: "Team과 People 정보 상세 조회 성공", type: DefaultResponse<TeamAndMemberResponseDto> })
   @Get("/team/:teamId")
-  async getTeamByTeamId(@Param("teamId") teamId: number): Promise<DefaultResponse<TeamAndMemberResponseDto[]>> {
-    return this.teamService.getTeamByTeamId(teamId);
+  async getTeamAndMembersByTeamIdOrNothing(@Param("teamId") teamId?: number): Promise<DefaultResponse<TeamAndMemberResponseDto[]>> {
+    return this.teamService.getTeamAndMembersByTeamIdOrNothing(teamId);
   }
 }

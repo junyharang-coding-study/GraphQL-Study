@@ -81,58 +81,17 @@ export class TeamImplService implements TeamService {
     return DefaultResponse.responseWithData(HttpStatus.OK, "OK", new TeamResponseDto(team));
   }
 
-  async getTeamByTeamId(teamId: number): Promise<DefaultResponse<TeamAndMemberResponseDto[]>> {
-    try {
-      const result: TeamAndMemberResponseDto[] = [];
-      let memberArray: PeopleEntity[] = [];
-      let teamsAndMembersResponseDtoByNon: TeamAndMemberResponseDto;
+  async getTeamAndMembersByTeamIdOrNothing(teamId: number): Promise<DefaultResponse<TeamAndMemberResponseDto[]>> {
+    const result: TeamAndMemberResponseDto[] = [];
 
-      if (teamId === null || teamId === undefined) {
-        const teams = await this.teamRepository.find();
-
-        if (teams === null) {
-          return DefaultResponse.response(HttpStatus.NOT_FOUND, "Data Not Found");
-        }
-
-        for (const team of teams) {
-          memberArray = await this.peopleQueryBuilderRepository.findAllByTeamId(team.teamId);
-
-          if (memberArray === null) {
-            return DefaultResponse.response(HttpStatus.NOT_FOUND, "Data Not Found");
-          }
-
-          const members = memberArray.map((people) => new PeopleResponseDto(people));
-
-          teamsAndMembersResponseDtoByNon = new TeamAndMemberResponseDto(team, members);
-          result.push(teamsAndMembersResponseDtoByNon);
-        }
-
-        return DefaultResponse.responseWithData(HttpStatus.OK, "Success", result);
-      }
-
-      const teams = await this.teamRepository.findAndCount({ where: { teamId } });
-
-      const peopleResponseDto = (await this.peopleQueryBuilderRepository.findAllByTeamId(teamId)).map((people) => new PeopleResponseDto(people));
-
-      let teamsAndMembersResponseDtoByTeamId: TeamAndMemberResponseDto;
-
-      if (teams !== null && peopleResponseDto !== null) {
-        for (const team of teams[0]) {
-          teamsAndMembersResponseDtoByTeamId = new TeamAndMemberResponseDto(team, peopleResponseDto);
-          result.push(teamsAndMembersResponseDtoByTeamId);
-        }
-        return DefaultResponse.responseWithData(HttpStatus.OK, "Success", result);
-      }
-      return DefaultResponse.response(HttpStatus.INTERNAL_SERVER_ERROR, "Internal Server Error");
-    } catch (error) {
-      console.log(error);
-      return DefaultResponse.response(HttpStatus.INTERNAL_SERVER_ERROR, "Internal Server Error");
+    if (teamId === null || teamId === undefined) {
+      return this.getTeamAndMembers(result);
     }
+
+    return this.getTeamAndMembersByTeamId(result, teamId);
   }
 
-  async updateTeam(teamUpdateRequestDto: TeamUpdateRequestDto): Promise<DefaultResponse<number>> {
-    const teamId = teamUpdateRequestDto.teamId;
-
+  async updateTeam(teamId: number, teamUpdateRequestDto: TeamUpdateRequestDto): Promise<DefaultResponse<number>> {
     if (teamId === null) {
       return DefaultResponse.response(HttpStatus.BAD_REQUEST, "Bad Request");
     }
@@ -164,5 +123,48 @@ export class TeamImplService implements TeamService {
     }
 
     return DefaultResponse.responseWithData(HttpStatus.OK, "OK", teamId);
+  }
+
+  private async getTeamAndMembers(result: TeamAndMemberResponseDto[]): Promise<DefaultResponse<TeamAndMemberResponseDto[]>> {
+    let memberArray: PeopleEntity[] = [];
+    let teamsAndMembersResponseDtoByNon: TeamAndMemberResponseDto;
+
+    const teams = await this.teamRepository.find();
+
+    if (teams === null) {
+      return DefaultResponse.response(HttpStatus.NOT_FOUND, "Data Not Found");
+    }
+
+    for (const team of teams) {
+      memberArray = await this.peopleQueryBuilderRepository.findAllByTeamId(team.teamId);
+
+      if (memberArray === null) {
+        return DefaultResponse.response(HttpStatus.NOT_FOUND, "Data Not Found");
+      }
+
+      const members = memberArray.map((people) => new PeopleResponseDto(people));
+
+      teamsAndMembersResponseDtoByNon = new TeamAndMemberResponseDto(team, members);
+      result.push(teamsAndMembersResponseDtoByNon);
+    }
+
+    return DefaultResponse.responseWithData(HttpStatus.OK, "Success", result);
+  }
+
+  private async getTeamAndMembersByTeamId(result: TeamAndMemberResponseDto[], teamId: number): Promise<DefaultResponse<TeamAndMemberResponseDto[]>> {
+    let teamsAndMembersResponseDtoByTeamId: TeamAndMemberResponseDto;
+
+    const teams = await this.teamRepository.findAndCount({ where: { teamId } });
+
+    const peopleResponseDto = (await this.peopleQueryBuilderRepository.findAllByTeamId(teamId)).map((people) => new PeopleResponseDto(people));
+
+    if (teams !== null && peopleResponseDto !== null) {
+      for (const team of teams[0]) {
+        teamsAndMembersResponseDtoByTeamId = new TeamAndMemberResponseDto(team, peopleResponseDto);
+        result.push(teamsAndMembersResponseDtoByTeamId);
+      }
+      return DefaultResponse.responseWithData(HttpStatus.OK, "Success", result);
+    }
+    return DefaultResponse.response(HttpStatus.INTERNAL_SERVER_ERROR, "Internal Server Error");
   }
 }

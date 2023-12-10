@@ -44,8 +44,8 @@ type Query {
         perPageSize: Int!,
         orderBy: Boolean
     ): TeamListResponse!,
-    getTeam(teamId: Int!): FindByTeamResponse!,
-    getTeamByTeamId(teamId: Int): FindByTeamAndMemberResponse!,
+    getTeam(teamId: ID!): FindByTeamResponse!,
+    getTeamAndMembersByTeamIdOrNothing(teamId: Int): FindByTeamAndMemberResponse!,
 
     getSupplyList(
         teamId: Int,
@@ -74,8 +74,8 @@ type Mutation {
     deleteSoftware(softwareId: String!): InputSoftwareResponse!,
 
     saveTeam(input: TeamRequestDto!): InputTeamResponse!,
-    updateTeam(input: TeamUpdateRequestDto): InputTeamResponse!,
-    deleteTeam(teamId: Int!): InputTeamResponse!,
+    updateTeam(teamId: ID!, input: TeamUpdateRequestDto): InputTeamResponse!,
+    deleteTeam(teamId: ID!): InputTeamResponse!,
 
     saveSupply(input: SupplyRequestDto!): InputSupplyResponse!,
     updateSupply(input: SupplyUpdateRequestDto): InputSupplyResponse!,

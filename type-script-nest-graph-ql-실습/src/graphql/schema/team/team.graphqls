@@ -20,7 +20,6 @@ input TeamSearchRequestDto {
 }
 
 input TeamUpdateRequestDto {
-    teamId: Int!
     manager: String,
     office: String,
     extensionNumber: String,

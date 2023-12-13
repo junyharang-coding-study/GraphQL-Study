@@ -3,9 +3,3 @@
   "schemaPath": "src/main/resources/graphql/*.graphqls",
   "extensions": {}
 }
-
-{
-  "name": "Graphql-Example",
-  "schemaPath": "src/main/resources/graphql/*.graphqls",
-  "extensions": {}
-}

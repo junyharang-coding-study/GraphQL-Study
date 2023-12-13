@@ -31,7 +31,7 @@ I hope it helps you study 😀 <br>
 
 <br><br>
 
-[![img.png](img.png)](https://link.coupang.com/a/bjcgMF) <br><br>
+[![img_2.png](img_2.png)](https://link.coupang.com/a/bjcgMF) <br><br>
 
 ## Project Code 정리
 
@@ -83,7 +83,7 @@ I hope it helps you study 😀 <br>
 
 ---
 
-[![img_1.png](img_1.png)](https://link.coupang.com/a/bjcy54) <br><br>
+[![img.png](img.png)](https://link.coupang.com/a/bjcy54) <br><br>
 
 해당 소스코드 안에는 Graphiql에서 테스트할 수 있는 Scala 문법을 미리 정리해 두었어요.
 `src/main/resources/graphql/query` 에 위치해 있고, 여기에 있는 문법들을 [Graphiql](http://localhost:8080/graphiql?path=/graphql)에서 사용하시면 바로바로 테스트 할 수 있어요!

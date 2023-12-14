@@ -1,0 +1,60 @@
+input EquipmentCreateRequestDto {
+    equipmentId: String!,
+    usedBy: String!,
+    count: Int!,
+    newOrUsed: String!
+}
+
+input EquipmentRequestDto {
+    equipmentId: String,
+    usedBy: String,
+    count: Int,
+    newOrUsed: String
+}
+
+input EquipmentUpdateRequestDto {
+    equipmentId: String,
+    usedBy: String,
+    count: Int,
+    newOrUsed: String
+}
+
+input EquipmentSearchRequestDto {
+    usedBy: String,
+    newOrUsed: String
+}
+
+type EquipmentResponse {
+    statusCode: Int!,
+    message: String!,
+    data: [EquipmentResponseDto!]!
+}
+
+type EquipmentResponseDto implements Tool {
+    equipmentId: ID!,
+    usedBy: Role!,
+    count: Int!,
+    newOrUsed: String!
+}
+
+#type EquipmentsAdvDto implements Tool {
+#    equipmentId: ID!,
+#    usedBy: Role!,
+#    count: Int!,
+#    useRate: Float,
+#    isNew: Boolean!
+#}
+
+type DefaultListEquipmentResponse {
+    statusCode: Int!,
+    message: String!,
+    data: [EquipmentResponseDto!]!,
+    pagination: Pagination
+}
+
+#type DefaultEquipmentsAdvResponse {
+#    statusCode: Int!,
+#    message: String!,
+#    data: [EquipmentsAdvDto!]!,
+#    pagination: String
+#}

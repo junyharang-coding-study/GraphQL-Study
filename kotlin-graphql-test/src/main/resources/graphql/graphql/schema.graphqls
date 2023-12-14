@@ -1,0 +1,143 @@
+type DefaultListResponse {
+    statusCode: Int!,
+    message: String!,
+    data: [String!]!,
+    pagination: String
+}
+
+type DefaultResponse {
+    statusCode: Int!,
+    message: String!,
+    data: String
+}
+
+type Pagination {
+    totalPages: Int!,
+    totalElements: Int!,
+    page: Int!,
+    currentElements: Int!
+}
+
+input PagingRequestDto {
+    currentPage: Int,
+    perPageSize: Int,
+}
+
+input PeopleRequestDto {
+    teamId: ID!,
+    lastName: String!,
+    firstName: String!,
+    sex: Sex!,
+    bloodType: BloodType!,
+    serveYears: Int!,
+    role: Role!,
+    hometown: String!
+}
+
+input PeopleUpdateRequestDto {
+    peopleId: ID!
+    teamId: ID,
+    lastName: String,
+    firstName: String,
+    sex: Sex,
+    bloodType: BloodType,
+    serveYears: Int,
+    role: Role,
+    hometown: String
+}
+
+type PeopleResponseDto {
+    peopleId: ID!,
+    teamId: ID!,
+    lastName: String!,
+    firstName: String!,
+    sex: Sex!,
+    bloodType: BloodType!,
+    serveYears: Int!,
+    role: Role!,
+    hometown: String!
+}
+
+input SoftwareRequestDto {
+    softwareId: String!,
+    usedBy: String!,
+    developedBy: String!,
+    description: String
+}
+
+input SoftwareUpdateRequestDto {
+    softwareId: String!,
+    usedBy: String,
+    developedBy: String,
+    description: String
+}
+
+type SoftwareResponseDto implements Tool {
+    softwareId: ID!,
+    usedBy: Role!,
+    developedBy: String!,
+    description: String
+}
+
+input SupplyRequestDto {
+    supplyId: String!,
+    teamId: ID!,
+}
+
+type SupplyResponseDto {
+    supplyId: ID!,
+    teamId: ID!
+}
+
+input TeamRequestDto {
+    teamId: ID,
+    manager: String!,
+    office: String!,
+    extensionNumber: String!,
+    mascot: String,
+    cleaningDuty: String!,
+    project: String
+}
+
+type TeamResponseDto {
+    teamId: ID!,
+    manager: String!,
+    office: String!,
+    extensionNumber: String!,
+    mascot: String,
+    cleaningDuty: String!,
+    project: String
+}
+
+type TeamAndMemberResponseDto {
+    teamId: ID!,
+    manager: String!,
+    office: String!,
+    extensionNumber: String!,
+    mascot: String,
+    cleaningDuty: String!,
+    project: String,
+    members: [PeopleResponseDto!]!
+}
+
+input TeamUpdateRequestDto {
+    teamId: ID!,
+    manager: String,
+    office: String,
+    extensionNumber: String,
+    mascot: String,
+    cleaningDuty: String,
+    project: String
+}
+
+input RoleRequestDto {
+    roleId: String!,
+    job: String!,
+    requirement: String!
+}
+
+input RoleUpdateRequestDto {
+    roleId: String!,
+    job: String,
+    requirement: String
+}

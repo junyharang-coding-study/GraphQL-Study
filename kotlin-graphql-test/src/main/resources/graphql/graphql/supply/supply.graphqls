@@ -1,0 +1,10 @@
+type SupplyId {
+    peopleId: ID!
+}
+
+type DefaultListSupplyResponse {
+    statusCode: Int!,
+    message: String!,
+    data: [SupplyResponseDto!]!,
+    pagination: String
+}

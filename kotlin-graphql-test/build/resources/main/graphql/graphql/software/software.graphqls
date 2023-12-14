@@ -1,0 +1,17 @@
+type SoftwareId {
+    softwareId: ID!
+}
+
+type DefaultListSoftwareResponseDto {
+    statusCode: Int!,
+    message: String!,
+    data: [SoftwareResponseDto!]!,
+    pagination: String
+}
+
+type DefaultSoftwareResponseDto {
+    statusCode: Int!,
+    message: String!,
+    data: SoftwareResponseDto!,
+    pagination: String
+}

@@ -1,12 +1,12 @@
 package com.junyharangstudy.kotlingraphqltest.api.equipment.resolver
 
+import com.junyharangstudy.kotlingraphqltest.api.common.constant.PagingRequestDto
 import com.junyharangstudy.kotlingraphqltest.api.equipment.model.dto.request.EquipmentCreateRequestDto
 import com.junyharangstudy.kotlingraphqltest.api.equipment.model.dto.request.EquipmentSearchRequestDto
 import com.junyharangstudy.kotlingraphqltest.api.equipment.model.dto.request.EquipmentUpdateRequestDto
 import com.junyharangstudy.kotlingraphqltest.api.equipment.model.dto.response.EquipmentResponseDto
 import com.junyharangstudy.kotlingraphqltest.api.equipment.service.EquipmentService
 import com.junyharangstudy.kotlingraphqltest.common.constant.DefaultResponse
-import com.junyharangstudy.kotlingraphqltest.common.constant.PageRequestDto
 import org.springframework.graphql.data.method.annotation.Argument
 import org.springframework.graphql.data.method.annotation.MutationMapping
 import org.springframework.graphql.data.method.annotation.QueryMapping
@@ -32,10 +32,10 @@ class EquipmentResolver (
 
     @QueryMapping
     fun getEquipmentList (
-        @Argument equipmentSearchRequestDto: EquipmentSearchRequestDto,
-        @Argument pageRequestDto: PageRequestDto
+        @Argument equipmentSearchRequestDto: EquipmentSearchRequestDto?,
+        @Argument pagingRequestDto: PagingRequestDto?,
     ): DefaultResponse<List<EquipmentResponseDto>> {
-        return equipmentService.getEquipmentList(equipmentSearchRequestDto, pageRequestDto)
+        return equipmentService.getEquipmentList(pagingRequestDto, equipmentSearchRequestDto)
     }
 
     @QueryMapping

@@ -1,0 +1,16 @@
+type TeamId {
+    teamId: ID!
+}
+
+type DefaultListTeamResponse {
+    statusCode: Int!,
+    message: String!,
+    data: [TeamResponseDto!]!,
+    pagination: String
+}
+
+type DefaultTeamResponse {
+    statusCode: Int!,
+    message: String!,
+    data: TeamAndMemberResponseDto!
+}

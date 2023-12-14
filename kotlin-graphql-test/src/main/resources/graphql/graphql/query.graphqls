@@ -1,0 +1,67 @@
+type Query {
+    # 함수 이름은 Controller @QueryMapping이 사용된 Method 이름과 동일해야 함.
+    getEquipmentList(
+        equipmentSearchRequestDto: EquipmentSearchRequestDto,
+        pagingRequestDto: PagingRequestDto,
+    ): DefaultListEquipmentResponse!,
+
+#    getEquipmentsAdv(
+#        equipmentId: String,
+#        usedBy: String,
+#        newOrUsed: String,
+#        page: Int,
+#        size: Int): DefaultEquipmentsAdvResponse!,
+
+    getEquipment(equipmentId: String!): DefaultResponse!
+
+    getPeopleList(
+        lastName: String,
+        firstName: String,
+        sex: Sex,
+        bloodType: BloodType,
+        serveYears: Int,
+        role: Role,
+        hometown: String
+        page: Int,
+        size: Int): DefaultListPeopleResponse!,
+
+    getPeopleByPeopleId(peopleId: Int!): DefaultPeopleResponse!
+
+    getPeopleByTeamId(
+        teamId: Int!,
+        page: Int,
+        size: Int): DefaultListResponse!
+
+    getSoftwareList(
+        usedBy: String,
+        developedBy: String,
+        page: Int,
+        size: Int): DefaultListSoftwareResponseDto!,
+
+    getSoftwareBySoftwareId(softwareId: String!): DefaultSoftwareResponseDto!
+
+    getSupplyList(
+        page: Int,
+        size: Int): DefaultListResponse!,
+
+    getSupplyBySupplyId(supplyId: String!): DefaultResponse!
+
+    getSupplyByTeamId(
+        teamId: Int!,
+        page: Int,
+        size: Int): DefaultListResponse!
+
+    getTeamList(
+        manager: String,
+        office: String,
+        extensionNumber: String,
+        mascot: String,
+        cleaningDuty: String,
+        project: String,
+        page: Int,
+        size: Int): DefaultListTeamResponse!,
+
+    getTeamByTeamId(teamId: Int!): DefaultTeamResponse!
+
+    getRoleByRoleId(roleId: String!): DefaultResponse!
+}

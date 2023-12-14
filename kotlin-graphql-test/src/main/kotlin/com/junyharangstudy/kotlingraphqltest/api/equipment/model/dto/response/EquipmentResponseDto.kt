@@ -8,13 +8,14 @@ class EquipmentResponseDto(
     private val count: Int,
     private val newOrUsed: String
 ) {
-}
-
-fun equipmentToDto(equipment: Equipment): EquipmentResponseDto {
-    return EquipmentResponseDto(
-        equipmentId = equipment.equipmentId,
-        usedBy = equipment.usedBy,
-        count = equipment.count,
-        newOrUsed = equipment.newOrUsed
-    )
+    companion object {
+        fun equipmentToDto(equipment: Equipment): EquipmentResponseDto {
+            return EquipmentResponseDto(
+                equipmentId = equipment.equipmentId,
+                usedBy = equipment.usedBy,
+                count = equipment.count,
+                newOrUsed = equipment.newOrUsed
+            )
+        }
+    }
 }

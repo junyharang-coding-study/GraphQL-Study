@@ -1,0 +1,17 @@
+type PeopleId {
+    peopleId: ID!
+}
+
+type DefaultListPeopleResponse {
+    statusCode: Int!,
+    message: String!,
+    data: [PeopleResponseDto!]!,
+    pagination: String
+}
+
+type DefaultPeopleResponse {
+    statusCode: Int!,
+    message: String!,
+    data: PeopleResponseDto!
+}
+

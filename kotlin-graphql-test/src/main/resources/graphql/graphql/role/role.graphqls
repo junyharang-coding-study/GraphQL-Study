@@ -1,0 +1,9 @@
+type RoleId {
+    roleId: ID!
+}
+
+type RoleResponseDto {
+    roleId: ID!,
+    job: String!,
+    requirement: String!
+}

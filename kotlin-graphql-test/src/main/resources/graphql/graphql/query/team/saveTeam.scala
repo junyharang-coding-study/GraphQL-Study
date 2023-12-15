@@ -1,5 +1,5 @@
-mutation saveForTeam {
-  saveForTeam(input: {
+mutation saveTeam {
+  saveTeam(input: {
     manager: "Juny",
     office: "	104B",
     extensionNumber: "#3170",

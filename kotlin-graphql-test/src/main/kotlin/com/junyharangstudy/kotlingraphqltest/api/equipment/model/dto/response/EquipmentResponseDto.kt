@@ -14,8 +14,7 @@ class EquipmentResponseDto(
                 equipmentId = equipment.equipmentId,
                 usedBy = equipment.usedBy,
                 count = equipment.count,
-                newOrUsed = equipment.newOrUsed
-            )
+                newOrUsed = equipment.newOrUsed)
         }
     }
 }

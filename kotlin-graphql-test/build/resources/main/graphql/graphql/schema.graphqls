@@ -89,47 +89,6 @@ type SupplyResponseDto {
     teamId: ID!
 }
 
-input TeamRequestDto {
-    teamId: ID,
-    manager: String!,
-    office: String!,
-    extensionNumber: String!,
-    mascot: String,
-    cleaningDuty: String!,
-    project: String
-}
-
-type TeamResponseDto {
-    teamId: ID!,
-    manager: String!,
-    office: String!,
-    extensionNumber: String!,
-    mascot: String,
-    cleaningDuty: String!,
-    project: String
-}
-
-type TeamAndMemberResponseDto {
-    teamId: ID!,
-    manager: String!,
-    office: String!,
-    extensionNumber: String!,
-    mascot: String,
-    cleaningDuty: String!,
-    project: String,
-    members: [PeopleResponseDto!]!
-}
-
-input TeamUpdateRequestDto {
-    teamId: ID!,
-    manager: String,
-    office: String,
-    extensionNumber: String,
-    mascot: String,
-    cleaningDuty: String,
-    project: String
-}
-
 input RoleRequestDto {
     roleId: String!,
     job: String!,

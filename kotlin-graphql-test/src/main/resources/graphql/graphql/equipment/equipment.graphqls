@@ -27,15 +27,22 @@ input EquipmentSearchRequestDto {
 type DefaultEquipmentResponse {
     statusCode: Int!,
     message: String!,
-    data: EquipmentResponseDto!
+    data: String
 }
 
-type EquipmentResponseDto implements Tool {
-    equipmentId: ID!,
-    usedBy: Role!,
-    count: Int!,
-    newOrUsed: String!
+type EquipmentResponseDto {
+    equipmentId: String,
+    usedBy: String,
+    count: Int,
+    newOrUsed: String
 }
+
+#type EquipmentResponseDto implements Tool {
+#    equipmentId: ID!,
+#    usedBy: Role,
+#    count: Int!,
+#    newOrUsed: String!
+#}
 
 #type EquipmentsAdvDto implements Tool {
 #    equipmentId: ID!,

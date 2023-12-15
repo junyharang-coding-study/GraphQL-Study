@@ -1,11 +1,34 @@
 query findBygetTeamListPaging {
   getTeamList(
-    page: 1,
-    size: 3
+    teamSearchRequestDto: {
+      manager: "Blake Smith",
+      # office: "",
+      # extensionNumber: "",
+      # mascot: "",
+      # cleaningDuty: "",
+      # project: ""
+    },
+    pageRequestDto: {
+      currentPage: 1,
+      perPageSize: 10
+      orderBy: true
+    },
   ) {
     statusCode,
     message,
-    data,
-    pagination
+    data {
+      teamId,
+      manager,
+      office,
+      extensionNumber,
+      mascot,
+      cleaningDuty,
+      project
+    },
+    pagination {
+      perPageSize,
+      totalElementCount,
+      totalPage
+    }
   }
 }

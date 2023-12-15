@@ -11,8 +11,6 @@ import com.junyharangstudy.kotlingraphqltest.api.equipment.repository.EquipmentQ
 import com.junyharangstudy.kotlingraphqltest.api.equipment.repository.EquipmentRepository
 import com.junyharangstudy.kotlingraphqltest.common.constant.DefaultResponse
 import com.junyharangstudy.kotlingraphqltest.common.constant.Pagination
-import org.springframework.data.domain.PageRequest
-import org.springframework.data.domain.Pageable
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -25,15 +23,18 @@ class EquipmentService(
 ) {
     @Transactional
     fun saveEquipment(equipmentCreateRequestDto: EquipmentCreateRequestDto): DefaultResponse<String> {
-        return DefaultResponse.response(
-            HttpStatus.CREATED.value(),
-            "Success Create",
-            equipmentRepository.save(
-                equipmentCreateRequestDto.toEntity(
-                    equipmentCreateRequestDto
-                )
-            ).equipmentId
-        )
+
+        val saveAsDbEquipmentId = equipmentRepository.save(
+            equipmentCreateRequestDto.toEntity(
+                equipmentCreateRequestDto
+            )
+        ).equipmentId
+
+        if (saveAsDbEquipmentId == null) {
+            return DefaultResponse.response(HttpStatus.NO_CONTENT.value(), "Failed Create");
+        }
+
+        return DefaultResponse.response(HttpStatus.CREATED.value(), "Success Create", saveAsDbEquipmentId)
     }
 
     @Transactional(readOnly = true)
@@ -69,11 +70,7 @@ class EquipmentService(
             return DefaultResponse.response(HttpStatus.NOT_FOUND.value(), "NOT FOUND DATA");
         }
 
-        return DefaultResponse.response(
-            HttpStatus.OK.value(),
-            "OK",
-            equipmentToDto(findById.get())
-        )
+        return DefaultResponse.response(HttpStatus.OK.value(), "OK", equipmentToDto(findById.get()))
     }
 
     @Transactional
@@ -89,11 +86,7 @@ class EquipmentService(
 
         val equipment = checkUpdateRequest(equipmentUpdateRequestDto, findById.get())
 
-        return DefaultResponse.response(
-            HttpStatus.OK.value(),
-            "Success Update",
-            equipmentRepository.save(equipment).equipmentId
-        )
+        return DefaultResponse.response(HttpStatus.OK.value(), "Success Update", equipmentRepository.save(equipment).equipmentId)
     }
 
     @Transactional
@@ -104,7 +97,7 @@ class EquipmentService(
             return DefaultResponse.response(HttpStatus.NOT_FOUND.value(), "NOT FOUND UPDATE TARGET DATA");
         }
 
-        return DefaultResponse.response(HttpStatus.OK.value(), "Deleted Success", equipmentId)
+        return DefaultResponse.response(HttpStatus.OK.value(), "Deleted Success", findById.get().equipmentId)
     }
 
     private fun checkUpdateRequest(
@@ -143,15 +136,10 @@ class EquipmentService(
                 .map {
                         equipment -> equipmentToDto(equipment)
                 }.toList(),
-            Pagination(findElements.size, processingTotalElementCount())
-        )
+            Pagination(findElements.size, processingTotalElementCount()))
     }
 
     private fun processingParameterPagingNotNull(pageRequestDto: PageRequestDto): DefaultResponse<List<EquipmentResponseDto>> {
-//        if (equipmentRepository.findAll().count() <= pageRequestDto.perPageSize!!) {
-//            pageRequestDto.perPageSize = equipmentRepository.findAll().count() -1
-//        }
-
         val findElements = equipmentQueryDslRepository.findBySearchAndPaging(pageRequestDto, null)
 
         if (findElements.isEmpty()) {

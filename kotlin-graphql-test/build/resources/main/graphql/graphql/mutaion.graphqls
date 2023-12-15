@@ -1,10 +1,10 @@
 type Mutation {
-    saveEquipment(input: EquipmentCreateRequestDto): DefaultResponse!
+    saveEquipment(input: EquipmentCreateRequestDto): DefaultEquipmentResponse!
     updateEquipment(
         equipmentId: String,
         input: EquipmentRequestDto
-    ): DefaultResponse!
-    deleteEquipment(equipmentId: String!): DefaultResponse!
+    ): DefaultEquipmentResponse!
+    deleteEquipment(equipmentId: String!): DefaultEquipmentResponse!
 
     saveForPeople(input: PeopleRequestDto): DefaultResponse!
     updatePeople(input: PeopleUpdateRequestDto): DefaultResponse!
@@ -17,9 +17,11 @@ type Mutation {
     saveForSupply(input: SupplyRequestDto): DefaultResponse!
     deleteSupply(supplyId: String!): DefaultResponse!
 
-    saveForTeam(input: TeamRequestDto): DefaultResponse!
-    updateTeam(input: TeamUpdateRequestDto): DefaultResponse!
-    deleteTeam(peopleId: Int!): DefaultResponse!
+    saveTeam(input: TeamCreateRequestDto): DefaultTeamResponse!
+    updateTeam(
+        teamId: ID,
+        input: TeamUpdateRequestDto): DefaultTeamResponse!
+    deleteTeam(teamId: ID!): DefaultTeamResponse!
 
     saveForRole(input: RoleRequestDto): DefaultResponse!
     updateRole(input: RoleUpdateRequestDto): DefaultResponse!

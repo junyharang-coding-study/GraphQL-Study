@@ -1,16 +1,73 @@
-type TeamId {
-    teamId: ID!
+input TeamCreateRequestDto {
+    teamId: ID,
+    manager: String!,
+    office: String!,
+    extensionNumber: String!,
+    mascot: String,
+    cleaningDuty: String!,
+    project: String
+}
+
+input TeamSearchRequestDto {
+    manager: String,
+    office: String,
+    extensionNumber: String,
+    mascot: String,
+    cleaningDuty: String,
+    project: String
+}
+
+input TeamUpdateRequestDto {
+    manager: String,
+    office: String,
+    extensionNumber: String,
+    mascot: String,
+    cleaningDuty: String,
+    project: String
 }
 
 type DefaultListTeamResponse {
     statusCode: Int!,
     message: String!,
     data: [TeamResponseDto!]!,
-    pagination: String
+    pagination: Pagination
+}
+
+type TeamResponseDto {
+    teamId: ID!,
+    manager: String!,
+    office: String!,
+    extensionNumber: String!,
+    mascot: String,
+    cleaningDuty: String!,
+    project: String
 }
 
 type DefaultTeamResponse {
     statusCode: Int!,
     message: String!,
+    data: String
+}
+
+type DefaultTeamSearchResponse {
+    statusCode: Int!,
+    message: String!,
+    data: TeamResponseDto!
+}
+
+type DefaultTeamAndMemberResponse {
+    statusCode: Int!,
+    message: String!,
     data: TeamAndMemberResponseDto!
+}
+
+type TeamAndMemberResponseDto {
+    teamId: ID!,
+    manager: String!,
+    office: String!,
+    extensionNumber: String!,
+    mascot: String,
+    cleaningDuty: String!,
+    project: String,
+    members: [PeopleResponseDto!]!
 }

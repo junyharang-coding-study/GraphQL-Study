@@ -52,16 +52,10 @@ type Query {
         size: Int): DefaultListResponse!
 
     getTeamList(
-        manager: String,
-        office: String,
-        extensionNumber: String,
-        mascot: String,
-        cleaningDuty: String,
-        project: String,
-        page: Int,
-        size: Int): DefaultListTeamResponse!,
+        teamSearchRequestDto: TeamSearchRequestDto,
+        pageRequestDto: PageRequestDto): DefaultListTeamResponse!,
 
-    getTeamByTeamId(teamId: Int!): DefaultTeamResponse!
+    getTeamByTeamId(teamId: Int!): DefaultTeamSearchResponse!
 
     getRoleByRoleId(roleId: String!): DefaultResponse!
 }

@@ -1,6 +1,6 @@
 package com.junyharangstudy.kotlingraphqltest.api.equipment.service
 
-import com.junyharangstudy.kotlingraphqltest.api.common.constant.PagingRequestDto
+import com.junyharangstudy.kotlingraphqltest.api.common.constant.PageRequestDto
 import com.junyharangstudy.kotlingraphqltest.api.equipment.model.dto.request.EquipmentCreateRequestDto
 import com.junyharangstudy.kotlingraphqltest.api.equipment.model.dto.request.EquipmentSearchRequestDto
 import com.junyharangstudy.kotlingraphqltest.api.equipment.model.dto.request.EquipmentUpdateRequestDto
@@ -38,15 +38,14 @@ class EquipmentService(
 
     @Transactional(readOnly = true)
     fun getEquipmentList(
-        pagingRequestDto: PagingRequestDto?,
+        pageRequestDto: PageRequestDto?,
         equipmentSearchRequestDto: EquipmentSearchRequestDto?
     ): DefaultResponse<List<EquipmentResponseDto>> {
 
-        if (pagingRequestDto?.currentPage != null && pagingRequestDto.perPageSize != null && equipmentSearchRequestDto != null) {
-            return processingParameterNotNull(PageRequest.of(pagingRequestDto.currentPage, pagingRequestDto.perPageSize!!
-            ), equipmentSearchRequestDto)
-        } else if (pagingRequestDto?.currentPage != null && pagingRequestDto.perPageSize != null && equipmentSearchRequestDto == null) {
-            return processingParameterPagingNotNull(pagingRequestDto)
+        if (pageRequestDto?.currentPage != null && pageRequestDto.perPageSize != null && equipmentSearchRequestDto != null) {
+            return processingParameterNotNull(pageRequestDto, equipmentSearchRequestDto)
+        } else if (pageRequestDto?.currentPage != null && pageRequestDto.perPageSize != null && equipmentSearchRequestDto == null) {
+            return processingParameterPagingNotNull(pageRequestDto)
         }
 
         val findElements = processingParameterNull()
@@ -128,10 +127,10 @@ class EquipmentService(
     }
 
     private fun processingParameterNotNull(
-        pageable: Pageable,
+        pageRequestDto: PageRequestDto,
         equipmentSearchRequestDto: EquipmentSearchRequestDto
     ): DefaultResponse<List<EquipmentResponseDto>> {
-        val findElements = equipmentQueryDslRepository.findBySearchAndPaging(pageable, equipmentSearchRequestDto)
+        val findElements = equipmentQueryDslRepository.findBySearchAndPaging(pageRequestDto, equipmentSearchRequestDto)
 
         if (findElements.isEmpty()) {
             return DefaultResponse.response(HttpStatus.NOT_FOUND.value(), "NOT FOUND DATA");
@@ -144,16 +143,16 @@ class EquipmentService(
                 .map {
                         equipment -> equipmentToDto(equipment)
                 }.toList(),
-            Pagination(findElements)
+            Pagination(findElements.size, processingTotalElementCount())
         )
     }
 
-    private fun processingParameterPagingNotNull(pagingRequestDto: PagingRequestDto): DefaultResponse<List<EquipmentResponseDto>> {
-        if (equipmentRepository.findAll().count() <= pagingRequestDto.perPageSize!!) {
-            pagingRequestDto.perPageSize = equipmentRepository.findAll().count() -1
-        }
+    private fun processingParameterPagingNotNull(pageRequestDto: PageRequestDto): DefaultResponse<List<EquipmentResponseDto>> {
+//        if (equipmentRepository.findAll().count() <= pageRequestDto.perPageSize!!) {
+//            pageRequestDto.perPageSize = equipmentRepository.findAll().count() -1
+//        }
 
-        val findElements = equipmentQueryDslRepository.findBySearchAndPaging(PageRequest.of(pagingRequestDto.currentPage!!, pagingRequestDto.perPageSize!!), null)
+        val findElements = equipmentQueryDslRepository.findBySearchAndPaging(pageRequestDto, null)
 
         if (findElements.isEmpty()) {
             return DefaultResponse.response(HttpStatus.NOT_FOUND.value(), "NOT FOUND DATA");
@@ -166,7 +165,7 @@ class EquipmentService(
                 .map { equipment ->
                     equipmentToDto(equipment)
                 }.toList(),
-            Pagination(findElements)
+            Pagination(findElements.size, processingTotalElementCount())
         )
     }
 
@@ -175,5 +174,9 @@ class EquipmentService(
             .map {
                     equipment -> equipmentToDto(equipment)
             }.toList()
+    }
+
+    private fun processingTotalElementCount(): Int {
+        return equipmentRepository.findAll().count()
     }
 }

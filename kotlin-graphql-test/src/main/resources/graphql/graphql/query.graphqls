@@ -2,7 +2,7 @@ type Query {
     # 함수 이름은 Controller @QueryMapping이 사용된 Method 이름과 동일해야 함.
     getEquipmentList(
         equipmentSearchRequestDto: EquipmentSearchRequestDto,
-        pagingRequestDto: PagingRequestDto,
+        pageRequestDto: PageRequestDto,
     ): DefaultListEquipmentResponse!,
 
 #    getEquipmentsAdv(
@@ -12,7 +12,7 @@ type Query {
 #        page: Int,
 #        size: Int): DefaultEquipmentsAdvResponse!,
 
-    getEquipment(equipmentId: String!): DefaultResponse!
+    getEquipment(equipmentId: String!): DefaultEquipmentResponse!
 
     getPeopleList(
         lastName: String,

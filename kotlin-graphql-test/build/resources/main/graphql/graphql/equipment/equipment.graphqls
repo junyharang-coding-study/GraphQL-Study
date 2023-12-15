@@ -24,10 +24,10 @@ input EquipmentSearchRequestDto {
     newOrUsed: String
 }
 
-type EquipmentResponse {
+type DefaultEquipmentResponse {
     statusCode: Int!,
     message: String!,
-    data: [EquipmentResponseDto!]!
+    data: EquipmentResponseDto!
 }
 
 type EquipmentResponseDto implements Tool {

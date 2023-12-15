@@ -12,15 +12,15 @@ type DefaultResponse {
 }
 
 type Pagination {
-    totalPages: Int!,
-    totalElements: Int!,
-    page: Int!,
-    currentElements: Int!
+    perPageSize: Int!,
+    totalElementCount: Int!,
+    totalPage: Int!,
 }
 
-input PagingRequestDto {
+input PageRequestDto {
     currentPage: Int,
     perPageSize: Int,
+    orderBy: Boolean
 }
 
 input PeopleRequestDto {

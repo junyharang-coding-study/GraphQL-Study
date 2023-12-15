@@ -1,6 +1,6 @@
 package com.junyharangstudy.kotlingraphqltest.api.equipment.resolver
 
-import com.junyharangstudy.kotlingraphqltest.api.common.constant.PagingRequestDto
+import com.junyharangstudy.kotlingraphqltest.api.common.constant.PageRequestDto
 import com.junyharangstudy.kotlingraphqltest.api.equipment.model.dto.request.EquipmentCreateRequestDto
 import com.junyharangstudy.kotlingraphqltest.api.equipment.model.dto.request.EquipmentSearchRequestDto
 import com.junyharangstudy.kotlingraphqltest.api.equipment.model.dto.request.EquipmentUpdateRequestDto
@@ -33,9 +33,9 @@ class EquipmentResolver (
     @QueryMapping
     fun getEquipmentList (
         @Argument equipmentSearchRequestDto: EquipmentSearchRequestDto?,
-        @Argument pagingRequestDto: PagingRequestDto?,
+        @Argument pageRequestDto: PageRequestDto?,
     ): DefaultResponse<List<EquipmentResponseDto>> {
-        return equipmentService.getEquipmentList(pagingRequestDto, equipmentSearchRequestDto)
+        return equipmentService.getEquipmentList(pageRequestDto, equipmentSearchRequestDto)
     }
 
     @QueryMapping

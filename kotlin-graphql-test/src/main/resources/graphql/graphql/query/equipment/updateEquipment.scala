@@ -1,6 +1,7 @@
 mutation updateEquipment {
-  updateEquipment(input: {
+  updateEquipment(
     equipmentId: "MacBook",
+    input: {
     usedBy: "developer",
     count: 150
     newOrUsed: "new"

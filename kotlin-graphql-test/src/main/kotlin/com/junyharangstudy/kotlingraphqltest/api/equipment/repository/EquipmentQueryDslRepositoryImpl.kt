@@ -1,15 +1,12 @@
 package com.junyharangstudy.kotlingraphqltest.api.equipment.repository
 
+import com.junyharangstudy.kotlingraphqltest.api.common.QueryDslSupportUtil.Companion.queryDslPagingProcessing
+import com.junyharangstudy.kotlingraphqltest.api.common.constant.PageRequestDto
 import com.junyharangstudy.kotlingraphqltest.api.equipment.model.dto.request.EquipmentSearchRequestDto
 import com.junyharangstudy.kotlingraphqltest.api.equipment.model.entity.Equipment
 import com.junyharangstudy.kotlingraphqltest.api.equipment.model.entity.QEquipment.equipment
-import com.junyharangstudy.kotlingraphqltest.common.constant.Pagination.Companion.queryDslPagingProcessing
 import com.querydsl.core.types.dsl.BooleanExpression
-import com.querydsl.jpa.impl.JPAQuery
 import com.querydsl.jpa.impl.JPAQueryFactory
-import org.springframework.data.domain.Page
-import org.springframework.data.domain.PageImpl
-import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Repository
 import org.springframework.util.StringUtils
 
@@ -19,24 +16,20 @@ class EquipmentQueryDslRepositoryImpl(
 ) : EquipmentQueryDslRepository {
 
     override fun findBySearchAndPaging(
-        pageable: Pageable,
+        pageRequestDto: PageRequestDto,
         equipmentSearchRequestDto: EquipmentSearchRequestDto?
-    ): Page<Equipment> {
+    ): List<Equipment> {
         val equipmentJPAQuery = jpaQueryFactory.selectFrom(equipment)
             .where(
                 eqUsedBy(equipmentSearchRequestDto?.usedBy),
                 eqNewOrUsed(equipmentSearchRequestDto?.newOrUsed),
             );
 
-        if (pageable.sort.isSorted) {
+        if (pageRequestDto.getOrderBy()) {
             equipmentJPAQuery.orderBy(equipment.equipmentId.desc())
         }
 
-        return PageImpl(
-            queryDslPagingProcessing(equipmentJPAQuery, pageable),
-            pageable,
-            equipmentJPAQuery.stream().count()
-        )
+        return queryDslPagingProcessing(equipmentJPAQuery, pageRequestDto)
     }
 
     fun eqUsedBy(usedBy: String?): BooleanExpression? {

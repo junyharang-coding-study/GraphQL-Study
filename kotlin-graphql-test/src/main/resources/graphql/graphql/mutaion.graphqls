@@ -26,7 +26,10 @@ type Mutation {
         input: TeamUpdateRequestDto): DefaultTeamResponse!
     deleteTeam(teamId: ID!): DefaultTeamResponse!
 
-    saveForRole(input: RoleRequestDto): DefaultResponse!
-    updateRole(input: RoleUpdateRequestDto): DefaultResponse!
+    saveRole(input: RoleCreateRequestDto): DefaultResponse!
+    updateRole(
+        roleId: String!,
+        input: RoleUpdateRequestDto
+    ): DefaultResponse!
     deleteRole(roleId: String!): DefaultResponse!
 }

@@ -1,5 +1,5 @@
-mutation saveForRole {
-  saveForRole(input: {
+mutation saveRole {
+  saveRole(input: {
     roleId: "frontEndDeveloper",
     job: "FeProgrammer",
     requirement: "Web/App FrontEnd Develop"

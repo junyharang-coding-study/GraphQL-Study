@@ -47,11 +47,7 @@ class SoftwareService (
                     return DefaultResponse.response(HttpStatus.NO_CONTENT.value(), "No Content", findElements)
                 }
 
-                return DefaultResponse.response(
-                    HttpStatus.OK.value(),
-                    "OK",
-                    findElements
-                )
+                return DefaultResponse.response(HttpStatus.OK.value(), "OK", findElements)
             }
         }
     }
@@ -80,6 +76,17 @@ class SoftwareService (
         }
     }
 
+    @Transactional
+    fun deleteSoftware(softwareId: String): DefaultResponse<String> {
+        val findById = softwareRepository.findById(softwareId)
+
+        return if (findById.isEmpty) {
+            DefaultResponse.response(HttpStatus.NOT_FOUND.value(), "NOT FOUND DELETE TARGET DATA")
+        } else {
+            DefaultResponse.response(HttpStatus.OK.value(), "Deleted Success", findById.get().softwareId)
+        }
+    }
+
     private fun checkUpdateRequest(softwareUpdateRequestDto: SoftwareUpdateRequestDto, software: Software): Software {
         return software.apply {
             when {
@@ -87,17 +94,6 @@ class SoftwareService (
                 softwareUpdateRequestDto.developedBy != null -> software.updateUsedBy(softwareUpdateRequestDto.developedBy!!)
                 softwareUpdateRequestDto.description != null -> software.updateUsedBy(softwareUpdateRequestDto.description!!)
             }
-        }
-    }
-
-    @Transactional
-    fun deleteSoftware(softwareId: String): DefaultResponse<String> {
-        val findById = softwareRepository.findById(softwareId)
-
-        return if (findById.isEmpty) {
-            DefaultResponse.response(HttpStatus.NOT_FOUND.value(), "NOT FOUND UPDATE TARGET DATA")
-        } else {
-            DefaultResponse.response(HttpStatus.OK.value(), "Deleted Success", findById.get().softwareId)
         }
     }
 
@@ -129,19 +125,18 @@ class SoftwareService (
     private fun processingParameterPagingNotNull(pageRequestDto: PageRequestDto): DefaultResponse<List<SoftwareResponseDto>> {
         val findElements = softwareQueryDslRepository.findBySearchAndPaging(pageRequestDto, null)
 
-
-        if (findElements.isEmpty()) {
-            return DefaultResponse.response(HttpStatus.NOT_FOUND.value(), "NOT FOUND DATA")
+        return if (findElements.isEmpty()) {
+             DefaultResponse.response(HttpStatus.NOT_FOUND.value(), "NOT FOUND DATA")
+        } else {
+            DefaultResponse.response(
+                HttpStatus.OK.value(),
+                "OK",
+                findElements.map { software ->
+                    SoftwareResponseDto.softwareToDto(software)
+                }.toList(),
+                Pagination(findElements.size, processingTotalElementCount(), pageRequestDto.getOrderBy())
+            )
         }
-
-        return DefaultResponse.response(
-            HttpStatus.OK.value(),
-            "OK",
-            findElements.map { software ->
-                SoftwareResponseDto.softwareToDto(software)
-            }.toList(),
-            Pagination(findElements.size, processingTotalElementCount(), pageRequestDto.getOrderBy())
-        )
     }
 
     private fun processingParameterNull(): List<SoftwareResponseDto> {

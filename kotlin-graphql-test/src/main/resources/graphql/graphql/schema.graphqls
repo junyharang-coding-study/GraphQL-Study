@@ -69,14 +69,3 @@ type SupplyResponseDto {
     teamId: ID!
 }
 
-input RoleRequestDto {
-    roleId: String!,
-    job: String!,
-    requirement: String!
-}
-
-input RoleUpdateRequestDto {
-    roleId: String!,
-    job: String,
-    requirement: String
-}

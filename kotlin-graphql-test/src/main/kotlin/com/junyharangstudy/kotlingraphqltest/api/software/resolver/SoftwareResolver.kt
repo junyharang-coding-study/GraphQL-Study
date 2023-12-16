@@ -13,9 +13,7 @@ import org.springframework.graphql.data.method.annotation.QueryMapping
 import org.springframework.stereotype.Controller
 
 @Controller
-class SoftwareResolver(
-    private val softwareService: SoftwareService
-) {
+class SoftwareResolver(private val softwareService: SoftwareService) {
     @MutationMapping
     fun saveSoftware(@Argument("input") softwareCreateRequestDto: SoftwareCreateRequestDto): DefaultResponse<String> {
         return softwareService.saveSoftware(softwareCreateRequestDto)

@@ -2,6 +2,10 @@ query getRoleByRoleId {
   getRoleByRoleId(roleId: "developer") {
     statusCode,
     message,
-    data
+    data {
+      roleId,
+      job,
+      requirement
+    }
   }
 }

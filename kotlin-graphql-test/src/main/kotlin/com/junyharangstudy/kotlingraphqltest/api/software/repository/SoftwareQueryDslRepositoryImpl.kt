@@ -12,9 +12,7 @@ import org.springframework.stereotype.Repository
 import org.springframework.util.StringUtils
 
 @Repository
-class SoftwareQueryDslRepositoryImpl (
-    private val jpaQueryFactory: JPAQueryFactory
-): SoftwareQueryDslRepository {
+class SoftwareQueryDslRepositoryImpl (private val jpaQueryFactory: JPAQueryFactory): SoftwareQueryDslRepository {
 
     override fun findBySearchAndPaging(
         pageRequestDto: PageRequestDto,
@@ -25,7 +23,7 @@ class SoftwareQueryDslRepositoryImpl (
                 eqUsedBy(softwareSearchRequestDto?.usedBy),
                 eqDevelopedBy(softwareSearchRequestDto?.developedBy),
                 eqDescription(softwareSearchRequestDto?.description)
-            );
+            )
 
         if (pageRequestDto.getOrderBy()) {
             softwareJPAQuery.orderBy(software.softwareId.desc())

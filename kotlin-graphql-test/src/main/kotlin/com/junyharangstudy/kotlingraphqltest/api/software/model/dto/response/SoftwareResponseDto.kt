@@ -14,8 +14,7 @@ class SoftwareResponseDto (
                 softwareId = software.softwareId,
                 usedBy = software.usedBy,
                 developedBy = software.developedBy,
-                description = software.description
-            )
+                description = software.description)
         }
     }
 }

@@ -1,5 +1,18 @@
-type RoleId {
-    roleId: ID!
+input RoleCreateRequestDto {
+    roleId: String!,
+    job: String!,
+    requirement: String!
+}
+
+input RoleUpdateRequestDto {
+    job: String,
+    requirement: String
+}
+
+type DefaultRoleResponse {
+    statusCode: Int!,
+    message: String!,
+    data: RoleResponseDto
 }
 
 type RoleResponseDto {

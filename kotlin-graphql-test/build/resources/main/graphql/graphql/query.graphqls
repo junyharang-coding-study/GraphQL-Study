@@ -55,5 +55,5 @@ type Query {
 
     getTeamByTeamId(teamId: Int!): DefaultTeamSearchResponse!
 
-    getRoleByRoleId(roleId: String!): DefaultResponse!
+    getRoleByRoleId(roleId: String!): DefaultRoleResponse!
 }

@@ -1,8 +1,9 @@
 mutation updateRole {
-  updateRole(input: {
+  updateRole(
     roleId: "developer",
-    job: "programmer"
-  }) {
+    input: {
+      job: "programmer"
+    }) {
     statusCode,
     message,
     data

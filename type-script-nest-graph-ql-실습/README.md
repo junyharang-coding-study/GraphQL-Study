@@ -104,6 +104,8 @@ Just you write this command in the command line.
 ✅ [GraphQL과 Apollo 열 네번째 이야기 - React와 Apollo Client](https://junyharang.tistory.com/528)
 <br><br>
 ✅ [GraphQL과 Apollo 열 다섯번째 이야기 - React와 Apollo Client - Query와 Mutation 사용하여 웹 페이지 만들기](https://junyharang.tistory.com/529)
+<br><br>
+✅ [GraphQL과 Apollo 열 여섯번째 이야기 - Kotlin + Spring Boot에서 GraphQL 사용해 보기 - 실습 환경 구성](https://junyharang.tistory.com/533)
 <br><br><br>
 
 #### 🤔 내가 만난 문제

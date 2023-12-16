@@ -10,6 +10,7 @@ class Equipment(
     var count: Int,
     var newOrUsed: String
 ) {
+
     fun updateUsedBy(usedBy: String) {
         this.usedBy = usedBy
     }

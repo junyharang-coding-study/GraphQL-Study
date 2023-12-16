@@ -2,6 +2,11 @@ query getSoftwareBySoftwareId {
   getSoftwareBySoftwareId(softwareId: "Eclipse") {
     statusCode,
     message,
-    data
+    data {
+      softwareId,
+      usedBy,
+      developedBy,
+      description
+    }
   }
 }

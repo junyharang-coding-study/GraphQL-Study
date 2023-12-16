@@ -136,7 +136,7 @@ class EquipmentService(
                 .map {
                         equipment -> equipmentToDto(equipment)
                 }.toList(),
-            Pagination(findElements.size, processingTotalElementCount()))
+            Pagination(findElements.size, processingTotalElementCount(), pageRequestDto.getOrderBy()))
     }
 
     private fun processingParameterPagingNotNull(pageRequestDto: PageRequestDto): DefaultResponse<List<EquipmentResponseDto>> {
@@ -153,7 +153,7 @@ class EquipmentService(
                 .map { equipment ->
                     equipmentToDto(equipment)
                 }.toList(),
-            Pagination(findElements.size, processingTotalElementCount())
+            Pagination(findElements.size, processingTotalElementCount(), pageRequestDto.getOrderBy())
         )
     }
 

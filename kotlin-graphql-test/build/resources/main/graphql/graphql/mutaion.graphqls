@@ -1,17 +1,20 @@
 type Mutation {
-    saveEquipment(input: EquipmentCreateRequestDto): DefaultEquipmentResponse!
+    saveEquipment(input: EquipmentCreateRequestDto): DefaultResponse!
     updateEquipment(
         equipmentId: String,
         input: EquipmentRequestDto
-    ): DefaultEquipmentResponse!
-    deleteEquipment(equipmentId: String!): DefaultEquipmentResponse!
+    ): DefaultResponse!
+    deleteEquipment(equipmentId: String!): DefaultResponse!
 
     saveForPeople(input: PeopleRequestDto): DefaultResponse!
     updatePeople(input: PeopleUpdateRequestDto): DefaultResponse!
     deletePeople(peopleId: Int!): DefaultResponse!
 
-    saveForSoftware(input: SoftwareRequestDto): DefaultResponse!
-    updateSoftware(input: SoftwareUpdateRequestDto): DefaultResponse!
+    saveSoftware(input: SoftwareCreateRequestDto): DefaultResponse!
+    updateSoftware(
+        softwareId: String!
+        input: SoftwareUpdateRequestDto
+    ): DefaultResponse!
     deleteSoftware(softwareId: String!): DefaultResponse!
 
     saveForSupply(input: SupplyRequestDto): DefaultResponse!

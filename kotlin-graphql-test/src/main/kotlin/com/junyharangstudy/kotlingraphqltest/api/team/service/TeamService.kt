@@ -1,24 +1,24 @@
 package com.junyharangstudy.kotlingraphqltest.api.team.service
 
 import com.junyharangstudy.kotlingraphqltest.api.common.constant.PageRequestDto
-import com.junyharangstudy.kotlingraphqltest.api.equipment.model.entity.QEquipment.equipment
 import com.junyharangstudy.kotlingraphqltest.api.team.model.dto.request.TeamCreateRequestDto
 import com.junyharangstudy.kotlingraphqltest.api.team.model.dto.request.TeamSearchRequestDto
 import com.junyharangstudy.kotlingraphqltest.api.team.model.dto.request.TeamUpdateRequestDto
 import com.junyharangstudy.kotlingraphqltest.api.team.model.dto.response.TeamResponseDto
 import com.junyharangstudy.kotlingraphqltest.api.team.model.dto.response.TeamResponseDto.Companion.teamToDto
+import com.junyharangstudy.kotlingraphqltest.api.team.model.entity.QTeam.team
 import com.junyharangstudy.kotlingraphqltest.api.team.model.entity.Team
 import com.junyharangstudy.kotlingraphqltest.api.team.repository.TeamQueryDslRepository
 import com.junyharangstudy.kotlingraphqltest.api.team.repository.TeamRepository
 import com.junyharangstudy.kotlingraphqltest.common.constant.DefaultResponse
 import com.junyharangstudy.kotlingraphqltest.common.constant.Pagination
-import jakarta.transaction.Transactional
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
-import java.util.Objects
+import org.springframework.transaction.annotation.Transactional
+import java.util.*
 
 @Service
-class TeamService (
+class TeamService(
     private val teamRepository: TeamRepository,
     private val teamQueryDslRepository: TeamQueryDslRepository
 ) {
@@ -26,89 +26,103 @@ class TeamService (
     fun saveTeam(teamCreateRequestDto: TeamCreateRequestDto): DefaultResponse<Long> {
         val saveAsDbTeamId = teamRepository.save(teamCreateRequestDto.toEntity(teamCreateRequestDto)).teamId
 
-        if (saveAsDbTeamId == null) {
-            return DefaultResponse.response(HttpStatus.NO_CONTENT.value(), "Failed Create");
+        return if (saveAsDbTeamId == null) {
+            DefaultResponse.response(HttpStatus.NO_CONTENT.value(), "Failed Create");
+        } else {
+            DefaultResponse.response(HttpStatus.CREATED.value(), "Success Create", saveAsDbTeamId)
         }
-
-        return DefaultResponse.response(HttpStatus.CREATED.value(), "Success Create", saveAsDbTeamId)
     }
 
-    @org.springframework.transaction.annotation.Transactional(readOnly = true)
-    fun getTeamList(teamSearchRequestDto: TeamSearchRequestDto?, pageRequestDto: PageRequestDto?): DefaultResponse<List<TeamResponseDto>> {
-        if (pageRequestDto?.currentPage != null && pageRequestDto.perPageSize != null && teamSearchRequestDto != null) {
-            return processingParameterNotNull(pageRequestDto, teamSearchRequestDto)
-        } else if (pageRequestDto?.currentPage != null && pageRequestDto.perPageSize != null && teamSearchRequestDto == null) {
-            return processingParameterPagingNotNull(pageRequestDto)
+    @Transactional(readOnly = true)
+    fun getTeamList(
+        teamSearchRequestDto: TeamSearchRequestDto?,
+        pageRequestDto: PageRequestDto?
+    ): DefaultResponse<List<TeamResponseDto>> {
+        return when {
+            pageRequestDto?.currentPage != null && pageRequestDto.perPageSize != null -> {
+                when {
+                    teamSearchRequestDto != null -> processingParameterNotNull(pageRequestDto, teamSearchRequestDto)
+                    else -> processingParameterPagingNotNull(pageRequestDto)
+                }
+            }
+
+            else -> {
+                val findElements = processingParameterNull()
+
+                if (findElements.isEmpty()) {
+                    return DefaultResponse.response(HttpStatus.NO_CONTENT.value(), "No Content", findElements)
+                }
+
+                return DefaultResponse.response(
+                    HttpStatus.OK.value(),
+                    "OK",
+                    findElements
+                )
+            }
         }
-
-        val findElements = processingParameterNull()
-
-        if (findElements.isEmpty()) {
-            return DefaultResponse.response(HttpStatus.NOT_FOUND.value(), "NOT FOUND DATA");
-        }
-
-        return DefaultResponse.response(
-            HttpStatus.OK.value(),
-            "OK",
-            findElements
-        )
     }
 
-    @org.springframework.transaction.annotation.Transactional(readOnly = true)
+    @Transactional(readOnly = true)
     fun getTeam(teamId: Long): DefaultResponse<TeamResponseDto> {
         val findById = teamRepository.findById(teamId)
 
-        if (findById.isEmpty) {
-            return DefaultResponse.response(HttpStatus.NOT_FOUND.value(), "NOT FOUND DATA");
+        return if (findById.isEmpty) {
+            DefaultResponse.response(HttpStatus.NOT_FOUND.value(), "NOT FOUND DATA");
+        } else {
+            DefaultResponse.response(HttpStatus.OK.value(), "OK", teamToDto(findById.get()))
         }
-
-        return DefaultResponse.response(HttpStatus.OK.value(), "OK", teamToDto(findById.get()))
     }
 
+    @Transactional
     fun updateTeam(teamId: Long, teamUpdateRequestDto: TeamUpdateRequestDto): DefaultResponse<Long> {
         val findById = teamRepository.findById(teamId)
 
-        if (findById.isEmpty) {
-            return DefaultResponse.response(HttpStatus.NOT_FOUND.value(), "NOT FOUND UPDATE TARGET DATA");
+        return findById.map {
+            val updatedTeam = checkUpdateRequest(teamUpdateRequestDto, findById.get())
+            DefaultResponse.response(HttpStatus.NOT_FOUND.value(), "Success Update", teamRepository.save(updatedTeam).teamId)
+        }.orElseGet {
+            DefaultResponse.response(HttpStatus.NOT_FOUND.value(), "NOT FOUND UPDATE TARGET DATA")
         }
-
-        val team = checkUpdateRequest(teamUpdateRequestDto, findById.get())
-
-        return DefaultResponse.response(HttpStatus.OK.value(), "Success Update", teamRepository.save(team).teamId)
     }
 
+    @Transactional
     fun deleteTeam(teamId: Long): DefaultResponse<Long> {
-        val findById = teamRepository.findById(teamId)
-
-        if (findById.isEmpty) {
-            return DefaultResponse.response(HttpStatus.NOT_FOUND.value(), "NOT FOUND UPDATE TARGET DATA");
+        return teamRepository.findById(teamId).map { team ->
+            teamRepository.delete(team)
+            DefaultResponse.response(HttpStatus.OK.value(), "Deleted Success", team.teamId)
+        }.orElseGet {
+            DefaultResponse.response(HttpStatus.NOT_FOUND.value(), "NOT FOUND UPDATE TARGET DATA")
         }
-
-        return DefaultResponse.response(HttpStatus.OK.value(), "Deleted Success", findById.get().teamId)
     }
 
 
-
-    private fun processingParameterNotNull(pageRequestDto: PageRequestDto, teamSearchRequestDto: TeamSearchRequestDto): DefaultResponse<List<TeamResponseDto>> {
+    private fun processingParameterNotNull(
+        pageRequestDto: PageRequestDto,
+        teamSearchRequestDto: TeamSearchRequestDto
+    ): DefaultResponse<List<TeamResponseDto>> {
         val findElements = teamQueryDslRepository.findBySearchAndPaging(pageRequestDto, teamSearchRequestDto)
 
-        if (findElements.isEmpty()) {
-            return DefaultResponse.response(HttpStatus.NOT_FOUND.value(), "NOT FOUND DATA");
+        return if (findElements.isEmpty()) {
+            DefaultResponse.response(
+                HttpStatus.NO_CONTENT.value(), "No Content",
+                findElements.map { team ->
+                    teamToDto(team)
+                }.toList(),
+            );
+        } else {
+            DefaultResponse.response(
+                HttpStatus.OK.value(),
+                "OK",
+                findElements.map { team ->
+                    teamToDto(team)
+                }.toList(),
+                Pagination(findElements.size, processingTotalElementCount(), pageRequestDto.getOrderBy())
+            )
         }
-
-        return DefaultResponse.response(
-            HttpStatus.OK.value(),
-            "OK",
-            findElements.stream().filter(Objects::nonNull).map {
-                team -> teamToDto(team)
-            }.toList(),
-            Pagination(findElements.size, processingTotalElementCount()))
     }
 
     private fun processingParameterNull(): List<TeamResponseDto> {
-        return teamRepository.findAll().stream().filter(Objects::nonNull).map {
-            team -> teamToDto(team)
-        }.toList()
+        return teamRepository.findAll().mapNotNull { team -> teamToDto(team) }
     }
 
     private fun processingParameterPagingNotNull(pageRequestDto: PageRequestDto): DefaultResponse<List<TeamResponseDto>> {
@@ -121,10 +135,11 @@ class TeamService (
         return DefaultResponse.response(
             HttpStatus.OK.value(),
             "OK",
-            findElements.stream().filter(Objects::nonNull).map {
-                team -> teamToDto(team)
+            findElements.map { team ->
+                teamToDto(team)
             }.toList(),
-            Pagination(findElements.size, processingTotalElementCount()))
+            Pagination(findElements.size, processingTotalElementCount(), pageRequestDto.getOrderBy())
+        )
     }
 
     private fun checkUpdateRequest(teamUpdateRequestDto: TeamUpdateRequestDto, team: Team): Team {
@@ -148,7 +163,7 @@ class TeamService (
             team.updateCleaningDuty(teamUpdateRequestDto.cleaningDuty!!)
         }
 
-        if (teamUpdateRequestDto.project != null ) {
+        if (teamUpdateRequestDto.project != null) {
             team.updateProject(teamUpdateRequestDto.project!!)
         }
 

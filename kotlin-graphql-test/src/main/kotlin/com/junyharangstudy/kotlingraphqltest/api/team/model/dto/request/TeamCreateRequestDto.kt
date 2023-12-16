@@ -19,7 +19,6 @@ class TeamCreateRequestDto(
             teamCreateRequestDto.extensionNumber,
             teamCreateRequestDto.mascot,
             teamCreateRequestDto.cleaningDuty,
-            teamCreateRequestDto.project
-        )
+            teamCreateRequestDto.project)
     }
 }

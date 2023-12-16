@@ -27,7 +27,7 @@ input EquipmentSearchRequestDto {
 type DefaultEquipmentResponse {
     statusCode: Int!,
     message: String!,
-    data: String
+    data: EquipmentResponseDto
 }
 
 type EquipmentResponseDto {

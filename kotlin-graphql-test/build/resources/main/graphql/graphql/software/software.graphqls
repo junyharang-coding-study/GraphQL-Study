@@ -1,17 +1,45 @@
-type SoftwareId {
-    softwareId: ID!
+input SoftwareCreateRequestDto {
+    softwareId: String!,
+    usedBy: String!,
+    developedBy: String!,
+    description: String
+}
+
+input SoftwareSearchRequestDto {
+    usedBy: String,
+    developedBy: String,
+    description: String
+}
+
+input SoftwareUpdateRequestDto {
+    usedBy: String,
+    developedBy: String,
+    description: String
 }
 
 type DefaultListSoftwareResponseDto {
     statusCode: Int!,
     message: String!,
     data: [SoftwareResponseDto!]!,
-    pagination: String
+    pagination: Pagination
 }
 
 type DefaultSoftwareResponseDto {
     statusCode: Int!,
     message: String!,
-    data: SoftwareResponseDto!,
-    pagination: String
+    data: SoftwareResponseDto!
 }
+
+type SoftwareResponseDto {
+    softwareId: ID!,
+    usedBy: String!,
+    developedBy: String!,
+    description: String
+}
+
+#type SoftwareResponseDto implements Tool {
+#    softwareId: ID!,
+#    usedBy: Role!,
+#    developedBy: String!,
+#    description: String
+#}

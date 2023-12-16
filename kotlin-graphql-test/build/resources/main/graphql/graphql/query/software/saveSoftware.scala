@@ -1,5 +1,5 @@
-mutation saveForSoftware {
-  saveForSoftware(input: {
+mutation saveSoftware {
+  saveSoftware(input: {
     softwareId: "InteilJ",
     usedBy: "developer",
     developedBy: "Jet Brain",

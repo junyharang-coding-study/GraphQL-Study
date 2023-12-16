@@ -15,6 +15,7 @@ type Pagination {
     perPageSize: Int!,
     totalElementCount: Int!,
     totalPage: Int!,
+    orderBy: Boolean
 }
 
 input PageRequestDto {
@@ -56,27 +57,6 @@ type PeopleResponseDto {
     serveYears: Int!,
     role: Role!,
     hometown: String!
-}
-
-input SoftwareRequestDto {
-    softwareId: String!,
-    usedBy: String!,
-    developedBy: String!,
-    description: String
-}
-
-input SoftwareUpdateRequestDto {
-    softwareId: String!,
-    usedBy: String,
-    developedBy: String,
-    description: String
-}
-
-type SoftwareResponseDto implements Tool {
-    softwareId: ID!,
-    usedBy: Role!,
-    developedBy: String!,
-    description: String
 }
 
 input SupplyRequestDto {

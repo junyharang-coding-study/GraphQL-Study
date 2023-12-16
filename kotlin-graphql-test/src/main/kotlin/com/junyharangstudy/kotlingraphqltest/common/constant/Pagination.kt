@@ -5,11 +5,15 @@ import kotlin.math.ceil
 class Pagination(
     perPageSize: Int,
     totalElementCount: Int,
+    orderBy: Boolean
 ) {
 
     var perPageSize: Int = perPageSize
         private set
     var totalElementCount: Int = totalElementCount
+        private set
+
+    var orderBy: Boolean = orderBy
         private set
 
     private var totalPage: Int = 0

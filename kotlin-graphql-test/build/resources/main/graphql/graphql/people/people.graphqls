@@ -1,12 +1,40 @@
-type PeopleId {
-    peopleId: ID!
+input PeopleCreateRequestDto {
+    teamId: ID!,
+    lastName: String!,
+    firstName: String!,
+    sex: String!,
+    bloodType: String!,
+    serveYears: Int!,
+    role: String!,
+    hometown: String!
+}
+
+input PeopleUpdateRequestDto {
+    teamId: ID,
+    lastName: String,
+    firstName: String,
+    sex: String,
+    bloodType: String,
+    serveYears: Int,
+    role: String,
+    hometown: String
+}
+
+input PeopleSearchRequestDto {
+    lastName: String,
+    firstName: String,
+    sex: String,
+    bloodType: String,
+    serveYears: Int,
+    role: String,
+    hometown: String
 }
 
 type DefaultListPeopleResponse {
     statusCode: Int!,
     message: String!,
     data: [PeopleResponseDto!]!,
-    pagination: String
+    pagination: Pagination
 }
 
 type DefaultPeopleResponse {
@@ -15,3 +43,49 @@ type DefaultPeopleResponse {
     data: PeopleResponseDto!
 }
 
+type PeopleResponseDto {
+    peopleId: ID!,
+    teamId: ID!,
+    lastName: String!,
+    firstName: String!,
+    sex: String!,
+    bloodType: String!,
+    serveYears: Int!,
+    role: String!,
+    hometown: String!
+}
+
+#input PeopleCreateRequestDto {
+#    teamId: ID!,
+#    lastName: String!,
+#    firstName: String!,
+#    sex: Sex!,
+#    bloodType: BloodType!,
+#    serveYears: Int!,
+#    role: Role!,
+#    hometown: String!
+#}
+#
+#input PeopleUpdateRequestDto {
+#    peopleId: ID!
+#    teamId: ID,
+#    lastName: String,
+#    firstName: String,
+#    sex: Sex,
+#    bloodType: BloodType,
+#    serveYears: Int,
+#    role: Role,
+#    hometown: String
+#}
+#
+#type PeopleResponseDto {
+#    peopleId: ID!,
+#    teamId: ID!,
+#    lastName: String!,
+#    firstName: String!,
+#    sex: Sex!,
+#    bloodType: BloodType!,
+#    serveYears: Int!,
+#    role: Role!,
+#    hometown: String!
+#}

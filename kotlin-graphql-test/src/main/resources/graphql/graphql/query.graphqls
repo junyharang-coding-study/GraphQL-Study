@@ -15,22 +15,16 @@ type Query {
     getEquipment(equipmentId: String!): DefaultEquipmentResponse!
 
     getPeopleList(
-        lastName: String,
-        firstName: String,
-        sex: Sex,
-        bloodType: BloodType,
-        serveYears: Int,
-        role: Role,
-        hometown: String
-        page: Int,
-        size: Int): DefaultListPeopleResponse!,
+        peopleSearchRequestDto: PeopleSearchRequestDto,
+        pageRequestDto: PageRequestDto
+    ): DefaultListPeopleResponse!,
 
     getPeopleByPeopleId(peopleId: Int!): DefaultPeopleResponse!
 
-    getPeopleByTeamId(
+    getPeopleListByTeamId(
         teamId: Int!,
-        page: Int,
-        size: Int): DefaultListResponse!
+        pageRequestDto: PageRequestDto
+        ): DefaultListPeopleResponse!
 
     getSoftwareList(
         softwareSearchRequestDto: SoftwareSearchRequestDto,

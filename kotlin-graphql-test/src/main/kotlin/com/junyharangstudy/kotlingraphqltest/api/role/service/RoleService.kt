@@ -83,6 +83,7 @@ class RoleService(
         return if (findById.isEmpty) {
             DefaultResponse.response(HttpStatus.NOT_FOUND.value(), "NOT FOUND DELETE TARGET DATA")
         } else {
+            roleRepository.deleteById(findById.get().roleId)
             DefaultResponse.response(HttpStatus.OK.value(), "Deleted Success", findById.get().roleId)
         }
     }

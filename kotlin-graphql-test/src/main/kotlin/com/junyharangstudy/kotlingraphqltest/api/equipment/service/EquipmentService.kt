@@ -93,11 +93,12 @@ class EquipmentService(
     fun deleteEquipment(equipmentId: String): DefaultResponse<String> {
         val findById = equipmentRepository.findById(equipmentId)
 
-        if (findById.isEmpty) {
-            return DefaultResponse.response(HttpStatus.NOT_FOUND.value(), "NOT FOUND UPDATE TARGET DATA");
+        return if (findById.isEmpty) {
+            DefaultResponse.response(HttpStatus.NOT_FOUND.value(), "NOT FOUND DELETE TARGET DATA")
+        } else {
+            equipmentRepository.deleteById(findById.get().equipmentId)
+            DefaultResponse.response(HttpStatus.OK.value(), "Deleted Success", equipmentId)
         }
-
-        return DefaultResponse.response(HttpStatus.OK.value(), "Deleted Success", findById.get().equipmentId)
     }
 
     private fun checkUpdateRequest(

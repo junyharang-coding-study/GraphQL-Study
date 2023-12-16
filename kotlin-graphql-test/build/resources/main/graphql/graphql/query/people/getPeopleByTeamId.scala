@@ -1,12 +1,29 @@
-query getPeopleByTeamId {
-  getPeopleByTeamId(
+query getPeopleListByTeamId {
+  getPeopleListByTeamId(
     teamId: 1,
-    page: 1,
-    size: 5
-  ) {
+    pageRequestDto: {
+      currentPage: 1,
+      perPageSize: 10,
+      orderBy: true
+    }) {
     statusCode,
     message,
-    data,
-    pagination
+    data {
+      peopleId,
+      teamId,
+      lastName,
+      firstName,
+      sex,
+      bloodType,
+      serveYears,
+      role,
+      hometown
+    },
+    pagination {
+      perPageSize,
+      totalElementCount,
+      totalPage,
+      orderBy
+    }
   }
 }

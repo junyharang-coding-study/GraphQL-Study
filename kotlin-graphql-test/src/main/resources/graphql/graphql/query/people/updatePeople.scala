@@ -1,6 +1,7 @@
 mutation updatePeople {
-  updatePeople(input: {
+  updatePeople(
     peopleId: 51,
+    input: {
     teamId: 5,
     lastName: "H"
     firstName: "Junyss",

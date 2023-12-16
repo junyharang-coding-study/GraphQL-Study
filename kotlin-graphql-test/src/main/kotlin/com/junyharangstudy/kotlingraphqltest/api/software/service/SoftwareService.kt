@@ -83,6 +83,7 @@ class SoftwareService (
         return if (findById.isEmpty) {
             DefaultResponse.response(HttpStatus.NOT_FOUND.value(), "NOT FOUND DELETE TARGET DATA")
         } else {
+            softwareRepository.deleteById(findById.get().softwareId)
             DefaultResponse.response(HttpStatus.OK.value(), "Deleted Success", findById.get().softwareId)
         }
     }

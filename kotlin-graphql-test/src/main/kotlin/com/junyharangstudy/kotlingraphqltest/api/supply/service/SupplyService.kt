@@ -30,7 +30,7 @@ class SupplyService (
         val saveAsDbRoleId = supplyRepository.save(supplyCreateRequestDto.toEntity(supplyCreateRequestDto.supplyId, findTeamByTeamId.get())).supplyId
 
         return if (saveAsDbRoleId == null) {
-            DefaultResponse.response(HttpStatus.NO_CONTENT.value(), "Failed Create")
+            DefaultResponse.response(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Failed Create")
         } else {
             DefaultResponse.response(HttpStatus.CREATED.value(), "Success Create", saveAsDbRoleId)
         }
@@ -44,9 +44,7 @@ class SupplyService (
                     teamId != null -> processingParameterNotNull(pageRequestDto, teamId)
                     else -> processingParameterPagingNotNull(pageRequestDto)
                 }
-            }
-
-            else -> {
+            } else -> {
                 val findElements = processingParameterNull()
 
                 if (findElements.isEmpty()) {
@@ -89,6 +87,7 @@ class SupplyService (
         return if (findById.isEmpty) {
             DefaultResponse.response(HttpStatus.NOT_FOUND.value(), "NOT FOUND DELETE TARGET DATA")
         } else {
+            supplyRepository.deleteById(findById.get().supplyId)
             DefaultResponse.response(HttpStatus.OK.value(), "Deleted Success", findById.get().supplyId)
         }
     }

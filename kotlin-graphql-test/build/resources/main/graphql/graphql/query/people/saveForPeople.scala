@@ -1,5 +1,5 @@
-mutation saveForPeople {
-  saveForPeople(input: {
+mutation savePeople {
+  savePeople(input: {
     teamId: 1,
     lastName: "H",
     firstName: "Juny",

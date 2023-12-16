@@ -1,5 +1,5 @@
-mutation saveForSupply {
-  saveForSupply(input: {
+mutation saveSupply {
+  saveSupply(input: {
     supplyId: "Labtop",
     teamId: 1
   }) {

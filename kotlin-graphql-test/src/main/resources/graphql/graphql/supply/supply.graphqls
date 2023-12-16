@@ -6,5 +6,21 @@ type DefaultListSupplyResponse {
     statusCode: Int!,
     message: String!,
     data: [SupplyResponseDto!]!,
-    pagination: String
+    pagination: Pagination
+}
+
+type DefaultSupplyResponse {
+    statusCode: Int!,
+    message: String!,
+    data: SupplyResponseDto!
+}
+
+input SupplyCreateRequestDto {
+    supplyId: String!,
+    teamId: ID!,
+}
+
+type SupplyResponseDto {
+    supplyId: ID!,
+    teamId: ID!
 }

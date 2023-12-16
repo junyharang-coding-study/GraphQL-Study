@@ -1,7 +1,12 @@
 query getSupplyBySupplyId {
-  getSupplyBySupplyId(supplyId: "webcam") {
+  getSupplyBySupplyId(
+    supplyId: "calculator",
+  ) {
     statusCode,
     message,
-    data
+    data {
+      supplyId,
+      teamId
+    },
   }
 }

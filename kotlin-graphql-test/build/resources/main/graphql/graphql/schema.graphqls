@@ -59,13 +59,4 @@ type PeopleResponseDto {
     hometown: String!
 }
 
-input SupplyRequestDto {
-    supplyId: String!,
-    teamId: ID!,
-}
-
-type SupplyResponseDto {
-    supplyId: ID!,
-    teamId: ID!
-}
 

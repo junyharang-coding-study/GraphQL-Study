@@ -17,7 +17,11 @@ type Mutation {
     ): DefaultResponse!
     deleteSoftware(softwareId: String!): DefaultResponse!
 
-    saveForSupply(input: SupplyRequestDto): DefaultResponse!
+    saveSupply(input: SupplyCreateRequestDto): DefaultResponse!
+    updateSupply(
+        supplyId: String!,
+        teamId: Int!
+    ): DefaultResponse!
     deleteSupply(supplyId: String!): DefaultResponse!
 
     saveTeam(input: TeamCreateRequestDto): DefaultTeamResponse!

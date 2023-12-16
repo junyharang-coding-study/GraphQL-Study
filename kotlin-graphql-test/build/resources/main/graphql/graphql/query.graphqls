@@ -39,15 +39,12 @@ type Query {
     getSoftwareBySoftwareId(softwareId: String!): DefaultSoftwareResponseDto!
 
     getSupplyList(
-        page: Int,
-        size: Int): DefaultListResponse!,
+        teamId: Int,
+        pageRequestDto: PageRequestDto): DefaultListSupplyResponse!,
 
-    getSupplyBySupplyId(supplyId: String!): DefaultResponse!
+    getSupplyBySupplyId(supplyId: String!): DefaultSupplyResponse!
 
-    getSupplyByTeamId(
-        teamId: Int!,
-        page: Int,
-        size: Int): DefaultListResponse!
+    getSupplyByTeamId(teamId: Int!): DefaultSupplyResponse!
 
     getTeamList(
         teamSearchRequestDto: TeamSearchRequestDto,

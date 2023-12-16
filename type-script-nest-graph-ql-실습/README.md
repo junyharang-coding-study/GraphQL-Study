@@ -109,7 +109,9 @@ Just you write this command in the command line.
 <br><br><br>
 
 #### 🤔 내가 만난 문제
-⚠️[\[Nest.js\] TypeORM Table 관계가 맺어졌을 때, Seeding \(feat. Migration\)](https://junyharang.tistory.com/521)
+⚠️ [\[Nest.js\] TypeORM Table 관계가 맺어졌을 때, Seeding \(feat. Migration\)](https://junyharang.tistory.com/521)
+<br><br>
+⚠️ [\[Spring Boot 3.0\] Could not resolve org.springframework.boot:spring-boot-gradle-plugin](https://junyharang.tistory.com/532)
 <br><br><br>
 
 #### 📋 부록

@@ -2,10 +2,10 @@ input PeopleCreateRequestDto {
     teamId: ID!,
     lastName: String!,
     firstName: String!,
-    sex: String!,
-    bloodType: String!,
+    sex: Sex,
+    bloodType: BloodType,
     serveYears: Int!,
-    role: String!,
+    role: Role,
     hometown: String!
 }
 
@@ -13,20 +13,20 @@ input PeopleUpdateRequestDto {
     teamId: ID,
     lastName: String,
     firstName: String,
-    sex: String,
-    bloodType: String,
+    sex: Sex,
+    bloodType: BloodType,
     serveYears: Int,
-    role: String,
+    role: Role,
     hometown: String
 }
 
 input PeopleSearchRequestDto {
     lastName: String,
     firstName: String,
-    sex: String,
-    bloodType: String,
+    sex: Sex,
+    bloodType: BloodType,
     serveYears: Int,
-    role: String,
+    role: Role,
     hometown: String
 }
 
@@ -48,44 +48,9 @@ type PeopleResponseDto {
     teamId: ID!,
     lastName: String!,
     firstName: String!,
-    sex: String!,
-    bloodType: String!,
+    sex: Sex!,
+    bloodType: BloodType!,
     serveYears: Int!,
-    role: String!,
+    role: Role!,
     hometown: String!
 }
-
-#input PeopleCreateRequestDto {
-#    teamId: ID!,
-#    lastName: String!,
-#    firstName: String!,
-#    sex: Sex!,
-#    bloodType: BloodType!,
-#    serveYears: Int!,
-#    role: Role!,
-#    hometown: String!
-#}
-#
-#input PeopleUpdateRequestDto {
-#    peopleId: ID!
-#    teamId: ID,
-#    lastName: String,
-#    firstName: String,
-#    sex: Sex,
-#    bloodType: BloodType,
-#    serveYears: Int,
-#    role: Role,
-#    hometown: String
-#}
-#
-#type PeopleResponseDto {
-#    peopleId: ID!,
-#    teamId: ID!,
-#    lastName: String!,
-#    firstName: String!,
-#    sex: Sex!,
-#    bloodType: BloodType!,
-#    serveYears: Int!,
-#    role: Role!,
-#    hometown: String!
-#}

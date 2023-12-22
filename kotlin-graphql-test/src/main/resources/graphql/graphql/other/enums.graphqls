@@ -3,15 +3,12 @@ enum Sex {
     female
 }
 
-enum  Role {
+enum Role {
     developer,
     designer,
     planner
 }
 
 enum BloodType {
-    A,
-    B,
-    O,
-    AB
+    A, B, O, AB
 }

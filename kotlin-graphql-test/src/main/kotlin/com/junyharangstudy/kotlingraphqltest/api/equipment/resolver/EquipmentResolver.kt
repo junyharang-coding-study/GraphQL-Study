@@ -4,6 +4,7 @@ import com.junyharangstudy.kotlingraphqltest.api.common.constant.PageRequestDto
 import com.junyharangstudy.kotlingraphqltest.api.equipment.model.dto.request.EquipmentCreateRequestDto
 import com.junyharangstudy.kotlingraphqltest.api.equipment.model.dto.request.EquipmentSearchRequestDto
 import com.junyharangstudy.kotlingraphqltest.api.equipment.model.dto.request.EquipmentUpdateRequestDto
+import com.junyharangstudy.kotlingraphqltest.api.equipment.model.dto.response.EquipmentAdvResponseDto
 import com.junyharangstudy.kotlingraphqltest.api.equipment.model.dto.response.EquipmentResponseDto
 import com.junyharangstudy.kotlingraphqltest.api.equipment.service.EquipmentService
 import com.junyharangstudy.kotlingraphqltest.common.constant.DefaultResponse
@@ -36,6 +37,14 @@ class EquipmentResolver (
         @Argument pageRequestDto: PageRequestDto?,
     ): DefaultResponse<List<EquipmentResponseDto>> {
         return equipmentService.getEquipmentList(pageRequestDto, equipmentSearchRequestDto)
+    }
+
+    @QueryMapping
+    fun getEquipmentsAdv (
+        @Argument equipmentSearchRequestDto: EquipmentSearchRequestDto?,
+        @Argument pageRequestDto: PageRequestDto?
+    ): DefaultResponse<List<EquipmentAdvResponseDto>> {
+        return equipmentService.getEquipmentAdv(pageRequestDto, equipmentSearchRequestDto)
     }
 
     @QueryMapping

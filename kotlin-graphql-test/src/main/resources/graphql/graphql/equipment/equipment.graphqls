@@ -30,27 +30,12 @@ type DefaultEquipmentResponse {
     data: EquipmentResponseDto
 }
 
-type EquipmentResponseDto {
-    equipmentId: String,
-    usedBy: String,
-    count: Int,
-    newOrUsed: String
+type EquipmentResponseDto implements Tool {
+    equipmentId: ID!,
+    usedBy: Role!,
+    count: Int!,
+    newOrUsed: String!
 }
-
-#type EquipmentResponseDto implements Tool {
-#    equipmentId: ID!,
-#    usedBy: Role,
-#    count: Int!,
-#    newOrUsed: String!
-#}
-
-#type EquipmentsAdvDto implements Tool {
-#    equipmentId: ID!,
-#    usedBy: Role!,
-#    count: Int!,
-#    useRate: Float,
-#    isNew: Boolean!
-#}
 
 type DefaultListEquipmentResponse {
     statusCode: Int!,
@@ -59,9 +44,17 @@ type DefaultListEquipmentResponse {
     pagination: Pagination
 }
 
-#type DefaultEquipmentsAdvResponse {
-#    statusCode: Int!,
-#    message: String!,
-#    data: [EquipmentsAdvDto!]!,
-#    pagination: String
-#}
+type DefaultEquipmentsAdvResponse {
+    statusCode: Int!,
+    message: String!,
+    data: [EquipmentsAdvDto!]!,
+    pagination: Pagination
+}
+
+type EquipmentsAdvDto implements Tool {
+    equipmentId: ID!,
+    usedBy: Role!,
+    count: Int!,
+    useRate: Float,
+    isNew: Boolean!
+}

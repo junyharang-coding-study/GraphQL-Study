@@ -1,16 +1,13 @@
 type Query {
-    # 함수 이름은 Controller @QueryMapping이 사용된 Method 이름과 동일해야 함.
     getEquipmentList(
         equipmentSearchRequestDto: EquipmentSearchRequestDto,
         pageRequestDto: PageRequestDto,
     ): DefaultListEquipmentResponse!,
 
-#    getEquipmentsAdv(
-#        equipmentId: String,
-#        usedBy: String,
-#        newOrUsed: String,
-#        page: Int,
-#        size: Int): DefaultEquipmentsAdvResponse!,
+    getEquipmentsAdv(
+        equipmentSearchRequestDto: EquipmentSearchRequestDto,
+        pageRequestDto: PageRequestDto,
+    ): DefaultEquipmentsAdvResponse!,
 
     getEquipment(equipmentId: String!): DefaultEquipmentResponse!
 
@@ -22,27 +19,31 @@ type Query {
     getPeopleByPeopleId(peopleId: Int!): DefaultPeopleResponse!
 
     getPeopleListByTeamId(
-        teamId: Int!,
+        teamId: ID!,
         pageRequestDto: PageRequestDto
         ): DefaultListPeopleResponse!
 
     getSoftwareList(
         softwareSearchRequestDto: SoftwareSearchRequestDto,
-        pageRequestDto: PageRequestDto): DefaultListSoftwareResponseDto!,
+        pageRequestDto: PageRequestDto
+    ): DefaultListSoftwareResponseDto!,
 
     getSoftwareBySoftwareId(softwareId: String!): DefaultSoftwareResponseDto!
 
     getSupplyList(
-        teamId: Int,
-        pageRequestDto: PageRequestDto): DefaultListSupplyResponse!,
+        teamId: ID,
+        pageRequestDto: PageRequestDto
+    ): DefaultListSupplyResponse!,
 
-    getSupplyBySupplyId(supplyId: String!): DefaultSupplyResponse!
+    getSupplyBySupplyId(supplyId: String!
+    ): DefaultSupplyResponse!
 
     getTeamList(
         teamSearchRequestDto: TeamSearchRequestDto,
-        pageRequestDto: PageRequestDto): DefaultListTeamResponse!,
+        pageRequestDto: PageRequestDto
+    ): DefaultListTeamResponse!,
 
-    getTeamByTeamId(teamId: Int!): DefaultTeamSearchResponse!
+    getTeamAndMemberByTeamId(teamId: ID!): DefaultTeamAndMemberResponse!
 
     getRoleByRoleId(roleId: String!): DefaultRoleResponse!
 }

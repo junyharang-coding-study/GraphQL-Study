@@ -1,9 +1,13 @@
 package com.junyharangstudy.kotlingraphqltest.api.team.service
 
 import com.junyharangstudy.kotlingraphqltest.api.common.constant.PageRequestDto
+import com.junyharangstudy.kotlingraphqltest.api.people.model.dto.response.PeopleResponseDto
+import com.junyharangstudy.kotlingraphqltest.api.people.model.entity.People
+import com.junyharangstudy.kotlingraphqltest.api.people.repository.PeopleRepository
 import com.junyharangstudy.kotlingraphqltest.api.team.model.dto.request.TeamCreateRequestDto
 import com.junyharangstudy.kotlingraphqltest.api.team.model.dto.request.TeamSearchRequestDto
 import com.junyharangstudy.kotlingraphqltest.api.team.model.dto.request.TeamUpdateRequestDto
+import com.junyharangstudy.kotlingraphqltest.api.team.model.dto.response.TeamAndMemberResponseDto
 import com.junyharangstudy.kotlingraphqltest.api.team.model.dto.response.TeamResponseDto
 import com.junyharangstudy.kotlingraphqltest.api.team.model.dto.response.TeamResponseDto.Companion.teamToDto
 import com.junyharangstudy.kotlingraphqltest.api.team.model.entity.QTeam.team
@@ -20,7 +24,8 @@ import java.util.*
 @Service
 class TeamService(
     private val teamRepository: TeamRepository,
-    private val teamQueryDslRepository: TeamQueryDslRepository
+    private val teamQueryDslRepository: TeamQueryDslRepository,
+    private val peopleRepository: PeopleRepository
 ) {
     @Transactional
     fun saveTeam(teamCreateRequestDto: TeamCreateRequestDto): DefaultResponse<Long> {
@@ -63,13 +68,22 @@ class TeamService(
     }
 
     @Transactional(readOnly = true)
-    fun getTeam(teamId: Long): DefaultResponse<TeamResponseDto> {
-        val findById = teamRepository.findById(teamId)
+    fun getTeamAndMemberByTeamId(teamId: Long): DefaultResponse<TeamAndMemberResponseDto> {
+        val findTeamByTeamId = teamRepository.findById(teamId)
 
-        return if (findById.isEmpty) {
+        return if (findTeamByTeamId.isEmpty) {
             DefaultResponse.response(HttpStatus.NOT_FOUND.value(), "NOT FOUND DATA");
+
         } else {
-            DefaultResponse.response(HttpStatus.OK.value(), "OK", teamToDto(findById.get()))
+            val findAllMemberByTeamId = peopleRepository.findAllByTeamId(teamId)
+
+            DefaultResponse.response(
+                HttpStatus.OK.value(),
+                "OK",
+                TeamAndMemberResponseDto.entityToDto(findTeamByTeamId.get(),
+                    findAllMemberByTeamId.map { people ->
+                        PeopleResponseDto.peopleToDto(people)
+            }))
         }
     }
 

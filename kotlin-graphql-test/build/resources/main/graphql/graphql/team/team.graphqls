@@ -54,20 +54,3 @@ type DefaultTeamSearchResponse {
     message: String!,
     data: TeamResponseDto!
 }
-
-type DefaultTeamAndMemberResponse {
-    statusCode: Int!,
-    message: String!,
-    data: TeamAndMemberResponseDto!
-}
-
-type TeamAndMemberResponseDto {
-    teamId: ID!,
-    manager: String!,
-    office: String!,
-    extensionNumber: String!,
-    mascot: String,
-    cleaningDuty: String!,
-    project: String,
-    members: [PeopleResponseDto!]!
-}

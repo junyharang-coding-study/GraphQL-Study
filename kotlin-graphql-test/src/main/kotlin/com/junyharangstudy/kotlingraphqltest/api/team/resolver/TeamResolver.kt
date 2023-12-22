@@ -4,6 +4,7 @@ import com.junyharangstudy.kotlingraphqltest.api.common.constant.PageRequestDto
 import com.junyharangstudy.kotlingraphqltest.api.team.model.dto.request.TeamCreateRequestDto
 import com.junyharangstudy.kotlingraphqltest.api.team.model.dto.request.TeamSearchRequestDto
 import com.junyharangstudy.kotlingraphqltest.api.team.model.dto.request.TeamUpdateRequestDto
+import com.junyharangstudy.kotlingraphqltest.api.team.model.dto.response.TeamAndMemberResponseDto
 import com.junyharangstudy.kotlingraphqltest.api.team.model.dto.response.TeamResponseDto
 import com.junyharangstudy.kotlingraphqltest.api.team.service.TeamService
 import com.junyharangstudy.kotlingraphqltest.common.constant.DefaultResponse
@@ -30,8 +31,8 @@ class TeamResolver(
     }
 
     @QueryMapping
-    fun getTeamByTeamId (@Argument teamId: Long): DefaultResponse<TeamResponseDto> {
-        return teamService.getTeam(teamId)
+    fun getTeamAndMemberByTeamId (@Argument teamId: Long): DefaultResponse<TeamAndMemberResponseDto> {
+        return teamService.getTeamAndMemberByTeamId(teamId)
     }
 
     @MutationMapping

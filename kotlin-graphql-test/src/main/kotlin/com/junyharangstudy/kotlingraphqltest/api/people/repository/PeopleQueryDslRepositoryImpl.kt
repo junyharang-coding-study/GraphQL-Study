@@ -8,7 +8,6 @@ import com.junyharangstudy.kotlingraphqltest.api.common.enumtype.Sex
 import com.junyharangstudy.kotlingraphqltest.api.people.model.dto.request.PeopleSearchRequestDto
 import com.junyharangstudy.kotlingraphqltest.api.people.model.entity.People
 import com.junyharangstudy.kotlingraphqltest.api.people.model.entity.QPeople.people
-import com.junyharangstudy.kotlingraphqltest.api.supply.model.entity.QSupply
 import com.querydsl.core.types.dsl.BooleanExpression
 import com.querydsl.jpa.impl.JPAQueryFactory
 import org.springframework.stereotype.Repository

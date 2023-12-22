@@ -20,7 +20,8 @@ class TeamResponseDto (
                 extensionNumber = team.extensionNumber,
                 mascot = team.mascot,
                 cleaningDuty = team.cleaningDuty,
-                project = team.project)
+                project = team.project
+            )
         }
     }
 }

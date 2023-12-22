@@ -3,10 +3,10 @@ package com.junyharangstudy.kotlingraphqltest.api.equipment.model.dto.response
 import com.junyharangstudy.kotlingraphqltest.api.equipment.model.entity.Equipment
 
 class EquipmentResponseDto(
-    private val equipmentId: String,
-    private val usedBy: String,
-    private val count: Int,
-    private val newOrUsed: String
+    val equipmentId: String,
+    val usedBy: String,
+    val count: Int,
+    val newOrUsed: String
 ) {
     companion object {
         fun equipmentToDto(equipment: Equipment): EquipmentResponseDto {

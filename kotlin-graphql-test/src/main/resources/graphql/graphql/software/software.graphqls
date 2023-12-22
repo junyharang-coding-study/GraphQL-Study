@@ -30,16 +30,9 @@ type DefaultSoftwareResponseDto {
     data: SoftwareResponseDto!
 }
 
-type SoftwareResponseDto {
+type SoftwareResponseDto implements Tool {
     softwareId: ID!,
-    usedBy: String!,
+    usedBy: Role!,
     developedBy: String!,
     description: String
 }
-
-#type SoftwareResponseDto implements Tool {
-#    softwareId: ID!,
-#    usedBy: Role!,
-#    developedBy: String!,
-#    description: String
-#}

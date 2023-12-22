@@ -37,7 +37,7 @@ dependencies {
     kapt("com.querydsl:querydsl-apt:5.0.0:jakarta")
 
     //SpringDoc 의존성 추가
-    implementation ("org.springdoc:springdoc-openapi-ui:1.6.14")
+    implementation ("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2")
 
     // 유효성 검사를 위한 의존성 추가
     implementation ("org.springframework.boot:spring-boot-starter-validation")
